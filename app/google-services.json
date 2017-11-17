@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "555042368443",
+    "firebase_url": "https://wayproject-5d588.firebaseio.com",
+    "project_id": "wayproject-5d588",
+    "storage_bucket": "wayproject-5d588.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555042368443:android:5a8d4fcc85be1fec",
+        "android_client_info": {
+          "package_name": "com.example.yangj.wayproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555042368443-lrjok1s9vonvepoa675adngqkps2bt0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKcjls39LgGtJ4gI2s0Oi4FXfD8n3I1Zc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

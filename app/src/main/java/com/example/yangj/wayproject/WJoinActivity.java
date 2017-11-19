@@ -3,7 +3,6 @@ package com.example.yangj.wayproject;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,36 +14,34 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class WJoinActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class WJoinActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     //변수선언
     private FirebaseAuth mAuth;
-    private EditText editText_Email;
-    private EditText editText_Password;
-    private Button button_EmailLogin;
+    private EditText editJoinID;
+    private EditText editJoinPW;
+    private Button btnJoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wjoin);
 
-        mAuth = FirebaseAuth.getInstance();
 
-        editText_Email=(EditText)findViewById(R.id.idEmailEdit);
-        editText_Password=(EditText)findViewById(R.id.idPasswordEdit);
-        button_EmailLogin=(Button)findViewById(R.id.idEmailLoginBtn);
-        button_EmailLogin.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        editJoinID=(EditText)findViewById(R.id.joinID);
+        editJoinPW=(EditText)findViewById(R.id.joinPW);
+        btnJoin=(Button)findViewById(R.id.join);
+        btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(WJoinActivity.this,"버튼은 눌림",Toast.LENGTH_SHORT).show();
-                createUser(editText_Email.getText().toString(),editText_Password.getText().toString());
+                createUser(editJoinID.getText().toString(),editJoinPW.getText().toString());
             }
         });
 
     }
-
     /**
      * 회원을 비밀번호와 이메일로 등록해주는 함수
      */
@@ -73,9 +70,6 @@ public class WJoinActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
-
-
-    @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }

@@ -15,7 +15,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".WLoginActivity" />
         <activity android:name=".WJoinActivity" />
-
         <activity
             android:name=".WIntroActivity"
             android:screenOrientation="portrait"
@@ -48,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WRegiReviewActivity" />
-        <activity android:name=".WAddPlaceActivity"></activity>
+        <activity android:name=".WAddPlaceActivity" />
     </application>
 
 </manifest>

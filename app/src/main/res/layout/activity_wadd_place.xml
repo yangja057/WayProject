@@ -23,5 +23,5 @@
         android:text="검색"
         tools:layout_editor_absoluteX="233dp"
         tools:layout_editor_absoluteY="0dp" />
-
 </LinearLayout>
+

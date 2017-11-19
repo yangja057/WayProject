@@ -2,13 +2,13 @@ package com.example.yangj.wayproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.support.v7.app.AppCompatActivity;
-=======
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
->>>>>>> 550dc5b42514d4c91838b00091fc7341cef1ae27
+
 
 public class MainActivity extends AppCompatActivity {
 

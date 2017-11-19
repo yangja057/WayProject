@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        btnGoRegiReview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(getBaseContext(),//클래스 등록);
-//                startActivity(intent);
-//            }
-//        });
+        btnGoRegiReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),WRegiReviewActivity.class);
+               startActivity(intent);
+            }
+        });
 
         btnGoToLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.yangj.wayproject;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,9 +24,8 @@ public class WLoginActivity extends AppCompatActivity implements GoogleApiClient
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wlogin2);
-
-
-
+        Intent intent=new Intent(this, WRegiReviewActivity.class);
+        startActivity(intent);
 
 
     }//oncreate closed

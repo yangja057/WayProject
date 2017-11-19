@@ -32,7 +32,6 @@ public class WJoinActivity extends AppCompatActivity implements GoogleApiClient.
 
         mAuth = FirebaseAuth.getInstance();
 
-
         editText_Email=(EditText)findViewById(R.id.idEmailEdit);
         editText_Password=(EditText)findViewById(R.id.idPasswordEdit);
         button_EmailLogin=(Button)findViewById(R.id.idEmailLoginBtn);

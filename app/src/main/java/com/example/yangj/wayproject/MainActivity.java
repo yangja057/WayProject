@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f452cdbcf165d813f88f49e3ebeaa20259ea4a18
 
 public class MainActivity extends AppCompatActivity {
 

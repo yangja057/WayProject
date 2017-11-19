@@ -7,15 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;//현재 로그인한 사용자를 얻기 위한 변수 선언
 
     private Button btnGoToJoin;
     private Button btnGoToApi;
     private Button btnGoToMainView;
     private Button btnGoRegiReview;
     private Button btnGoToLogin;
+    private Button btnLogOut;
+    private EditText editNowUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +37,27 @@ public class MainActivity extends AppCompatActivity {
         리뷰등록 버튼 : 리뷰등록 액티비티로 이동
 
          */
-
+        editNowUser=(EditText)findViewById(R.id.nowUser);
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
         btnGoRegiReview=(Button)findViewById(R.id.goRegiReview);
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
+        btnLogOut=(Button)findViewById(R.id.logOut);
+
+
+/*
+현재 로그인한 사용자
+ */
+
+
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //로그아웃을 수행함
+            }
+        });
 
 
         btnGoToJoin.setOnClickListener(new View.OnClickListener() {

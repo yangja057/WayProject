@@ -4,11 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.MainActivity">
+
+    <EditText
+        android:id="@+id/nowUser"
+        android:hint="로그인된 사용자의 ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="112dp"
+        android:layout_height="85dp"
+        android:text="로그아웃"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="27dp" />
 
     <Button
         android:id="@+id/goToLogin"
-        android:layout_width="57dp"
+        android:layout_width="108dp"
         android:layout_height="85dp"
         android:text="로그인"
         tools:layout_editor_absoluteX="132dp"

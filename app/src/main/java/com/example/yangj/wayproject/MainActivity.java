@@ -2,23 +2,21 @@ package com.example.yangj.wayproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
+
 
 import android.support.annotation.NonNull;
->>>>>>> 29c95fee18d259c4d29decd3529651c307386212
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
-=======
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.facebook.login.LoginManager;
->>>>>>> 29c95fee18d259c4d29decd3529651c307386212
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 //                Intent intent=new Intent(getBaseContext(),//클래스 등록);
 //                startActivity(intent);
 //            }
-//        });
+//        })
 
 //        btnGoToMainView.setOnClickListener(new View.OnClickListener() {
 //            @Override

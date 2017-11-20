@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class WLoginActivity extends AppCompatActivity {
 
+    private TextView textNowUser;
+    private TextView textNowEmail;
     //변수선언
     private FirebaseAuth mAuth;
     private EditText editLoginID;
@@ -32,6 +35,10 @@ public class WLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wlogin);
+
+        //현재 사용자 등록및 확인
+        textNowUser=(TextView)findViewById(R.id.nowUser);
+        textNowEmail=(TextView)findViewById(R.id.nowEmail) ;
 
         mAuth = FirebaseAuth.getInstance();
         editLoginID=(EditText)findViewById(R.id.loginID);
@@ -51,9 +58,16 @@ public class WLoginActivity extends AppCompatActivity {
                 FirebaseUser user=firebaseAuth.getCurrentUser();
                 if(user!=null){
                     //user is signed in
-
+                    Toast.makeText(WLoginActivity.this,"로그인이 되어있는 상태입니다",Toast.LENGTH_LONG).show();
+                   // textNowUser.setText(mAuth.getCurrentUser().getDisplayName());
+                    textNowEmail.setText(mAuth.getCurrentUser().getEmail());
+                  //  Intent intent=new Intent(WLoginActivity.this,MainActivity.class);
+                  //  startActivity(intent);
+                  //  finish();
                 }else{
                     //user is signed out
+                    Toast.makeText(WLoginActivity.this,"사용자가 없습니다. 로그인을 해주세요",Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -86,6 +100,15 @@ public class WLoginActivity extends AppCompatActivity {
 
 
     }
-
+    public void onStart(){
+       super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+        public void onStop() {
+            super.onStop();
+            if (mAuthListener != null) {
+                mAuth.removeAuthStateListener(mAuthListener);
+            }
+        }
 
 }

@@ -7,11 +7,8 @@
     android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.MainActivity">
 
-    <EditText
-        android:id="@+id/nowUser"
-        android:hint="로그인된 사용자의 ID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+
     <Button
         android:id="@+id/logOut"
         android:layout_width="112dp"

@@ -3,18 +3,21 @@ package com.example.yangj.wayproject;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-<<<<<<< HEAD
 
-=======
->>>>>>> f452cdbcf165d813f88f49e3ebeaa20259ea4a18
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoRegiReview;
     private Button btnGoToLogin;
     private Button btnLogOut;
-    private EditText editNowUser;
+
+
+    private  FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         리뷰등록 버튼 : 리뷰등록 액티비티로 이동
 
          */
-        editNowUser=(EditText)findViewById(R.id.nowUser);
+
+
+
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
@@ -60,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //로그아웃을 수행함
+                Toast.makeText(getBaseContext(),"로그아웃",Toast.LENGTH_LONG).show();
+                FirebaseAuth.getInstance().signOut();
+               // Intent intent=new Intent(getBaseContext(),WLoginActivity.class);
+               // startActivity(intent);
             }
         });
 
@@ -107,5 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }
+    }//oncreat closed
+
+
+
 }

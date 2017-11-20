@@ -30,6 +30,22 @@
         app:layout_constraintStart_toStartOf="@+id/loginID"
         app:layout_constraintTop_toBottomOf="@+id/loginID" />
 
+    <TextView
+        android:id="@+id/nowUser"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:hint="nowUser"
+        app:layout_constraintBottom_toTopOf="@+id/nowEmail" />
+
+    <TextView
+        android:id="@+id/nowEmail"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:hint="nowEmail"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="80dp" />
+
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"

@@ -94,7 +94,7 @@ public class DataTestActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference riversRef = storageReference.child("images/profile.jpg");
+            StorageReference riversRef = storageReference.child("images/"+filePath+".jpg");
 
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

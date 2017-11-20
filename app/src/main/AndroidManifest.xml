@@ -51,6 +51,7 @@
         </activity>
         <activity android:name=".WRegiReviewActivity" />
         <activity android:name=".WAddPlaceActivity" />
+        <activity android:name=".WListActivity"></activity>
     </application>
 
 </manifest>

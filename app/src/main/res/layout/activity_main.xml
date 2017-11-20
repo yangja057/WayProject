@@ -57,4 +57,11 @@
         tools:layout_editor_absoluteX="263dp"
         tools:layout_editor_absoluteY="151dp" />
 
+    <Button
+        android:id="@+id/goListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ListView"
+        />
+
 </LinearLayout>

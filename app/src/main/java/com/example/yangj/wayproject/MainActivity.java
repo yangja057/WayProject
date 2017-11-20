@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoRegiReview;
     private Button btnGoToLogin;
     private Button btnLogOut;
-
+    private Button btnGoList;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoRegiReview=(Button)findViewById(R.id.goRegiReview);
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
         btnLogOut=(Button)findViewById(R.id.logOut);
+        btnGoList=(Button)findViewById(R.id.goListView);
 
 
 /*
@@ -111,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getBaseContext(),WLoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnGoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),WListActivity.class);
                 startActivity(intent);
             }
         });

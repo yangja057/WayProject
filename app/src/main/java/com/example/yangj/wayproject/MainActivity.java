@@ -2,11 +2,27 @@ package com.example.yangj.wayproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+
+import android.support.annotation.NonNull;
+>>>>>>> 29c95fee18d259c4d29decd3529651c307386212
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
+=======
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.facebook.login.LoginManager;
+>>>>>>> 29c95fee18d259c4d29decd3529651c307386212
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoRegiReview;
     private Button btnGoToLogin;
     private Button btnLogOut;
-    private EditText editNowUser;
+    private Button btnGoList;
+
+    private  FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +51,16 @@ public class MainActivity extends AppCompatActivity {
         리뷰등록 버튼 : 리뷰등록 액티비티로 이동
 
          */
-        editNowUser=(EditText)findViewById(R.id.nowUser);
+
+
+
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
         btnGoRegiReview=(Button)findViewById(R.id.goRegiReview);
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
         btnLogOut=(Button)findViewById(R.id.logOut);
+        btnGoList=(Button)findViewById(R.id.goListView);
 
 
 /*
@@ -52,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //로그아웃을 수행함
+                Toast.makeText(getBaseContext(),"로그아웃",Toast.LENGTH_LONG).show();
+                FirebaseAuth.getInstance().signOut();
+               // Intent intent=new Intent(getBaseContext(),WLoginActivity.class);
+               // startActivity(intent);
             }
         });
 
@@ -95,9 +120,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnGoList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),WListActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
 
-    }
+    }//oncreat closed
+
+
+
 }

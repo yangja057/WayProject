@@ -51,15 +51,25 @@ public class WRegiReviewActivity extends AppCompatActivity {
 
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
-        try{
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-            WHICH_POINT = 0;
-
-        }catch (GooglePlayServicesRepairableException e){
+        Intent intent;
+        try {
+            intent = builder.build(WRegiReviewActivity.this);
+            startActivityForResult(intent, PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
-        }catch(GooglePlayServicesNotAvailableException e){
+        } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
+
+//        try{
+//            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+//            WHICH_POINT = 0;
+//
+//        }catch (GooglePlayServicesRepairableException e){
+//            e.printStackTrace();
+//        }catch(GooglePlayServicesNotAvailableException e){
+//            e.printStackTrace();
+//        }
     }
 
     public void searchEndingPoint(View view){
@@ -84,7 +94,7 @@ public class WRegiReviewActivity extends AppCompatActivity {
 
         if(requestCode == PLACE_PICKER_REQUEST){
             if(resultCode == RESULT_OK){
-                Place place = PlacePicker.getPlace(this, data);
+                Place place = PlacePicker.getPlace(WRegiReviewActivity.this, data);
                 if(WHICH_POINT == 0){
                     tvStartingPoint.setText(place.getName());
                 }

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoToLogin;
     private Button btnLogOut;
     private Button btnGoList;
+    private Button btnCheck;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -44,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
         검색버튼 : 구글 api로 이동
         보여지는 view: 출발 도착을 눌렀을 경우 그다음에 보여지는 썸네일들이 있는 뷰
         리뷰등록 버튼 : 리뷰등록 액티비티로 이동
+        testActivity :  데이터 테스트 액티비티
 
          */
 
 
+        btnCheck=(Button)findViewById(R.id.check);
 
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
@@ -62,6 +65,16 @@ public class MainActivity extends AppCompatActivity {
 현재 로그인한 사용자
  */
 
+
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //데이터 확인
+                Intent intent=new Intent(getBaseContext(),DataTestActivity.class);
+                 startActivity(intent);
+
+            }
+        });
 
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {

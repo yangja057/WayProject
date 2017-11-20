@@ -10,6 +10,14 @@
 
 
     <Button
+        android:id="@+id/check"
+        android:layout_width="112dp"
+        android:layout_height="85dp"
+        android:text="데이터 확인"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="27dp" />
+
+    <Button
         android:id="@+id/logOut"
         android:layout_width="112dp"
         android:layout_height="85dp"

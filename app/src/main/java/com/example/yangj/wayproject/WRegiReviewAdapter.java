@@ -1,17 +1,13 @@
 package com.example.yangj.wayproject;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,8 +19,12 @@ public class WRegiReviewAdapter extends BaseAdapter{
 
     private ArrayList<WRegiReviewItem> WRegiReviewItemList=new ArrayList<WRegiReviewItem>();
     private View parentconvertView;
-    public WRegiReviewAdapter(){
+    WRegiReviewActivity mActivity;
 
+    Button placeButton;
+
+    public WRegiReviewAdapter(WRegiReviewActivity activity){
+        mActivity = activity;
     }
     @Override
     public int getCount() {
@@ -51,13 +51,21 @@ public class WRegiReviewAdapter extends BaseAdapter{
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
-        TextView placeText=(TextView) convertView.findViewById(R.id.placeText);
+//        TextView placeText=(TextView) convertView.findViewById(R.id.placeText);
+        placeButton = (Button) convertView.findViewById(R.id.placeButton);
         ImageView UserImage=(ImageView)convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
+        placeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.myOnClick(v);
+            }
+        });
+
         WRegiReviewItem regiReviewItem=WRegiReviewItemList.get(position);
 
-       placeText.setText(regiReviewItem.getPlace());
+//       placeText.setText(regiReviewItem.getPlace());
        
 //        if(regiReviewItem.getPhoto()==0){
 //            //ImageView UserImage=(ImageView)parentconvertView.findViewById(R.id.UserImage);

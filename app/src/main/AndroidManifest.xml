@@ -52,7 +52,7 @@
         <activity android:name=".WRegiReviewActivity" />
         <activity android:name=".WAddPlaceActivity" />
         <activity android:name=".WListActivity" />
-        <activity android:name=".DataTestActivity"></activity>
+        <activity android:name=".DataTestActivity" />
     </application>
 
 </manifest>

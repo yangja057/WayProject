@@ -1,35 +1,29 @@
 package com.example.yangj.wayproject;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-
-import java.util.List;
-
 public class WRegiReviewActivity extends AppCompatActivity {
 
-
-    private static final int PLACE_PICKER_REQUEST = 1;
     private static int WHICH_POINT = 0; //StartingPoint 이면 0, EndingPoint 이면 1
 
     TextView tvStartingPoint;
     TextView tvEndingPoint;
 
+    static String curSelectPlace;
+
     Button btnStartingPoint;
     Button btnEndingPoint;
     Button AddButton;
+
+    final WRegiReviewAdapter adapter=new WRegiReviewAdapter(WRegiReviewActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +32,6 @@ public class WRegiReviewActivity extends AppCompatActivity {
 
 
         ListView listView;
-        final WRegiReviewAdapter adapter=new WRegiReviewAdapter();
 
         listView=(ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
@@ -52,13 +45,18 @@ public class WRegiReviewActivity extends AppCompatActivity {
         btnStartingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchStartingPoint(v);
+                Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
+                startActivityForResult(intent, 1);
+                WHICH_POINT = 0;
             }
         });
+
         btnEndingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchEndingPoint(v);
+                Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
+                startActivityForResult(intent, 1);
+                WHICH_POINT = 1;
             }
         });
 
@@ -76,62 +74,36 @@ public class WRegiReviewActivity extends AppCompatActivity {
         });
     }
 
-    public void searchStartingPoint(View view){
-        //This is the place to call the place picker function
-
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
-        Intent intent;
-        try {
-            intent = builder.build(WRegiReviewActivity.this);
-            startActivityForResult(intent, PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-
-//        try{
-//            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-//            WHICH_POINT = 0;
-//
-//        }catch (GooglePlayServicesRepairableException e){
-//            e.printStackTrace();
-//        }catch(GooglePlayServicesNotAvailableException e){
-//            e.printStackTrace();
-//        }
-    }
-
-    public void searchEndingPoint(View view){
-        //This is the place to call the place picker function
-
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
-        try{
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-            WHICH_POINT = 1;
-
-        }catch (GooglePlayServicesRepairableException e){
-            e.printStackTrace();
-        }catch(GooglePlayServicesNotAvailableException e){
-            e.printStackTrace();
-        }
+    public void myOnClick(View v){
+        Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
+        startActivityForResult(intent, 1);
+        WHICH_POINT = 2;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == PLACE_PICKER_REQUEST){
-            if(resultCode == RESULT_OK){
-                Place place = PlacePicker.getPlace(WRegiReviewActivity.this, data);
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
                 if(WHICH_POINT == 0){
-                    tvStartingPoint.setText(place.getName());
+                    tvStartingPoint.setText(data.getStringExtra("placeName"));
                 }
-                else{
-                    tvEndingPoint.setText(place.getName());
+                else if(WHICH_POINT == 1){
+                    tvEndingPoint.setText(data.getStringExtra("placeName"));
+                }
+                else if(WHICH_POINT == 2){
+                    curSelectPlace = data.getStringExtra("placeName");
+                    adapter.placeButton.setText(curSelectPlace);
                 }
             }
+            if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(getBaseContext(),"데이터 가져오기 실패",Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+    public String getCurSelectPlace(){
+        return curSelectPlace;
     }
 }

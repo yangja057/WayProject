@@ -58,7 +58,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItem regiReviewItem=WRegiReviewItemList.get(position);
 
        placeText.setText(regiReviewItem.getPlace());
-       
+
 //        if(regiReviewItem.getPhoto()==0){
 //            //ImageView UserImage=(ImageView)parentconvertView.findViewById(R.id.UserImage);
 //            UserImage.setImageResource(R.drawable.base);

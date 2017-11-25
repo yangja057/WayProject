@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogOut;
     private Button btnGoList;
     private Button btnCheck;
+    private Button btnTestList;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
         btnLogOut=(Button)findViewById(R.id.logOut);
         btnGoList=(Button)findViewById(R.id.goListView);
-
+        btnTestList=(Button)findViewById(R.id. TestListView) ;
 
 /*
 현재 로그인한 사용자
@@ -142,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnTestList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),LTest.class);
+                startActivity(intent);
+            }
+        });
 
 
 

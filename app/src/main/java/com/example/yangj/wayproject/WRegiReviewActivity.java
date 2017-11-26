@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,11 +29,30 @@ public class WRegiReviewActivity extends AppCompatActivity {
     final WRegiReviewAdapter adapter=new WRegiReviewAdapter(WRegiReviewActivity.this);
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflate the menu item for use in the action bas
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.list_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Handle press on the action bar items
+        switch(item.getItemId()){
+            case R.id.newPost:
+                Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wregi_review);
-
-
         ListView listView;
 
         listView=(ListView)findViewById(R.id.listview1);

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -51,9 +52,15 @@ public class WRegiReviewAdapter extends BaseAdapter{
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
+<<<<<<< HEAD
         regiReviewItem.placeButton = (Button) convertView.findViewById(R.id.placeButton);
         regiReviewItem.UserImage = (ImageView)convertView.findViewById(R.id.UserImage);
         regiReviewItem.explainText = (EditText)convertView.findViewById(R.id.explainText);
+=======
+        placeButton=(Button) convertView.findViewById(R.id.placeButton);
+        ImageButton UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
+        EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
+>>>>>>> 922e8240551aa36247934ad5a7fa7901afcb49e2
 
         regiReviewItem.placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +91,11 @@ public class WRegiReviewAdapter extends BaseAdapter{
 
     public void addItem(){
         WRegiReviewItem item=new WRegiReviewItem();
+<<<<<<< HEAD
+=======
+        item.setPhoto(R.drawable.base);
+
+>>>>>>> 922e8240551aa36247934ad5a7fa7901afcb49e2
         WRegiReviewItemList.add(item);
     }
 }

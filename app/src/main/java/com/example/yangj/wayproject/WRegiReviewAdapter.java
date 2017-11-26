@@ -62,11 +62,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
         placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-               // mActivity.myOnClick(v);
-=======
                 mActivity.myOnClickListener(v);
->>>>>>> 957d7997b4136c44ecf1d0ce24d0fc553f1d463e
             }
         });
 

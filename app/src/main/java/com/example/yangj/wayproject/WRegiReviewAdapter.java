@@ -61,21 +61,30 @@ public class WRegiReviewAdapter extends BaseAdapter{
         placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.myOnClick(v);
+               // mActivity.myOnClick(v);
             }
         });
 
         WRegiReviewItem regiReviewItem=WRegiReviewItemList.get(position);
 
-//       placeButton.setText(regiReviewItem.getPlace());
-
-//        if(regiReviewItem.getPhoto()==0){
-//            //ImageView UserImage=(ImageView)parentconvertView.findViewById(R.id.UserImage);
-//            UserImage.setImageResource(R.drawable.base);
-//        }
        UserImage.setImageResource(regiReviewItem.getPhoto());
 
-       explainText.setText(regiReviewItem.getReview());
+       UserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //디바이스에서 가져오기
+            }
+        });
+
+       UserImage.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(context, "길게눌려여",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        explainText.setText(regiReviewItem.getReview());
 
         return convertView;
     }
@@ -91,19 +100,6 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItem item=new WRegiReviewItem();
         item.setPhoto(R.drawable.base);
 
-        UserImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //디바이스에서 가져오기
-            }
-        });
-        UserImage.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(context, "길게눌려여",Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
         WRegiReviewItemList.add(item);
 
     }

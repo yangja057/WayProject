@@ -115,8 +115,8 @@ public class WRegiReviewActivity extends AppCompatActivity {
                     tvEndingPoint.setText(data.getStringExtra("placeName"/*"placeId"*/));
                 }
                 else if(WHICH_POINT == 2){
-                    adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"/*"placeId"*/));
-                    adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlace());
+                    //adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"/*"placeId"*/));
+                    //adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlace());
                 }
             }
             if(resultCode == Activity.RESULT_CANCELED){

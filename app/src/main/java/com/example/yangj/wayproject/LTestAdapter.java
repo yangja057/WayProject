@@ -1,11 +1,11 @@
 package com.example.yangj.wayproject;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,12 +54,12 @@ public class LTestAdapter extends BaseAdapter{
 
         WRegiReviewItem LRegiViewItem=LTestList.get(position);
 
-        TextView placeText=(TextView) convertView.findViewById(R.id.placeText);
+        Button placeButton=(Button) convertView.findViewById(R.id.placeButton);
         ImageView UserImage=(ImageView)convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
         UserImage.setImageResource(LRegiViewItem.getPhoto());
-        placeText.setText(LRegiViewItem.getPlace());
+        placeButton.setText(LRegiViewItem.getPlace());
         explainText.setText(LRegiViewItem.getReview());
 
         return convertView;

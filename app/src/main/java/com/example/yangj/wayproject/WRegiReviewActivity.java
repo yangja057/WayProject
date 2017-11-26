@@ -124,8 +124,9 @@ public class WRegiReviewActivity extends AppCompatActivity {
                     tvEndingPoint.setText(endingPointName);
                 }
                 else if(WHICH_POINT == 2){
-                    adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"));
-                    adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlace());
+                    adapter.regiReviewItem.setPlaceName(data.getStringExtra("placeName"));
+                    adapter.regiReviewItem.setPlaceId(data.getStringExtra("placeId"));
+                    adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlaceName());
                 }
             }
             if(resultCode == Activity.RESULT_CANCELED){

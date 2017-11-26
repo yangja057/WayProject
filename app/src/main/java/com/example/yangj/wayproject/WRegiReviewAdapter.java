@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +20,8 @@ public class WRegiReviewAdapter extends BaseAdapter{
 
     private ArrayList<WRegiReviewItem> WRegiReviewItemList=new ArrayList<WRegiReviewItem>();
     private View parentconvertView;
+    WRegiReviewItem regiReviewItem;
+
     Button placeButton;
     ImageButton UserImage;
     WRegiReviewActivity mActivity;
@@ -61,11 +62,11 @@ public class WRegiReviewAdapter extends BaseAdapter{
         placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.myOnClick(v);
+                mActivity.myOnClickListener(v);
             }
         });
 
-        WRegiReviewItem regiReviewItem=WRegiReviewItemList.get(position);
+        regiReviewItem=WRegiReviewItemList.get(position);
 
 //       placeButton.setText(regiReviewItem.getPlace());
 

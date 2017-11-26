@@ -24,7 +24,6 @@ public class WRegiReviewAdapter extends BaseAdapter{
     private View parentconvertView;
     WRegiReviewItem regiReviewItem;
 
-    Button placeButton;
     ImageButton UserImage;
     WRegiReviewActivity mActivity;
     private Context context;
@@ -52,23 +51,22 @@ public class WRegiReviewAdapter extends BaseAdapter{
         final int pos=position;
         context=parent.getContext();
         parentconvertView=convertView;
+        regiReviewItem=WRegiReviewItemList.get(position);
 
         if(convertView==null){
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
-        placeButton=(Button) convertView.findViewById(R.id.placeButton);
+        regiReviewItem.placeButton=(Button) convertView.findViewById(R.id.placeButton);
         UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
-        placeButton.setOnClickListener(new View.OnClickListener() {
+        regiReviewItem.placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mActivity.myOnClickListener(v);
             }
         });
-
-        regiReviewItem=WRegiReviewItemList.get(position);
 
        UserImage.setImageResource(regiReviewItem.getPhoto());
 

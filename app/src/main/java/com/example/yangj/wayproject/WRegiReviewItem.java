@@ -14,7 +14,8 @@ public class WRegiReviewItem {
     EditText explainText;
 
     private int photo;
-    private String place;
+    private String placeName;
+    private String placeId;
     private String review;
 
     public WRegiReviewItem(){
@@ -22,11 +23,13 @@ public class WRegiReviewItem {
         review="리뷰써주세요오^_^/";
     }
     public void setPhoto(int photo){this.photo=photo;}
-    public void setPlace(String place){this.place=place;}
+    public void setPlaceName(String placeName){this.placeName=placeName;}
+    public void setPlaceId(String placeId){this.placeId=placeId;}
     public void setReview(String review){this.review=review;}
 
     public int getPhoto(){return photo;}
-    public String getPlace(){return place;}
+    public String getPlaceName(){return placeName;}
+    public String getPlaceId(){return placeId;}
     public String getReview(){return review;}
 
 }

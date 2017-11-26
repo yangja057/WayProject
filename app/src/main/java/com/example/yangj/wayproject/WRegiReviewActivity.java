@@ -18,7 +18,12 @@ public class WRegiReviewActivity extends AppCompatActivity {
     private static int WHICH_POINT = 0; //StartingPoint 이면 0, EndingPoint 이면 1
 
     TextView tvStartingPoint;
+    String startingPointName;
+    String startingPointId;
+
     TextView tvEndingPoint;
+    String endingPointName;
+    String endingPointId;
 
     static String curSelectPlace;
 
@@ -109,13 +114,17 @@ public class WRegiReviewActivity extends AppCompatActivity {
         if(requestCode == 1){
             if(resultCode == Activity.RESULT_OK){
                 if(WHICH_POINT == 0){
-                    tvStartingPoint.setText(data.getStringExtra("placeName"/*"placeId"*/));
+                    startingPointName = data.getStringExtra("placeName");
+                    startingPointId = data.getStringExtra("placeId");
+                    tvStartingPoint.setText(startingPointName);
                 }
                 else if(WHICH_POINT == 1){
-                    tvEndingPoint.setText(data.getStringExtra("placeName"/*"placeId"*/));
+                    endingPointName = data.getStringExtra("placeName");
+                    endingPointId = data.getStringExtra("placeId");
+                    tvEndingPoint.setText(endingPointName);
                 }
                 else if(WHICH_POINT == 2){
-                    adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"/*"placeId"*/));
+                    adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"));
                     adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlace());
                 }
             }

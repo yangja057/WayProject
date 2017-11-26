@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
         placeButton=(Button) convertView.findViewById(R.id.placeButton);
-        ImageView UserImage=(ImageView)convertView.findViewById(R.id.UserImage);
+        ImageButton UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
         placeButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
 
     public void addItem(){
         WRegiReviewItem item=new WRegiReviewItem();
-
+        item.setPhoto(R.drawable.base);
 
         WRegiReviewItemList.add(item);
 

@@ -19,10 +19,12 @@
             android:gravity="center_vertical"
             android:textSize="24dp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/UserImage"
             android:layout_width="match_parent"
             android:layout_height="190dp"
+            android:src="@drawable/base"
+            android:scaleType="fitCenter"
             android:layout_weight="1" />
 
         <EditText

@@ -41,6 +41,7 @@ public class WAddPlaceActivity extends AppCompatActivity {
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("placeName", place.getName());
+                returnIntent.putExtra("placeId", place.getId());
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }

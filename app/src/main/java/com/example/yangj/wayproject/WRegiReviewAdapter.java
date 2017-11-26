@@ -1,6 +1,8 @@
 package com.example.yangj.wayproject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +83,22 @@ public class WRegiReviewAdapter extends BaseAdapter{
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(context, "길게눌려여",Toast.LENGTH_SHORT).show();
+                final AlertDialog.Builder alertDialog=new AlertDialog.Builder(context);
+
+                //제목 셋팅
+                alertDialog.setTitle("게시물 삭제");
+
+                //AlertDialog 셋팅
+                alertDialog.setMessage("게시물을 삭제할 것입니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("삭제",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //게시물을 삭제한다.
+                                        //AlertDialogActivity.this.finish();
+                                    }
+                                });
                 return true;
             }
         });
@@ -89,13 +107,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
 
         return convertView;
     }
-//    public void addItem(int photo, String place, String review){
-//        WRegiReviewItem item=new WRegiReviewItem();
-//
-//        item.setPhoto(photo);
-//        item.setPlace(place);
-//        item.setReview(review);
-//    }
+
 
     public void addItem(){
         WRegiReviewItem item=new WRegiReviewItem();

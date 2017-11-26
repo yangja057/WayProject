@@ -74,7 +74,7 @@ public class WRegiReviewActivity extends AppCompatActivity {
         });
     }
 
-    public void myOnClick(View v){
+    public void myOnClickListener(View v){
         Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
         startActivityForResult(intent, 1);
         WHICH_POINT = 2;
@@ -93,8 +93,8 @@ public class WRegiReviewActivity extends AppCompatActivity {
                     tvEndingPoint.setText(data.getStringExtra("placeName"));
                 }
                 else if(WHICH_POINT == 2){
-                    curSelectPlace = data.getStringExtra("placeName");
-                    adapter.placeButton.setText(curSelectPlace);
+                    adapter.regiReviewItem.setPlace(data.getStringExtra("placeName"));
+                    adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlace());
                 }
             }
             if(resultCode == Activity.RESULT_CANCELED){

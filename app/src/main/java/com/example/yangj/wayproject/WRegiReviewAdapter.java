@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,9 @@ public class WRegiReviewAdapter extends BaseAdapter{
     private ArrayList<WRegiReviewItem> WRegiReviewItemList=new ArrayList<WRegiReviewItem>();
     private View parentconvertView;
     Button placeButton;
+    ImageButton UserImage;
     WRegiReviewActivity mActivity;
+    private Context context;
 
     public WRegiReviewAdapter(WRegiReviewActivity activity){
         mActivity = activity;
@@ -44,7 +47,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos=position;
-        final Context context=parent.getContext();
+        context=parent.getContext();
         parentconvertView=convertView;
 
         if(convertView==null){
@@ -52,7 +55,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
         placeButton=(Button) convertView.findViewById(R.id.placeButton);
-        ImageButton UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
+        UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
         placeButton.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,19 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItem item=new WRegiReviewItem();
         item.setPhoto(R.drawable.base);
 
+        UserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //디바이스에서 가져오기
+            }
+        });
+        UserImage.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(context, "길게눌려여",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
         WRegiReviewItemList.add(item);
 
     }

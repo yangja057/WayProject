@@ -1,40 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.DataTestActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:layout_weight="1"
             android:id="@+id/buttonChoose"
-            android:text="choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="choose" />
 
         <Button
-            android:layout_weight="2"
             android:id="@+id/buttonUpload"
-            android:text="Upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_weight="2"
+            android:text="Upload" />
+
+        <EditText
+            android:id="@+id/uploadReview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:hint="리뷰를 등록해 주세요"
+            android:textColor="#666666"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:layout_below="@+id/linearLayout"
+        android:orientation="horizontal">
 
-        />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_below="@+id/linearLayout"
 
-</android.support.constraint.ConstraintLayout>
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/uploadImage"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>

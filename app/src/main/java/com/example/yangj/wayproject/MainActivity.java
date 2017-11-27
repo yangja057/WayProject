@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoList;
     private Button btnCheck;
     private Button btnTestList;
+    private Button btnBoardData;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -53,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
         보여지는 view: 출발 도착을 눌렀을 경우 그다음에 보여지는 썸네일들이 있는 뷰
         리뷰등록 버튼 : 리뷰등록 액티비티로 이동
         testActivity :  데이터 테스트 액티비티
+        boardActivity : 데이터베이스에 있는 내용이 뿌려지는 화면==LTest view? 사용자가 보기위한 화면인것임
 
          */
 
 
         btnCheck=(Button)findViewById(R.id.check);
-
+        btnBoardData=(Button)findViewById(R.id.BoardData) ;
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
@@ -119,6 +121,14 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+        btnBoardData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),BoardActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnGoRegiReview.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,47 +8,49 @@
     tools:context="com.example.yangj.wayproject.MainActivity">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <Button
+        android:id="@+id/TestListView"
+        android:layout_width="112dp"
+        android:layout_height="85dp"
+        android:layout_weight="1"
+        android:text="다스리의 작업실" />
 
         <Button
-            android:id="@+id/TestListView"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/BoardData"
+            android:layout_width="112dp"
+            android:layout_height="85dp"
             android:layout_weight="1"
-            android:text="다스리의 작업실" />
+            android:text="데이터 읽어서 뿌려죠" />
 
         <Button
             android:id="@+id/goListView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="112dp"
+            android:layout_height="85dp"
             android:layout_weight="1"
             android:text="ListView" />
 
         <Button
             android:id="@+id/goToApi"
-            android:layout_width="wrap_content"
-            android:layout_height="183dp"
+            android:layout_width="112dp"
+            android:layout_height="85dp"
             android:layout_weight="1"
             android:text="구글 api"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="93dp" />
 
-        <Button
-            android:id="@+id/goRegiReview"
-            android:layout_width="wrap_content"
-            android:layout_height="151dp"
-            android:layout_weight="1"
-            android:text="리뷰등록 뷰"
-            tools:layout_editor_absoluteX="263dp"
-            tools:layout_editor_absoluteY="151dp" />
+    <Button
+        android:id="@+id/goRegiReview"
+        android:layout_width="112dp"
+        android:layout_height="85dp"
+        android:layout_weight="1"
+        android:text="리뷰등록 뷰"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="151dp" />
 
         <Button
             android:id="@+id/goToMainView"
-            android:layout_width="wrap_content"
-            android:layout_height="157dp"
+            android:layout_width="112dp"
+            android:layout_height="85dp"
             android:layout_weight="1"
             android:text="메인뷰"
             tools:layout_editor_absoluteX="263dp"
@@ -56,8 +58,8 @@
 
         <Button
             android:id="@+id/goToJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="112dp"
+            android:layout_height="85dp"
             android:layout_weight="1"
             android:text="회원가입"
             tools:layout_editor_absoluteX="88dp"
@@ -65,7 +67,7 @@
 
         <Button
             android:id="@+id/goToLogin"
-            android:layout_width="108dp"
+            android:layout_width="112dp"
             android:layout_height="85dp"
             android:layout_weight="1"
             android:text="로그인"
@@ -81,14 +83,14 @@
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
 
-        <Button
-            android:id="@+id/check"
-            android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
-            android:text="데이터 확인"
-            tools:layout_editor_absoluteX="132dp"
-            tools:layout_editor_absoluteY="27dp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/check"
+        android:layout_width="112dp"
+        android:layout_height="85dp"
+        android:layout_weight="1"
+        android:text="데이터 확인"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="27dp" />
+
 
 </LinearLayout>

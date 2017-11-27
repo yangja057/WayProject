@@ -74,6 +74,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 //디바이스에서 가져오기
+               // uploadFile();
             }
         });
 
@@ -94,8 +95,8 @@ public class WRegiReviewAdapter extends BaseAdapter{
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         //게시물을 삭제한다.
-                                        //regiReviewItem.setPhoto();
-
+                                        regiReviewItem.setPhoto(0);
+                                        regiReviewItem.setPhoto(R.drawable.base);
                                     }
                                 }).setNegativeButton("취소",
                         new DialogInterface.OnClickListener() {
@@ -127,4 +128,5 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItemList.add(item);
 
     }
+
 }

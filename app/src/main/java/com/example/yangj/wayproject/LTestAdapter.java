@@ -59,7 +59,7 @@ public class LTestAdapter extends BaseAdapter{
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
         UserImage.setImageResource(LRegiViewItem.getPhoto());
-        placeButton.setText(LRegiViewItem.getPlace());
+        placeButton.setText(LRegiViewItem.getPlaceName());
         explainText.setText(LRegiViewItem.getReview());
 
         return convertView;
@@ -69,7 +69,7 @@ public class LTestAdapter extends BaseAdapter{
 
         WRegiReviewItem item=new WRegiReviewItem();
 
-        item.setPlace(place);
+        item.setPlaceName(place);
         item.setReview(review);
         item.setPhoto(photo);
 

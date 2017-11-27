@@ -31,6 +31,9 @@ public class WRegiReviewActivity extends AppCompatActivity {
     Button btnEndingPoint;
     Button AddButton;
 
+    boolean touchbookmark=false;
+
+
     final WRegiReviewAdapter adapter=new WRegiReviewAdapter(WRegiReviewActivity.this);
 
     @Override
@@ -45,8 +48,20 @@ public class WRegiReviewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         //Handle press on the action bar items
         switch(item.getItemId()){
-            case R.id.newPost:
+            case R.id.newPost:  //글 등록
                 Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bookmark: //북마크(즐겨찾기)
+                Toast.makeText(this, "즐겨찾기", Toast.LENGTH_SHORT).show();
+                if(!touchbookmark){
+                    item.setIcon(R.drawable.ic_action_bookmark2);
+                    touchbookmark=true;
+                }
+                else
+                {
+                    item.setIcon(R.drawable.ic_action_bookmark);
+                    touchbookmark=false;
+                }
                 break;
             default:
                 break;

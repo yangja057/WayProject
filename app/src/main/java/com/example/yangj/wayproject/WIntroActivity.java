@@ -24,7 +24,7 @@ public class WIntroActivity extends Activity{
             public void run() {
                 Intent intent=new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         },2000);
     }

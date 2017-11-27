@@ -9,6 +9,7 @@ import android.widget.ImageView;
  */
 
 public class WRegiReviewItem {
+
     Button placeButton;
     ImageView UserImage;
     EditText explainText;

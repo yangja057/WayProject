@@ -74,6 +74,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 //디바이스에서 가져오기
+               // uploadFile();
             }
         });
 
@@ -84,22 +85,35 @@ public class WRegiReviewAdapter extends BaseAdapter{
                 final AlertDialog.Builder alertDialog=new AlertDialog.Builder(context);
 
                 //제목 셋팅
-                alertDialog.setTitle("게시물 삭제");
+                alertDialog.setTitle("사진 삭제");
 
                 //AlertDialog 셋팅
-                alertDialog.setMessage("게시물을 삭제할 것입니까?")
+                alertDialog.setMessage("사진을 삭제할 것입니까?")
                         .setCancelable(false)
                         .setPositiveButton("삭제",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         //게시물을 삭제한다.
-                                        //AlertDialogActivity.this.finish();
+                                        regiReviewItem.setPhoto(0);
+                                        regiReviewItem.setPhoto(R.drawable.base);
                                     }
-                                });
+                                }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog1=alertDialog.create();
+
+                //다이얼로그 보여주기
+                alertDialog.show();
+
                 return true;
             }
         });
+
 
         explainText.setText(regiReviewItem.getReview());
 
@@ -114,4 +128,5 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItemList.add(item);
 
     }
+
 }

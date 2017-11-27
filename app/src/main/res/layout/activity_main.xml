@@ -8,50 +8,54 @@
     tools:context="com.example.yangj.wayproject.MainActivity">
 
 
+
     <Button
         android:id="@+id/TestListView"
         android:layout_width="112dp"
-        android:layout_height="85dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
         android:text="다스리의 작업실" />
 
         <Button
             android:id="@+id/BoardData"
+            android:text="데이터 읽고뿌려줘"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
-            android:text="데이터 읽어서 뿌려죠" />
+            android:layout_height="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
 
         <Button
             android:id="@+id/goListView"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+
             android:text="ListView" />
 
         <Button
             android:id="@+id/goToApi"
+
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+
             android:text="구글 api"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="93dp" />
+        <Button
+            android:id="@+id/goRegiReview"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
 
-    <Button
-        android:id="@+id/goRegiReview"
-        android:layout_width="112dp"
-        android:layout_height="85dp"
-        android:layout_weight="1"
-        android:text="리뷰등록 뷰"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="151dp" />
+            android:text="리뷰등록 뷰"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="151dp" />
 
         <Button
             android:id="@+id/goToMainView"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:text="메인뷰"
             tools:layout_editor_absoluteX="263dp"
             tools:layout_editor_absoluteY="151dp" />
@@ -59,17 +63,15 @@
         <Button
             android:id="@+id/goToJoin"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
-            android:text="회원가입"
+            android:layout_height="40dp"
+     android:text="회원가입"
             tools:layout_editor_absoluteX="88dp"
             tools:layout_editor_absoluteY="334dp" />
 
         <Button
             android:id="@+id/goToLogin"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:text="로그인"
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
@@ -77,20 +79,28 @@
         <Button
             android:id="@+id/logOut"
             android:layout_width="112dp"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:text="로그아웃"
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
 
-    <Button
-        android:id="@+id/check"
-        android:layout_width="112dp"
-        android:layout_height="85dp"
-        android:layout_weight="1"
-        android:text="데이터 확인"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="27dp" />
+        <Button
+            android:id="@+id/check"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
 
+            android:text="데이터 확인"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="27dp" />
+
+        <Button
+            android:id="@+id/goMainSearch"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+
+            android:text="메인검색"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="27dp" />
+    </LinearLayout>
 
 </LinearLayout>

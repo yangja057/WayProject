@@ -10,18 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class WRegiReviewActivity extends AppCompatActivity {
+    static private final int STARTING_POINT = 0;
+    static private final int ENDING_POINT = 1;
+    static private final int CUR_SELECT_PLACE = 2;
 
-    private static int WHICH_POINT = 0; //StartingPoint 이면 0, EndingPoint 이면 1
-
-    TextView tvStartingPoint;
     String startingPointName;
     String startingPointId;
 
-    TextView tvEndingPoint;
     String endingPointName;
     String endingPointId;
 
@@ -30,6 +28,9 @@ public class WRegiReviewActivity extends AppCompatActivity {
     Button btnStartingPoint;
     Button btnEndingPoint;
     Button AddButton;
+
+    boolean touchbookmark=false;
+
 
     final WRegiReviewAdapter adapter=new WRegiReviewAdapter(WRegiReviewActivity.this);
 
@@ -45,8 +46,20 @@ public class WRegiReviewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         //Handle press on the action bar items
         switch(item.getItemId()){
-            case R.id.newPost:
+            case R.id.newPost:  //글 등록
                 Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bookmark: //북마크(즐겨찾기)
+                Toast.makeText(this, "즐겨찾기", Toast.LENGTH_SHORT).show();
+                if(!touchbookmark){
+                    item.setIcon(R.drawable.ic_action_bookmark2);
+                    touchbookmark=true;
+                }
+                else
+                {
+                    item.setIcon(R.drawable.ic_action_bookmark);
+                    touchbookmark=false;
+                }
                 break;
             default:
                 break;
@@ -63,8 +76,6 @@ public class WRegiReviewActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
-        tvStartingPoint = (TextView)findViewById(R.id.tvStartingPoint);
-        tvEndingPoint = (TextView)findViewById(R.id.tvEndingPoint);
         btnStartingPoint = (Button)findViewById(R.id.btnStartingPoint);
         btnEndingPoint = (Button)findViewById(R.id.btnEndingPoint);
         AddButton=(Button)findViewById(R.id.button3);
@@ -73,8 +84,7 @@ public class WRegiReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
-                startActivityForResult(intent, 1);
-                WHICH_POINT = 0;
+                startActivityForResult(intent, STARTING_POINT);
             }
         });
 
@@ -82,8 +92,7 @@ public class WRegiReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
-                startActivityForResult(intent, 1);
-                WHICH_POINT = 1;
+                startActivityForResult(intent, ENDING_POINT);
             }
         });
 
@@ -101,41 +110,36 @@ public class WRegiReviewActivity extends AppCompatActivity {
         });
     }
 
-    public void myOnClickListener(View v){
+    public void selectPlaceOnClickListener(View v){
         Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
-        startActivityForResult(intent, 1);
-        WHICH_POINT = 2;
+        startActivityForResult(intent, CUR_SELECT_PLACE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1){
-            if(resultCode == Activity.RESULT_OK){
-                if(WHICH_POINT == 0){
+        if(resultCode == Activity.RESULT_OK){
+            switch (requestCode){
+                case STARTING_POINT:
                     startingPointName = data.getStringExtra("placeName");
                     startingPointId = data.getStringExtra("placeId");
-                    tvStartingPoint.setText(startingPointName);
-                }
-                else if(WHICH_POINT == 1){
+                    btnStartingPoint.setText(startingPointName);
+                    break;
+                case ENDING_POINT:
                     endingPointName = data.getStringExtra("placeName");
                     endingPointId = data.getStringExtra("placeId");
-                    tvEndingPoint.setText(endingPointName);
-                }
-                else if(WHICH_POINT == 2){
+                    btnEndingPoint.setText(endingPointName);
+                    break;
+                case CUR_SELECT_PLACE:
                     adapter.regiReviewItem.setPlaceName(data.getStringExtra("placeName"));
                     adapter.regiReviewItem.setPlaceId(data.getStringExtra("placeId"));
                     adapter.regiReviewItem.placeButton.setText(adapter.regiReviewItem.getPlaceName());
-                }
-            }
-            if(resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(getBaseContext(),"데이터 가져오기 실패",Toast.LENGTH_LONG).show();
+                    break;
             }
         }
-    }
-
-    public String getCurSelectPlace(){
-        return curSelectPlace;
+        else if(resultCode == Activity.RESULT_CANCELED){
+            Toast.makeText(getBaseContext(),"데이터 가져오기 실패",Toast.LENGTH_LONG).show();
+        }
     }
 }

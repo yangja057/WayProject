@@ -3,6 +3,7 @@ package com.example.yangj.wayproject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,26 +59,27 @@ public class WRegiReviewAdapter extends BaseAdapter{
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
         regiReviewItem.placeButton=(Button) convertView.findViewById(R.id.placeButton);
-        UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
+        regiReviewItem.UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 
         regiReviewItem.placeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActivity.myOnClickListener(v);
+                mActivity.selectPlaceOnClickListener(v);
             }
         });
 
-       UserImage.setImageResource(regiReviewItem.getPhoto());
+       regiReviewItem.UserImage.setImageResource(regiReviewItem.getPhoto());
 
-       UserImage.setOnClickListener(new View.OnClickListener() {
+      regiReviewItem.UserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //디바이스에서 가져오기
+                showFileChooser();
             }
         });
 
-       UserImage.setOnLongClickListener(new View.OnLongClickListener(){
+      regiReviewItem.UserImage.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(context, "길게눌려여",Toast.LENGTH_SHORT).show();
@@ -96,7 +98,19 @@ public class WRegiReviewAdapter extends BaseAdapter{
                                         //게시물을 삭제한다.
                                         //AlertDialogActivity.this.finish();
                                     }
-                                });
+                                }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog1=alertDialog.create();
+
+                //다이얼로그 보여주기
+                alertDialog.show();
+
                 return true;
             }
         });
@@ -114,4 +128,12 @@ public class WRegiReviewAdapter extends BaseAdapter{
         WRegiReviewItemList.add(item);
 
     }
+
+    private void showFileChooser(){
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+      //  startActivityForResult(Intent.createChooser(intent,"Select an Image"),PICK_IMAGE_REQUEST);
+    }
+
 }

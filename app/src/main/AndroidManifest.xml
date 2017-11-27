@@ -53,9 +53,7 @@
         <activity android:name=".WAddPlaceActivity" />
         <activity android:name=".WListActivity" />
         <activity android:name=".DataTestActivity" />
-        <activity android:name=".LTest" />
-        <activity android:name=".LoadPost" />
-        <activity android:name=".LoadPoastActivity"></activity>
+        <activity android:name=".LTest"></activity>
     </application>
 
 </manifest>

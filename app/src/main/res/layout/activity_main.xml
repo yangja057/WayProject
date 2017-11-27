@@ -21,13 +21,6 @@
             android:text="다스리의 작업실" />
 
         <Button
-            android:id="@+id/LoadData"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="로드 데이터" />
-
-        <Button
             android:id="@+id/goListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

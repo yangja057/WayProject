@@ -96,7 +96,19 @@ public class WRegiReviewAdapter extends BaseAdapter{
                                         //게시물을 삭제한다.
                                         //AlertDialogActivity.this.finish();
                                     }
-                                });
+                                }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog1=alertDialog.create();
+
+                //다이얼로그 보여주기
+                alertDialog.show();
+
                 return true;
             }
         });

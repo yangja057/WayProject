@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;//현재 로그인한 사용자를 얻기 위한 변수 선언
-
+//
     private Button btnGoToJoin;
     private Button btnGoToApi;
     private Button btnGoToMainView;

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoList;
     private Button btnCheck;
     private Button btnTestList;
+    private Button btnLoadData;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /*
+        데이터 확인
+        로드 포스트
         로그인버튼 : 로그인으로 이동
         회원가입 버튼 : 회원가입으로 이동
         검색버튼 : 구글 api로 이동
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnCheck=(Button)findViewById(R.id.check);
+        btnLoadData=(Button)findViewById(R.id.LoadData);
 
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToApi);
@@ -68,6 +72,17 @@ public class MainActivity extends AppCompatActivity {
         btnGoList=(Button)findViewById(R.id.goListView);
         btnTestList=(Button)findViewById(R.id. TestListView) ;
 
+
+        /*
+        데이터 로드 확인
+         */
+        btnLoadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),LoadPoastActivity.class);
+                startActivity(intent);
+            }
+        });
 /*
 현재 로그인한 사용자
  */

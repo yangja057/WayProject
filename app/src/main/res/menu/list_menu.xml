@@ -4,9 +4,9 @@
 
 
    <item
-        android:id="@+id/newPost"
-        android:title=""
+        android:id="@+id/action_add"
+        android:title="Add Post"
         app:showAsAction="always"
-        android:icon="@drawable/ic_action_write" />
+        android:icon="@mipmap/ic_add_white_24dp" />
 
 </menu>

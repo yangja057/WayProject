@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+//firebase추가
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 25
@@ -54,5 +56,3 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:3.1.0'
     testCompile 'junit:junit:4.12'
 }
-//firebase추가
-apply plugin: 'com.google.gms.google-services'

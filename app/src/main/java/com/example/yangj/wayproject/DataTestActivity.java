@@ -147,9 +147,12 @@ public class DataTestActivity extends AppCompatActivity {
                             m_imageData.description=editUpLoadReview.getText().toString();
                             m_imageData.userEmail=auth.getCurrentUser().getEmail();//등록한 사용자의 이메일을 반환
                             m_imageData.star++;
+                            //m_imageData.title="str1-str2";
+                            m_imageData.placeID="이곳은 자영이가 넘기는 place 의 id 입니다.";
+                            m_imageData.placeName="이곳은 자영이가 넘기는 place의 id와 매칭되는 name입니다.";
 
                             //user정보 등록
-                            m_userData.userID=auth.getCurrentUser().getEmail();
+                            m_userData.userEmail=auth.getCurrentUser().getEmail();
                             m_userData.myReviewList.add(m_imageData);
                            m_userData.likeReviewList.add(m_imageData);
                            m_userData.userUID=auth.getCurrentUser().getUid();

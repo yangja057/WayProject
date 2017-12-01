@@ -65,7 +65,7 @@ public class BoardActivity extends AppCompatActivity {
         즉 다른사람이 데이터를 수정했으면
         자동적으로 새로 고침이 됨
          */
-        database.getReference().child("image").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -116,7 +116,7 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((CustomViewHolder)holder).textView.setText(imageDTOs.get(position).title);
+           // ((CustomViewHolder)holder).textView.setText(imageDTOs.get(position).title);
             ((CustomViewHolder)holder).textView2.setText(imageDTOs.get(position).description);
             //Glide.with(holder.itemView.getContext()).load(imageDTOs.get(position).imageUrl).into(((CustomViewHolder)holder).imageView);
         }

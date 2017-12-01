@@ -54,13 +54,10 @@
         <activity android:name=".WListActivity" />
         <activity android:name=".DataTestActivity" />
         <activity android:name=".LTest" />
-        <activity android:name=".WMainSearchActivity"/>
-        <activity android:name=".BoardActivity">
-
-        </activity>
-
-
-
+        <activity android:name=".WMainSearchActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".WMyLikeReviewActivity" />
+        <activity android:name=".WMainViewActivity" />
     </application>
 
 </manifest>

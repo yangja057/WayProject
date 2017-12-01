@@ -30,38 +30,38 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+  데이터 베이스의 내용을 뿌리는 공간
+   */
+
 public class BoardActivity extends AppCompatActivity {
 
-    /*
-    데이터 베이스의 내용을 뿌리는 공간
-     */
+
     private RecyclerView recyclerView;
    public  List<ImageData> imageDTOs=new ArrayList<>(); //데이터 리스트 구조체
     public List<String> uidLists =new ArrayList<>(); // 사용자 리스트
 
-    //파이어 베이스 데이터베이스 추가
+    //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
-
+   private BoardRecyclerViewAdapter boardRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-
-        //다른곳에서 사용하기 위해서 singletone pattern으로  등록
-        database=FirebaseDatabase.getInstance();
+        database=FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
 
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final BoardRecyclerViewAdapter boardRecyclerViewAdapter=new BoardRecyclerViewAdapter();
-        recyclerView.setAdapter(boardRecyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));//리사이클 뷰를 세팅하는 코드
+        boardRecyclerViewAdapter=new BoardRecyclerViewAdapter();//adapter 생성
+        recyclerView.setAdapter(boardRecyclerViewAdapter);//리사이클뷰에게 어댑터를 쥐어줌
 
         //데이터를 읽어오는 코드
         /*
-        addValueEventListene : 글자가 하나씩 바뀔때 마다 데이터가 계속 넘어옴
-        client에게 알려줌
+        - "review"를 읽어옴
+        - addValueEventListene : 글자가 하나씩 바뀔때 마다 데이터가 계속 넘어옴
+        - client에게 알려줌
         즉 다른사람이 데이터를 수정했으면
         자동적으로 새로 고침이 됨
          */
@@ -71,13 +71,15 @@ public class BoardActivity extends AppCompatActivity {
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
                 imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
+                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
                     getchildren() :가지 하나를 children이라고 함
-                    child==현재 image: 의 children하나를 읽어옴
+                    child==현재 "review" 의 children하나를 읽어옴
                      */
                     ImageData imageData=snapshot.getValue(ImageData.class);
-                    imageDTOs.add(imageData);
+                    imageDTOs.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
                 }
                 boardRecyclerViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
@@ -105,13 +107,12 @@ public class BoardActivity extends AppCompatActivity {
 
     public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_board,parent,false);
 
-            return new CustomViewHolder(view);
+            return new CustomViewHolder(view);//리사이클 뷰의 장점^.^ view holder에 view를 넘겨줌
     }
 
         @Override
@@ -126,6 +127,7 @@ public class BoardActivity extends AppCompatActivity {
             return imageDTOs.size();
         }
 
+        //view holder innerclass
         private class CustomViewHolder extends RecyclerView.ViewHolder {
 
             ImageView imageView;

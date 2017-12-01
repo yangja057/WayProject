@@ -160,8 +160,10 @@ public class DataTestActivity extends AppCompatActivity {
                              * 중요) child안에 emial string 넣으면 안됨<-보안상의 문제인듯
                              */
 
-                            //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
 
+                            //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
+                            //"review"는 첫번째 루트
+                            //"users"는 두번째 루트
                            database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
                             database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
 

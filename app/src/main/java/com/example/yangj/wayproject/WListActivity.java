@@ -10,17 +10,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class WListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private EditText Startedit;
+    private EditText Endedit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wlist);
+
         recyclerView=(RecyclerView)findViewById(R.id.ListrecyclerView);
+        Startedit=(EditText)findViewById(R.id.list_btnStartingPoint);
+        Endedit=(EditText)findViewById(R.id.list_btnEndingPoint);
 
         WListViewAdapter adapter;
         adapter=new WListViewAdapter(R.layout.activity_wlist_item);
@@ -40,6 +47,21 @@ public class WListActivity extends AppCompatActivity {
 
         adapter.WlistViewItemList.add(item1);
         adapter.WlistViewItemList.add(item2);
+
+        Startedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Toast.makeText(getApplicationContext(), "이건 출발지를 선택하는 애지롱",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Endedit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "이건 도착지를 선택하는 애지롱",Toast.LENGTH_SHORT).show();
+            }
+        });
 //       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
 //               "ice", "ice");
 //       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bear),

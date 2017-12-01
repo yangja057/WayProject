@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +36,7 @@ public class BoardActivity extends AppCompatActivity {
     데이터 베이스의 내용을 뿌리는 공간
      */
     private RecyclerView recyclerView;
-   public  List<ImageData> m_imageData=new ArrayList<>(); //데이터 리스트 구조체
+   public  List<ImageData> imageDTOs=new ArrayList<>(); //데이터 리스트 구조체
     public List<String> uidLists =new ArrayList<>(); // 사용자 리스트
 
     //파이어 베이스 데이터베이스 추가
@@ -47,10 +48,11 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
+
         //다른곳에서 사용하기 위해서 singletone pattern으로  등록
         database=FirebaseDatabase.getInstance();
 
-        recyclerView=(RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final BoardRecyclerViewAdapter boardRecyclerViewAdapter=new BoardRecyclerViewAdapter();
@@ -63,19 +65,19 @@ public class BoardActivity extends AppCompatActivity {
         즉 다른사람이 데이터를 수정했으면
         자동적으로 새로 고침이 됨
          */
-        database.getReference().child("image").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-                m_imageData.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+                imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
                     getchildren() :가지 하나를 children이라고 함
                     child==현재 image: 의 children하나를 읽어옴
                      */
                     ImageData imageData=snapshot.getValue(ImageData.class);
-                    m_imageData.add(imageData);
+                    imageDTOs.add(imageData);
                 }
                 boardRecyclerViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
@@ -110,17 +112,18 @@ public class BoardActivity extends AppCompatActivity {
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_board,parent,false);
 
             return new CustomViewHolder(view);
-        }
+    }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ((CustomViewHolder)holder).textView.setText(m_imageData.get(position).title);
-            ((CustomViewHolder)holder).textView2.setText(m_imageData.get(position).description);
+           // ((CustomViewHolder)holder).textView.setText(imageDTOs.get(position).title);
+            ((CustomViewHolder)holder).textView2.setText(imageDTOs.get(position).description);
+            //Glide.with(holder.itemView.getContext()).load(imageDTOs.get(position).imageUrl).into(((CustomViewHolder)holder).imageView);
         }
 
         @Override
         public int getItemCount() {
-            return m_imageData.size();
+            return imageDTOs.size();
         }
 
         private class CustomViewHolder extends RecyclerView.ViewHolder {

@@ -9,10 +9,7 @@ public class ImageData {
     public String imageUrl;
     public String title;
     public String description;
-    public String uid;//작성자
+    public String userEmail;//작성자
     public int star;
-
-
-
 
 }

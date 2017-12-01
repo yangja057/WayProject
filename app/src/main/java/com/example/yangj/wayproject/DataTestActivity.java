@@ -145,7 +145,7 @@ public class DataTestActivity extends AppCompatActivity {
                             m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
                             //m_imageData.title=editImageTitle.getText().toString();
                             m_imageData.description=editUpLoadReview.getText().toString();
-                            m_imageData.uid=auth.getCurrentUser().getEmail();//등록한 사용자의 이메일을 반환
+                            m_imageData.userEmail=auth.getCurrentUser().getEmail();//등록한 사용자의 이메일을 반환
                             m_imageData.star++;
 
                             //user정보 등록
@@ -163,8 +163,8 @@ public class DataTestActivity extends AppCompatActivity {
 
                             //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
                             //"review"는 첫번째 루트
-                            //"users"는 두번째 루트
-                           database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
+                            //"users"는 두번째 루트트
+                          database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
                             database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
 
                         }

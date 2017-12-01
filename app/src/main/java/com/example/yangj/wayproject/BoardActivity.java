@@ -55,7 +55,7 @@ public class BoardActivity extends AppCompatActivity {
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));//리사이클 뷰를 세팅하는 코드
         boardRecyclerViewAdapter=new BoardRecyclerViewAdapter();//adapter 생성
-        recyclerView.setAdapter(boardRecyclerViewAdapter);//리사이클뷰에게 어댑터를 쥐어줌
+        recyclerView.setAdapter(boardRecyclerViewAdapter);//리사이클뷰에게 어댑터를 줌
 
         //데이터를 읽어오는 코드
         /*

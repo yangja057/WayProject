@@ -35,12 +35,12 @@
             android:text="ListView" />
 
         <Button
-            android:id="@+id/goToApi"
+            android:id="@+id/goToFirebase"
 
             android:layout_width="112dp"
             android:layout_height="40dp"
 
-            android:text="구글 api"
+            android:text="데이터읽기 완성본"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="93dp" />
         <Button

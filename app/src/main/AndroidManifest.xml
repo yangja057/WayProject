@@ -58,6 +58,7 @@
         <activity android:name=".BoardActivity" />
         <activity android:name=".WMyLikeReviewActivity" />
         <activity android:name=".WMainViewActivity" />
+        <activity android:name=".FirebaseActivity"></activity>
     </application>
 
 </manifest>

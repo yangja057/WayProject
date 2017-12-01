@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnBoardData=(Button)findViewById(R.id.BoardData) ;
 
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
-        btnGoToApi=(Button)findViewById(R.id.goToApi);
+        btnGoToApi=(Button)findViewById(R.id.goToFirebase);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
         btnGoRegiReview=(Button)findViewById(R.id.goRegiReview);
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        btnGoToApi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(getBaseContext(),//클래스 등록);
-//                startActivity(intent);
-//            }
-//        })
+        btnGoToApi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),FirebaseActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        btnGoToMainView.setOnClickListener(new View.OnClickListener() {
 //            @Override

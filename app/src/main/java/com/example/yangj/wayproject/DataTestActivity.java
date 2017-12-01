@@ -93,7 +93,7 @@ public class DataTestActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);//data가 사진 파일의 객체인것임
         if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
             filePath=data.getData();
             imagePath=data.getData().toString();//파일 경로 저장했는데
@@ -140,13 +140,30 @@ public class DataTestActivity extends AppCompatActivity {
                             real time data base
                              */
                             ImageData m_imageData=new ImageData();
-                           m_imageData.imageUrl=downloadUrl.toString();
+                            UserData m_userData=new UserData();
+
+                            m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
                             //m_imageData.title=editImageTitle.getText().toString();
                             m_imageData.description=editUpLoadReview.getText().toString();
                             m_imageData.uid=auth.getCurrentUser().getEmail();//등록한 사용자의 이메일을 반환
+                            m_imageData.star++;
 
-                           // database.getReference().child("image: ").setValue(m_imageData);//데이터저장
-                            database.getReference().child("image: ").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
+                            //user정보 등록
+                            m_userData.userID=auth.getCurrentUser().getEmail();
+                            m_userData.myReviewList.add(m_imageData);
+                           m_userData.likeReviewList.add(m_imageData);
+                           m_userData.userUID=auth.getCurrentUser().getUid();
+
+                           //Toast.makeText(DataTestActivity.this, curUser,Toast.LENGTH_LONG).show();
+
+                            /**
+                             * 중요) child안에 emial string 넣으면 안됨<-보안상의 문제인듯
+                             */
+
+                            //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
+
+                           database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
+                            database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
 
                         }
                     })

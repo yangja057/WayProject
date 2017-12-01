@@ -23,9 +23,9 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
                 android:background="@drawable/btn_backgroud"
-                android:text="출발지 검색" />
+                android:hint="출발지 검색" />
 
             <EditText
                 android:id="@+id/list_btnEndingPoint"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:background="@drawable/btn_backgroud"
-                android:text="도착지 검색" />
+                android:hint="도착지 검색" />
 
         </LinearLayout>
 

@@ -4,6 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,44 +15,40 @@ import android.widget.Toast;
 
 public class WListActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wlist);
+        recyclerView=(RecyclerView)findViewById(R.id.ListrecyclerView);
 
-        ListView listView;
         WListViewAdapter adapter;
+        adapter=new WListViewAdapter(R.layout.activity_wlist_item);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapter=new WListViewAdapter();
+        WListViewItem item1=new WListViewItem();
+        item1.setTitle("Bear");
+        item1.setIcon(ContextCompat.getDrawable(this,R.drawable.bear));
+        item1.setDesc("So Cute><");
 
-        listView=(ListView)findViewById(R.id.listview1);
-        listView.setAdapter(adapter);
+        WListViewItem item2=new WListViewItem();
+        item2.setTitle("brother");
+        item2.setIcon(ContextCompat.getDrawable(this, R.drawable.brothers));
+        item2.setDesc("bears");
 
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bear),
-                "Bear", "Cute><");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.brothers),
-                "brother", "bears");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
-                "ice", "ice");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bear),
-                "Bear", "Cute><");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.brothers),
-                "brother", "bears");
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
-                "ice", "ice");
+        adapter.WlistViewItemList.add(item1);
+        adapter.WlistViewItemList.add(item2);
+//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
+//               "ice", "ice");
+//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bear),
+//               "Bear", "Cute><");
+//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.brothers),
+//                "brother", "bears");
+//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
+//                "ice", "ice");
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                WListViewItem item=(WListViewItem) parent.getItemAtPosition(position);
-                String titleStr=item.getTitle();
-                String descStr=item.getDesc();
-                int photo=item.getPhoto();
-                Drawable iconDrawable=item.getIcon();
 
-                Toast.makeText(WListActivity.this, titleStr, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 }

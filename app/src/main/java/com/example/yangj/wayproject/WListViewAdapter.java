@@ -48,8 +48,14 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         Uri filepath= Uri.parse(imageItem.getImageUrl());
 
         holder.iconImageView.setImageURI(filepath);
-        holder.titleTextView.setText(imageItem.getPlaceName());
-        holder.descTextView.setText(imageItem.getDescription());
+        holder.Place1View.setText(imageItem.getPlaceName());
+        holder.Place2View.setText(imageItem.getPlaceName());
+        holder.Place3View.setText(imageItem.getPlaceName());
+        holder.Place4View.setText(imageItem.getPlaceName());
+        holder.Place5View.setText(imageItem.getPlaceName());
+
+        holder.UserIdView.setText(imageItem.getUserEmail());
+        holder.RecommendView.setText(imageItem.getDescription());
 
     }
 
@@ -62,16 +68,28 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         //뷰 재활용을 위한 viewHolder
 
         ImageView iconImageView;
-        TextView titleTextView;
-        TextView descTextView;
+        TextView Place1View;
+        TextView Place2View;
+        TextView Place3View;
+        TextView Place4View;
+        TextView Place5View;
+        TextView RecommendView;
+        TextView UserIdView;
+
 
         public ViewHolder(View itemView){
             super(itemView);
 
             iconImageView=(ImageView)itemView.findViewById(R.id.imageView1);
-            titleTextView=(TextView)itemView.findViewById(R.id.textView1);
-            descTextView=(TextView)itemView.findViewById(R.id.textView2);
 
+            Place1View=(TextView)itemView.findViewById(R.id.place1);
+            Place2View=(TextView)itemView.findViewById(R.id.place2);
+            Place3View=(TextView)itemView.findViewById(R.id.place3);
+            Place4View=(TextView)itemView.findViewById(R.id.place4);
+            Place5View=(TextView)itemView.findViewById(R.id.place5);
+
+            RecommendView=(TextView)itemView.findViewById(R.id.recommend);
+            UserIdView=(TextView)itemView.findViewById(R.id.userID);
         }
     }
 

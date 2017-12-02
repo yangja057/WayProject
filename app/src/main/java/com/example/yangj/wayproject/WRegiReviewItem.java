@@ -1,6 +1,5 @@
 package com.example.yangj.wayproject;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -9,7 +8,7 @@ import android.widget.ImageView;
  */
 
 public class WRegiReviewItem {
-    Button placeButton;
+    EditText placeButton;
     ImageView UserImage;
     EditText explainText;
 

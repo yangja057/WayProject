@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -58,7 +57,7 @@ public class WRegiReviewAdapter extends BaseAdapter{
             LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.activity_wregi_review_item, parent, false);
         }
-        regiReviewItem.placeButton=(Button) convertView.findViewById(R.id.placeButton);
+        regiReviewItem.placeButton=(EditText) convertView.findViewById(R.id.placeButton);
         regiReviewItem.UserImage=(ImageButton) convertView.findViewById(R.id.UserImage);
         EditText explainText=(EditText)convertView.findViewById(R.id.explainText);
 

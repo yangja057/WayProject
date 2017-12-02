@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnBoardData;
     private Button btnGoMainSearch;
+    private Button btnGoRegiReviewRV;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoList=(Button)findViewById(R.id.goListView);
         btnTestList=(Button)findViewById(R.id. TestListView) ;
         btnGoMainSearch=(Button)findViewById(R.id.goMainSearch);
+        btnGoRegiReviewRV=(Button)findViewById(R.id.goRegiReviewRV);
 
 /*
 현재 로그인한 사용자
@@ -154,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getBaseContext(),WMainSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnGoRegiReviewRV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), WRegiReviewRVActivity.class);
                 startActivity(intent);
             }
         });

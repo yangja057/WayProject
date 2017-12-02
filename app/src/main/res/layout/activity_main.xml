@@ -101,6 +101,15 @@
             android:text="메인검색"
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
+
+        <Button
+            android:id="@+id/goRegiReviewRV"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+
+            android:text="리뷰등록리사이클"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="27dp" />
     </LinearLayout>
 
 </LinearLayout>

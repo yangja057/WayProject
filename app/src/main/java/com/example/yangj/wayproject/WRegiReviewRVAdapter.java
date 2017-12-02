@@ -15,9 +15,12 @@ import java.util.List;
  */
 
 public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdapter.ViewHolder>{
-
     private List<ImageData> listItems;
     private Context context;
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
 
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {
         this.listItems = listItems;
@@ -32,7 +35,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());
@@ -46,14 +49,14 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        public View container;
         public EditText edtPlaceButton;
         public ImageButton imbUserImage;
         public EditText edtExplainText;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            
             edtPlaceButton = (EditText) itemView.findViewById(R.id.regi_placeButton);
             imbUserImage = (ImageButton) itemView.findViewById(R.id.regi_UserImage);
             edtExplainText = (EditText) itemView.findViewById(R.id.regi_explainText);

@@ -21,6 +21,16 @@
         android:background="@drawable/btn_backgroud"
         android:hint="도착지 검색" />
 
+    <Button
+        android:id="@+id/regi_addItemButton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_backgroud"
+        android:text="+" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/regi_recyclerView"
         android:layout_width="match_parent"

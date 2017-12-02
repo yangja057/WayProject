@@ -5,16 +5,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Hashtable;
+
 /**
  * Firebase에 데이터를 load하는 부분이 모두 담겨있습니다
  */
 public class FirebaseActivity extends AppCompatActivity {
+
+    private Button btnGOGO;
 
     /**
      * 리사이클 뷰를 이용하는데 세가지 요소가 필요함
@@ -33,6 +42,7 @@ public class FirebaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase);
 
+        btnGOGO=(Button)findViewById(R.id.regiFireBase) ;//이 버튼을 누르면 firebase에 등록되는것을 볼 수 있음
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -45,9 +55,15 @@ public class FirebaseActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         //
+
+        //기본 구조인 String으로 adapter를 쥐어주는 방식
         mAdapter = new FirebaseAdapter(myDataset);//표시될 데이터를 연결해줌
         mRecyclerView.setAdapter(mAdapter);//어댑터를 리사이클뷰에 연결해줌
 
+
+        btnGOGO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
         /*
         firebase authentication
@@ -56,38 +72,63 @@ public class FirebaseActivity extends AppCompatActivity {
         -이메일주소->현재는 이것만 가져오게 되어있음
         -사진 정보
          */
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//getCurrentUser(): 현재user를 가지고옴
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            //String name = user.getDisplayName();
-            String email = user.getEmail();
-            //Uri photoUrl = user.getPhotoUrl();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//getCurrentUser(): 현재user를 가지고옴
+                if (user != null) {
+                    // Name, email address, and profile photo Url
+                    //String name = user.getDisplayName();
+                    String email = user.getEmail();
+                    //Uri photoUrl = user.getPhotoUrl();
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+                    // Check if user's email is verified
+                    boolean emailVerified = user.isEmailVerified();
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            //String uid = user.getUid();
-            email=user.getEmail();
-        }
+                    // The user's ID, unique to the Firebase project. Do NOT use this value to
+                    // authenticate with your backend server, if you have one. Use
+                    // FirebaseUser.getToken() instead.
+                    //String uid = user.getUid();
+                    email=user.getEmail();
+                }
 
-        /**
-         * 데이터 베이스에 데이터를 쓰기
+                /**
+                 * 데이터 베이스에 데이터를 쓰기
+                 */
+                // Write a message to the database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+          /*
+        혹시 몰라서 추가하는 시간 순서대로 정리하기
+        : 최신순으로 firebase의 데이터를 불러오고 싶을 경우 용이하게 쓰일것 같아서
+        일단 내맘속에 저^.^장^.^
+        ->우리는 이부분을 user의 uid로 구성했음
          */
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("tempTest");//어디에 저장을 할거야?(tree의 root)
+                Calendar c = Calendar.getInstance();
+                //System.out.println("Current time => " + c.getTime());//print문은 필요없는 것임
 
-        myRef.setValue("Hello, World!");//setValue() : 뭐라고 저장할거야?
-
-
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = df.format(c.getTime());
 
 
 
+                //DatabaseReference myRef = database.getReference("tempTest");//어디에 저장을 할거야?(tree의 root)
+                DatabaseReference myRef = database.getReference("tempTest").child(formattedDate);//이렇게 할 경우 "tempTest"의 child가 생김
+
+                //hash table 삽입하여 firebase 의 구조를 만듦
+                Hashtable<String, String> test = new Hashtable<String, String>();
+                test.put("one","이것은 test인것임");
+                test.put("two", "이것은 test2인것임");
+                test.put("three", "이것또한 test3일지니");
+
+                //데이터 저장 방법 1
+                //myRef.setValue("Hello, World!");//setValue() : 뭐라고 저장할거야?
+                myRef.setValue(test);//setValue의 인자로는 객체가 들어감
+            }
+        });//btnGOGO finish
 
 
 
-    }
+
+
+
+
+    }//onCreate closed
 }

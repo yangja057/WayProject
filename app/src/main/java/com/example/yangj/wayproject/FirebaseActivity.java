@@ -11,12 +11,19 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Comment;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Firebase에 데이터를 load하는 부분이 모두 담겨있습니다
@@ -24,7 +31,7 @@ import java.util.Hashtable;
 public class FirebaseActivity extends AppCompatActivity {
 
     private Button btnGOGO;
-
+    private Button btnDOWN;
     /**
      * 리사이클 뷰를 이용하는데 세가지 요소가 필요함
      * 1. 리사이클 뷰
@@ -35,14 +42,28 @@ public class FirebaseActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    /**
+     * 데이터를 읽고 쓰기 위한 객체 선언
+     */
+    private  FirebaseDatabase database;//데이터 쓰기
+    private DatabaseReference myRef;//데이터 읽기
+
+    /*
+    여러가지 형태의 데이터 클래스들
+     */
     String[] myDataset={"안녕","오늘"};
+    //private List<Comment> mComments = new ArrayList<>();
+    private List<ImageData> mComments = new ArrayList<>();
+    private List<String> mCommentIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase);
 
+        btnDOWN=(Button)findViewById(R.id.downFireBase);//이 버튼을 누르면 firebase에 있는 내용을 불러와 뿌림
         btnGOGO=(Button)findViewById(R.id.regiFireBase) ;//이 버튼을 누르면 firebase에 등록되는것을 볼 수 있음
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -56,10 +77,12 @@ public class FirebaseActivity extends AppCompatActivity {
         // specify an adapter (see also next example)
         //
 
-        //기본 구조인 String으로 adapter를 쥐어주는 방식
-        mAdapter = new FirebaseAdapter(myDataset);//표시될 데이터를 연결해줌
+        //기본 구조인 String으로 adapter를 쥐어주는 방식 <- String[] myDataset
+        //mAdapter = new FirebaseAdapter(myDataset);//표시될 데이터를 연결해줌
+        //mRecyclerView.setAdapter(mAdapter);//어댑터를 리사이클뷰에 연결해줌
+        mComments=new ArrayList<>();
+        mAdapter = new FirebaseAdapter(mComments);//표시될 데이터를 연결해줌
         mRecyclerView.setAdapter(mAdapter);//어댑터를 리사이클뷰에 연결해줌
-
 
         btnGOGO.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +116,9 @@ public class FirebaseActivity extends AppCompatActivity {
                  * 데이터 베이스에 데이터를 쓰기
                  */
                 // Write a message to the database
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+                //FirebaseDatabase database = FirebaseDatabase.getInstance();
+                database = FirebaseDatabase.getInstance();
+                myRef=database.getReference();
           /*
         혹시 몰라서 추가하는 시간 순서대로 정리하기
         : 최신순으로 firebase의 데이터를 불러오고 싶을 경우 용이하게 쓰일것 같아서
@@ -110,7 +134,8 @@ public class FirebaseActivity extends AppCompatActivity {
 
 
                 //DatabaseReference myRef = database.getReference("tempTest");//어디에 저장을 할거야?(tree의 root)
-                DatabaseReference myRef = database.getReference("tempTest").child(formattedDate);//이렇게 할 경우 "tempTest"의 child가 생김
+                //DatabaseReference myRef = database.getReference("tempTest").child(formattedDate);//이렇게 할 경우 "tempTest"의 child가 생김
+               // myRef = database.getReference("tempTest").child(formattedDate);---1
 
                 //hash table 삽입하여 firebase 의 구조를 만듦
                 Hashtable<String, String> test = new Hashtable<String, String>();
@@ -120,12 +145,57 @@ public class FirebaseActivity extends AppCompatActivity {
 
                 //데이터 저장 방법 1
                 //myRef.setValue("Hello, World!");//setValue() : 뭐라고 저장할거야?
-                myRef.setValue(test);//setValue의 인자로는 객체가 들어감
+                myRef.child("tempTest").child(formattedDate).setValue(test);//setValue의 인자로는 객체가 들어감---2 //1,2는 같은 것임
             }
         });//btnGOGO finish
 
 
+        btnDOWN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                myRef.child("tempTest").addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        //이것만 필요함
+                       // Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+
+                        // A new comment has been added, add it to the displayed list
+                        //private List<Comment> mComments = new ArrayList<>(); //리스트를 만듦(객체들의 리스트)
+
+                        //Comment comment = dataSnapshot.getValue(Comment.class); //ImageData class 로 바꿔줘야됨됨
+                        ImageData comment = dataSnapshot.getValue(ImageData.class);
+
+                        // [START_EXCLUDE]
+                        // Update RecyclerView
+                        mCommentIds.add(dataSnapshot.getKey());//getKey() : 키값을 가져옴
+                        mComments.add(comment);//arrayList에 객체 하나를 추가(add)함
+                        mAdapter.notifyItemInserted(mComments.size() - 1);
+                        // [END_EXCLUDE]
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });//btnDOWN finish
 
 
 

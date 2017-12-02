@@ -8,17 +8,31 @@
     android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.WRegiReviewActivity">
 
-    <Button
-        android:id="@+id/btnStartingPoint"
+    <EditText
+        android:id="@+id/regi_btnStartingPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="출발지 검색" />
+        android:background="@drawable/btn_backgroud"
+        android:hint="출발지 검색" />
 
-    <Button
-        android:id="@+id/btnEndingPoint"
+    <EditText
+        android:id="@+id/regi_btnEndingPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="도착지 검색" />
+        android:background="@drawable/btn_backgroud"
+        android:hint="도착지 검색" />
+
+    <!--<Button-->
+        <!--android:id="@+id/btnStartingPoint"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="출발지 검색" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnEndingPoint"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="도착지 검색" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,8 +26,8 @@ public class WRegiReviewActivity extends AppCompatActivity {
 
     static String curSelectPlace;
 
-    Button btnStartingPoint;
-    Button btnEndingPoint;
+    EditText edtStartingPoint;
+    EditText edtEndingPoint;
     Button AddButton;
 
     boolean touchbookmark=false;
@@ -76,11 +77,11 @@ public class WRegiReviewActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listview1);
         listView.setAdapter(adapter);
 
-        btnStartingPoint = (Button)findViewById(R.id.btnStartingPoint);
-        btnEndingPoint = (Button)findViewById(R.id.btnEndingPoint);
+        edtStartingPoint = (EditText) findViewById(R.id.regi_btnStartingPoint);
+        edtEndingPoint = (EditText) findViewById(R.id.regi_btnEndingPoint);
         AddButton=(Button)findViewById(R.id.button3);
 
-        btnStartingPoint.setOnClickListener(new View.OnClickListener() {
+        edtStartingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
@@ -88,7 +89,7 @@ public class WRegiReviewActivity extends AppCompatActivity {
             }
         });
 
-        btnEndingPoint.setOnClickListener(new View.OnClickListener() {
+        edtEndingPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
@@ -124,12 +125,12 @@ public class WRegiReviewActivity extends AppCompatActivity {
                 case STARTING_POINT:
                     startingPointName = data.getStringExtra("placeName");
                     startingPointId = data.getStringExtra("placeId");
-                    btnStartingPoint.setText(startingPointName);
+                    edtStartingPoint.setText(startingPointName);
                     break;
                 case ENDING_POINT:
                     endingPointName = data.getStringExtra("placeName");
                     endingPointId = data.getStringExtra("placeId");
-                    btnEndingPoint.setText(endingPointName);
+                    edtEndingPoint.setText(endingPointName);
                     break;
                 case CUR_SELECT_PLACE:
                     adapter.regiReviewItem.setPlaceName(data.getStringExtra("placeName"));

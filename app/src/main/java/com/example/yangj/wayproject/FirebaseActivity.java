@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -52,8 +53,8 @@ public class FirebaseActivity extends AppCompatActivity {
     여러가지 형태의 데이터 클래스들
      */
     String[] myDataset={"안녕","오늘"};
-    //private List<Comment> mComments = new ArrayList<>();
-    private List<ImageData> mComments = new ArrayList<>();
+   // private List<Comment>mComments = new ArrayList<>();
+    private List<ImageData> mData = new ArrayList<>();
     private List<String> mCommentIds = new ArrayList<>();
 
     @Override
@@ -80,9 +81,17 @@ public class FirebaseActivity extends AppCompatActivity {
         //기본 구조인 String으로 adapter를 쥐어주는 방식 <- String[] myDataset
         //mAdapter = new FirebaseAdapter(myDataset);//표시될 데이터를 연결해줌
         //mRecyclerView.setAdapter(mAdapter);//어댑터를 리사이클뷰에 연결해줌
-        mComments=new ArrayList<>();
-        mAdapter = new FirebaseAdapter(mComments);//표시될 데이터를 연결해줌
+
+        mAdapter = new FirebaseAdapter(mData);//표시될 데이터를 연결해줌
         mRecyclerView.setAdapter(mAdapter);//어댑터를 리사이클뷰에 연결해줌
+
+        /**
+         * 데이터 베이스에 데이터를 쓰기
+         */
+        // Write a message to the database
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
+        myRef=database.getReference();
 
         btnGOGO.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,13 +121,7 @@ public class FirebaseActivity extends AppCompatActivity {
                     email=user.getEmail();
                 }
 
-                /**
-                 * 데이터 베이스에 데이터를 쓰기
-                 */
-                // Write a message to the database
-                //FirebaseDatabase database = FirebaseDatabase.getInstance();
-                database = FirebaseDatabase.getInstance();
-                myRef=database.getReference();
+
           /*
         혹시 몰라서 추가하는 시간 순서대로 정리하기
         : 최신순으로 firebase의 데이터를 불러오고 싶을 경우 용이하게 쓰일것 같아서
@@ -154,24 +157,26 @@ public class FirebaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                myRef.child("tempTest").addChildEventListener(new ChildEventListener() {
+                myRef.child("review: ").child("str1-str2").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         //이것만 필요함
-                       // Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+
 
                         // A new comment has been added, add it to the displayed list
                         //private List<Comment> mComments = new ArrayList<>(); //리스트를 만듦(객체들의 리스트)
 
                         //Comment comment = dataSnapshot.getValue(Comment.class); //ImageData class 로 바꿔줘야됨됨
-                        ImageData comment = dataSnapshot.getValue(ImageData.class);
+                        ImageData data = dataSnapshot.getValue(ImageData.class);
 
                         // [START_EXCLUDE]
                         // Update RecyclerView
                         mCommentIds.add(dataSnapshot.getKey());//getKey() : 키값을 가져옴
-                        mComments.add(comment);//arrayList에 객체 하나를 추가(add)함
-                        mAdapter.notifyItemInserted(mComments.size() - 1);
+                        mData.add(data);//arrayList에 객체 하나를 추가(add)함
+                        mAdapter.notifyItemInserted(mData.size() - 1);
                         // [END_EXCLUDE]
+
+                       Log.d("다스리의 로그", "onChildAdded:" + data.description.toString());
                     }
 
                     @Override
@@ -192,6 +197,7 @@ public class FirebaseActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
+                        Log.e("다스리의 로그","데이터가 왜 잘못되는걸까");
                     }
                 });
             }

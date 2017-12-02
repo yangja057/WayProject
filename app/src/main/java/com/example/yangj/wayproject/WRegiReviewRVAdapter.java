@@ -56,7 +56,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-            
+
             edtPlaceButton = (EditText) itemView.findViewById(R.id.regi_placeButton);
             imbUserImage = (ImageButton) itemView.findViewById(R.id.regi_UserImage);
             edtExplainText = (EditText) itemView.findViewById(R.id.regi_explainText);

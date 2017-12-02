@@ -54,6 +54,15 @@ public class WRegiReviewRVActivity extends AppCompatActivity {
         adapter = new WRegiReviewRVAdapter(listItems, this);
         recyclerView.setAdapter(adapter);
 
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+                    }
+                })
+        );
+
         StartingPointEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

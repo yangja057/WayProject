@@ -144,13 +144,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnTestList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getBaseContext(),LTest.class);
-                startActivity(intent);
-            }
-        });
+//        btnTestList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(getBaseContext(),LTest.class);
+//                startActivity(intent);
+//            }
+//        });
 
         btnGoMainSearch.setOnClickListener(new View.OnClickListener() {
             @Override

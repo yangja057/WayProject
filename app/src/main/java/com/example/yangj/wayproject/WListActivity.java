@@ -41,18 +41,7 @@ public class WListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        WListViewItem item1=new WListViewItem();
-        item1.setTitle("Bear");
-        item1.setIcon(ContextCompat.getDrawable(this,R.drawable.bear));
-        item1.setDesc("So Cute><");
 
-        WListViewItem item2=new WListViewItem();
-        item2.setTitle("brother");
-        item2.setIcon(ContextCompat.getDrawable(this, R.drawable.brothers));
-        item2.setDesc("bears");
-
-        adapter.WlistViewItemList.add(item1);
-        adapter.WlistViewItemList.add(item2);
 
         Startedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,14 +60,7 @@ public class WListActivity extends AppCompatActivity {
                 startActivityForResult(intent, ENDING_POINT);
             }
         });
-//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
-//               "ice", "ice");
-//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.bear),
-//               "Bear", "Cute><");
-//       adapter.addItem(ContextCompat.getDrawable(this, R.drawable.brothers),
-//                "brother", "bears");
-//        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ice),
-//                "ice", "ice");
+
     }
 
     @Override

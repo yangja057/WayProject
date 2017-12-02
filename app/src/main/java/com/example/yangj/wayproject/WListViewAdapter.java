@@ -1,7 +1,9 @@
 package com.example.yangj.wayproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +21,20 @@ import java.util.List;
 
 public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.ViewHolder> {
 
-    public List<WListViewItem> WlistViewItemList=new ArrayList<WListViewItem>();
+    public List<ImageData> WImageDataItemList=new ArrayList<ImageData>();
     private int itemLayout; //R.layout.listitem.xml을 담음.
+    private View view;
 
-    public WListViewAdapter(/*List<WListViewItem> wlistitems,*/ int itemLayout){
+    public WListViewAdapter(/*List<ImageData> wlistitems,*/ int itemLayout){
         //생성자
-        //this.WlistViewItemList=wlistitems;
+
         this.itemLayout=itemLayout;
     }
 
     @Override
     public WListViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //레이아웃을 만들어서 Holder에 저장
-        View view=LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
+        view=LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -40,18 +43,19 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         //listview의 getview를 대체
         //넘겨받은 데이터를 화면에 출력하는 역할이다.
 
-        WListViewItem listViewItem=WlistViewItemList.get(position);
+        ImageData imageItem=WImageDataItemList.get(position);
 
-        holder.iconImageView.setImageDrawable(listViewItem.getIcon());
-        holder.titleTextView.setText(listViewItem.getTitle());
-        holder.descTextView.setText(listViewItem.getDesc());
+        Uri filepath= Uri.parse(imageItem.getImageUrl());
 
+        holder.iconImageView.setImageURI(filepath);
+        holder.titleTextView.setText(imageItem.getPlaceName());
+        holder.descTextView.setText(imageItem.getDescription());
 
     }
 
     @Override
     public int getItemCount() {
-        return WlistViewItemList.size();
+        return WImageDataItemList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

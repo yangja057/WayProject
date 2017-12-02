@@ -2,7 +2,9 @@ package com.example.yangj.wayproject;
 
 
 import android.media.Image;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class BoardActivity extends AppCompatActivity {
         boardRecyclerViewAdapter=new BoardRecyclerViewAdapter();//adapter 생성
         recyclerView.setAdapter(boardRecyclerViewAdapter);//리사이클뷰에게 어댑터를 줌
 
+
         //데이터를 읽어오는 코드
         /*
         - "review"를 읽어옴
@@ -65,12 +68,14 @@ public class BoardActivity extends AppCompatActivity {
         즉 다른사람이 데이터를 수정했으면
         자동적으로 새로 고침이 됨
          */
-        database.getReference().child("review").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review: ").child("str1-str2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Log.i("다스리의 로그", "onChildAdded:" + dataSnapshot.getKey());
+
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-                imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+              //  imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
@@ -80,12 +85,13 @@ public class BoardActivity extends AppCompatActivity {
                      */
                     ImageData imageData=snapshot.getValue(ImageData.class);
                     imageDTOs.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+                    Log.i("다스리의 로그", "imageData:" + dataSnapshot.getChildren().toString());
                 }
                 boardRecyclerViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
 
             }
         });

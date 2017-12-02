@@ -13,8 +13,10 @@ import java.util.List;
  */
 
 public class FirebaseAdapter extends RecyclerView.Adapter<FirebaseAdapter.ViewHolder> {
+
     private String[] mDataset;
-    List<ImageData> mComments;
+    List<ImageData> mdata;
+   // List<Comment> mComments;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -32,15 +34,21 @@ public class FirebaseAdapter extends RecyclerView.Adapter<FirebaseAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
+    //생성자1
     public FirebaseAdapter(String[] myDataset) {
         mDataset = myDataset;
     }
 
     //생성자 2 ImageData type의 생성자
-    // Provide a suitable constructor (depends on the kind of dataset)
+     //Provide a suitable constructor (depends on the kind of dataset)
     public FirebaseAdapter(List<ImageData> _comments) {
-        this.mComments = _comments;
+        this.mdata = _comments;
     }
+
+    //생성자 3 Comment type의 생성자
+//    public FirebaseAdapter(List<Comment> mComments) {
+//        this.mComments=mComments;
+//    }
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -63,14 +71,14 @@ public class FirebaseAdapter extends RecyclerView.Adapter<FirebaseAdapter.ViewHo
         onBindViewHolder 라는 곳에서는 mTextView의 position(순서)에 맞는 데이터를 넣음
          */
         //holder.mTextView.setText(mDataset[position]);
-        holder.mTextView.setText(mComments.get(position).description);//해당 position에 있는 리뷰를 가지고옴
-    }
+        holder.mTextView.setText(mdata.get(position).description);//List의 해당위치의 객체 멤버함수인 리뷰를 가지고옴
+   }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         //return mDataset.length; //String 일경우에는 length이지만
-        return mComments.size();//List일 경우에는 size, 즉 배열의사이즈
+        return mdata.size();//List일 경우에는 size, 즉 배열의사이즈
     }
 
 }

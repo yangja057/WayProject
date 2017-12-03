@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +18,9 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
     static private final int STARTING_POINT = 0;
     static private final int ENDING_POINT = 1;
     static private final int CUR_SELECT_PLACE = 2;
+
+    static private final int PLACE_BUTTON = 0;
+    static private final int USER_IMAGE = 1;
 
     private RecyclerView recyclerView;
     private WRegiReviewRVAdapter adapter;
@@ -36,6 +38,8 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
     private String CurSelectPlaceName;
     private String CurSelectPlaceId;
+
+    private int ItemPostion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +61,6 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
         adapter.setOnItemClickListener(this);
 
         recyclerView.setAdapter(adapter);
-
-//        recyclerView.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//        );
-
-
-
 
         StartingPointEdt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,8 +118,10 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                     EndingPointEdt.setText(EndingPointName);
                     break;
                 case CUR_SELECT_PLACE:
-                    CurSelectPlaceName = data.getStringExtra("placeName");
-                    CurSelectPlaceId = data.getStringExtra("placeId");
+                    ImageData listItem = listItems.get(ItemPostion);
+                    listItem.setPlaceName(data.getStringExtra("placeName"));
+                    listItem.setPlaceID(data.getStringExtra("placeId"));
+                    adapter.notifyItemChanged(ItemPostion);
                     break;
             }
         }
@@ -138,8 +132,19 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
     @Override
     public void onItemClick(int position, int id) {
+        switch (id){
+            case PLACE_BUTTON:
+                ItemPostion = position;
+                Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
+                startActivityForResult(intent, CUR_SELECT_PLACE);
+                break;
+            case USER_IMAGE:
+                break;
+            default:
+                break;
+        }
 
-        Log.d("다스리의 로그",""+position);
+        //Log.d("다스리의 로그",""+position);
 
     }
 }

@@ -28,7 +28,6 @@
                 android:id="@+id/regi_UserImage"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
-                android:src="@drawable/base"
                 android:scaleType="fitCenter"
                 android:layout_weight="1"
                 android:background="@drawable/btn_backgroud"/>

@@ -2,6 +2,7 @@ package com.example.yangj.wayproject;
 
 
 import android.media.Image;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -75,7 +77,7 @@ public class BoardActivity extends AppCompatActivity {
                 Log.i("다스리의 로그", "onChildAdded:" + dataSnapshot.getKey());
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-              //  imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+               imageDTOs.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
@@ -125,7 +127,8 @@ public class BoardActivity extends AppCompatActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
            // ((CustomViewHolder)holder).textView.setText(imageDTOs.get(position).title);
             ((CustomViewHolder)holder).textView2.setText(imageDTOs.get(position).description);
-            //Glide.with(holder.itemView.getContext()).load(imageDTOs.get(position).imageUrl).into(((CustomViewHolder)holder).imageView);
+            Uri myUri= Uri.parse(imageDTOs.get(position).imageUrl);
+            Glide.with(holder.itemView.getContext()).load(myUri).into(((CustomViewHolder)holder).imageView);
         }
 
         @Override

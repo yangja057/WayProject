@@ -7,8 +7,6 @@
     android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.MainActivity">
 
-
-
     <Button
         android:id="@+id/TestListView"
         android:layout_width="112dp"
@@ -36,18 +34,16 @@
 
         <Button
             android:id="@+id/goToFirebase"
-
             android:layout_width="112dp"
             android:layout_height="40dp"
-
             android:text="데이터읽기 완성본"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="93dp" />
+
         <Button
             android:id="@+id/goRegiReview"
             android:layout_width="112dp"
             android:layout_height="40dp"
-
             android:text="리뷰등록 뷰"
             tools:layout_editor_absoluteX="263dp"
             tools:layout_editor_absoluteY="151dp" />
@@ -64,7 +60,7 @@
             android:id="@+id/goToJoin"
             android:layout_width="112dp"
             android:layout_height="40dp"
-     android:text="회원가입"
+            android:text="회원가입"
             tools:layout_editor_absoluteX="88dp"
             tools:layout_editor_absoluteY="334dp" />
 
@@ -106,10 +102,10 @@
             android:id="@+id/goRegiReviewRV"
             android:layout_width="112dp"
             android:layout_height="40dp"
-
             android:text="리뷰등록리사이클"
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
+
     </LinearLayout>
 
 </LinearLayout>

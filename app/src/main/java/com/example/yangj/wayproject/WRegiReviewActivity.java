@@ -50,18 +50,6 @@ public class WRegiReviewActivity extends AppCompatActivity {
             case R.id.newPost:  //글 등록
                 Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.bookmark: //북마크(즐겨찾기)
-                Toast.makeText(this, "즐겨찾기", Toast.LENGTH_SHORT).show();
-                if(!touchbookmark){
-                    item.setIcon(R.drawable.ic_action_bookmark2);
-                    touchbookmark=true;
-                }
-                else
-                {
-                    item.setIcon(R.drawable.ic_action_bookmark);
-                    touchbookmark=false;
-                }
-                break;
             default:
                 break;
         }

@@ -1,11 +1,16 @@
 package com.example.yangj.wayproject;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +27,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
     static private final int STARTING_POINT = 0;
     static private final int ENDING_POINT = 1;
     static private final int CUR_SELECT_PLACE = 2;
-
+    static private final int PICK_IMAGE_REQUEST=3;
     static private final int PLACE_BUTTON = 0;
     static private final int USER_IMAGE = 1;
 
@@ -56,6 +62,11 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
         switch(item.getItemId()){
             case R.id.newPost:  //글 등록
                 Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
+            /*
+             private List<ImageData> listItems;
+             private EditText StartingPointEdt;
+             private EditText EndingPointEdt;
+             */
                 break;
             default:
                 break;
@@ -105,6 +116,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
             public void onClick(View v) {
                 ImageData listItem = new ImageData();
                 listItems.add(listItem);
+                //Log.d("다스리의 로그",listItem.description);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -150,6 +162,23 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
         else if(resultCode == Activity.RESULT_CANCELED){
             Toast.makeText(getBaseContext(),"데이터 가져오기 실패",Toast.LENGTH_LONG).show();
         }
+
+        if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
+             Uri filePath=data.getData();//uri
+            //imagePath=data.getData().toString();//파일 경로 저장했는데//string->database로
+            ImageData listItem = listItems.get(ItemPostion);
+            listItem.imageUrl=filePath.toString();
+
+            try {
+                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+
+                adapter.notifyItemChanged(ItemPostion);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override
@@ -161,6 +190,12 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                 startActivityForResult(intent, CUR_SELECT_PLACE);
                 break;
             case USER_IMAGE:
+                ItemPostion = position;
+                Intent intent2=new Intent();
+                intent2.setType("image/*");
+                intent2.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent2,"Select an Image"),PICK_IMAGE_REQUEST);
+
                 break;
             default:
                 break;

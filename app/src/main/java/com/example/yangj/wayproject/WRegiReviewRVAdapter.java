@@ -1,13 +1,21 @@
 package com.example.yangj.wayproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -38,9 +46,23 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
         ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());
-        //holder.imbUserImage.setImageURI(listItem.getImageUrl());
-        holder.edtExplainText.setText(listItem.getDescription());
 
+
+        if(listItem.imageUrl!=null){
+            Uri myuri=Uri.parse(listItem.imageUrl);
+            Bitmap bitmap= null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(),myuri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.imbUserImage.setImageBitmap(bitmap);
+            //holder.imbUserImage.setImageURI(myUri);
+
+        }
+
+
+        holder.edtExplainText.setText(listItem.getDescription());
         holder.edtPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,14 +84,14 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public EditText edtPlaceButton;
-        public ImageButton imbUserImage;
+        public ImageView imbUserImage;
         public EditText edtExplainText;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             edtPlaceButton = (EditText) itemView.findViewById(R.id.regi_placeButton);
-            imbUserImage = (ImageButton) itemView.findViewById(R.id.regi_UserImage);
+            imbUserImage = (ImageView) itemView.findViewById(R.id.regi_UserImage);
             edtExplainText = (EditText) itemView.findViewById(R.id.regi_explainText);
         }
     }

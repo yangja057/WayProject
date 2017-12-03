@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -167,8 +168,10 @@ public class DataTestActivity extends AppCompatActivity {
                             //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
                             //"review"는 첫번째 루트
                             //"users"는 두번째 루트트
+
                           database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
                             database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
+                            Log.e("다스리의 로그",m_imageData.description);
 
                         }
                     })

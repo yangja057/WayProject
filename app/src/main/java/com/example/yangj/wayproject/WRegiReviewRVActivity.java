@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WRegiReviewRVActivity extends AppCompatActivity {
+public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiReviewRVAdapter.OnItemClickListener {
     static private final int STARTING_POINT = 0;
     static private final int ENDING_POINT = 1;
     static private final int CUR_SELECT_PLACE = 2;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private WRegiReviewRVAdapter adapter;
 
     private List<ImageData> listItems;
 
@@ -52,16 +53,22 @@ public class WRegiReviewRVActivity extends AppCompatActivity {
         listItems = new ArrayList<>();
 
         adapter = new WRegiReviewRVAdapter(listItems, this);
+
+        adapter.setOnItemClickListener(this);
+
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
-                    }
-                })
-        );
+//        recyclerView.addOnItemTouchListener(
+//                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//        );
+
+
+
 
         StartingPointEdt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,5 +134,12 @@ public class WRegiReviewRVActivity extends AppCompatActivity {
         else if(resultCode == Activity.RESULT_CANCELED){
             Toast.makeText(getBaseContext(),"데이터 가져오기 실패",Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onItemClick(int position, int id) {
+
+        Log.d("다스리의 로그",""+position);
+
     }
 }

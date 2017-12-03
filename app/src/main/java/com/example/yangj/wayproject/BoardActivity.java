@@ -114,7 +114,7 @@ public class BoardActivity extends AppCompatActivity {
     public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ) {
 
             View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_board,parent,false);
 

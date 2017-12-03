@@ -15,7 +15,8 @@ import java.util.List;
  */
 
 public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdapter.ViewHolder>{
-    private List<ImageData> listItems;
+
+    public List<ImageData> listItems;
     private Context context;
 
     public interface OnItemClickListener {

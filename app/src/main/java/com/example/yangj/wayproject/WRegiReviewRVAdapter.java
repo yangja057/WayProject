@@ -18,10 +18,6 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     private List<ImageData> listItems;
     private Context context;
 
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
-    }
-
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
@@ -41,6 +37,12 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
         holder.edtPlaceButton.setText(listItem.getPlaceName());
         //holder.imbUserImage.setImageURI(listItem.getImageUrl());
         holder.edtExplainText.setText(listItem.getDescription());
+        holder.edtPlaceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(position,0);
+            }
+        });
     }
 
     @Override
@@ -62,4 +64,14 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
             edtExplainText = (EditText) itemView.findViewById(R.id.regi_explainText);
         }
     }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener=onItemClickListener;
+    }
+
+    OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        public void onItemClick( int position, int id);
+    }
+
 }

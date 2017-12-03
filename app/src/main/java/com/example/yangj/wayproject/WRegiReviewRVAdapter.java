@@ -15,15 +15,10 @@ import java.util.List;
  */
 
 public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdapter.ViewHolder>{
-<<<<<<< HEAD
     static private final int PLACE_BUTTON = 0;
     static private final int USER_IMAGE = 1;
 
     private List<ImageData> listItems;
-=======
-
-    public List<ImageData> listItems;
->>>>>>> 5cc61efe91afa0252c38ea83e36239b562231bd0
     private Context context;
 
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {

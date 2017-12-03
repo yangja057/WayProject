@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,12 +45,44 @@ public class BoardActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-   public  List<ImageData> imageDTOs=new ArrayList<>(); //데이터 리스트 구조체
+    public  List<ImageData> imageDTOs=new ArrayList<>(); //데이터 리스트 구조체
     public List<String> uidLists =new ArrayList<>(); // 사용자 리스트
 
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
-    private FirebaseDatabase database;
+   private FirebaseDatabase database;
    private BoardRecyclerViewAdapter boardRecyclerViewAdapter;
+
+    boolean touchbookmark=false;    //bookmark버튼을 클릭했는가 하지 않았는가.
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.favorite_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.bookmark: //북마크(즐겨찾기)
+                Toast.makeText(this, "즐겨찾기", Toast.LENGTH_SHORT).show();
+                if(!touchbookmark){
+                    //bookmark버튼을 클릭했을때, icon을 까만 별로 바꾼다.★
+                    item.setIcon(R.drawable.ic_action_bookmark2);
+                    touchbookmark=true;
+                }
+                else
+                {
+                    //즐겨찾기 해제시 icon을 텅빈 별로 바꾼다.☆
+                    item.setIcon(R.drawable.ic_action_bookmark);
+                    touchbookmark=false;
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,6 +19,7 @@ public class ImageData {
     public String placeID;//장소의 고유 id
     public  String placeName;//장소의 이름
     public String one;//test용
+    public String reviewNum;//review들의 고유 넘버
 
     public String getDescription() {
         return description;

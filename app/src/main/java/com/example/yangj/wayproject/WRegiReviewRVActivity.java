@@ -1,12 +1,15 @@
 package com.example.yangj.wayproject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +20,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +63,19 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
     private int ItemPostion;
 
+    /*
+    firebase 데이터 로드
+     */
+    private Uri filePath;
+    private StorageReference storageReference;
+
+    //realtime database
+    private FirebaseDatabase database;//데이터 베이스 추가
+    private FirebaseAuth auth;
+    //private EditText editImageTitle;//사진의 이름을 저장할 et
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
@@ -61,12 +87,60 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.newPost:  //글 등록
+
                 Toast.makeText(this,"글등록버튼",Toast.LENGTH_SHORT).show();
-            /*
-             private List<ImageData> listItems;
-             private EditText StartingPointEdt;
-             private EditText EndingPointEdt;
-             */
+
+             /*
+                realtime db
+                 */
+                database=FirebaseDatabase.getInstance();
+                storageReference= FirebaseStorage.getInstance().getReference();
+                auth=FirebaseAuth.getInstance();
+
+
+                //파일 업로드가 성공했을 경우
+                //사진 storage에 저장
+                StorageReference riversRef = storageReference.child("images/"+ filePath.getLastPathSegment());
+                riversRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //사진등록이 성공했을 경우, 사진을 storage에 저장하기전에 데이터를 보존해둠
+                        Uri downloadUrl=taskSnapshot.getDownloadUrl();
+                        listItems.get(ItemPostion).imageUrl=downloadUrl.toString();//imageUri를 taskSnapshot.getDownloadUrl()의 string값으로 저장
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(WRegiReviewRVActivity.this, exception.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+                database.getReference().child("review").child("str1-str2").push().setValue(listItems);
+
+                // m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
+                // m_imageData.myUrl=Uri.parse(m_imageData.imageUrl);
+
+               //user정보 등록
+                UserData m_userData=new UserData();
+                m_userData.userEmail=auth.getCurrentUser().getEmail();
+                m_userData.userUID=auth.getCurrentUser().getUid();
+
+                for(int i=0;i<listItems.size();i++){
+                    m_userData.myReviewList.add(listItems.get(i));
+                    //m_userData.myReviewList.add(listItems.get(i));
+                }
+                database.getReference().child("users").child(m_userData.userUID).push().setValue(m_userData);
+
+                /**
+                 * 중요) child안에 emial string 넣으면 안됨<-보안상의 문제인듯
+                 */
+
+                //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
+                //"review"는 첫번째 루트
+                //"users"는 두번째 루트트
+
+
                 break;
             default:
                 break;
@@ -164,19 +238,25 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
         }
 
         if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
-             Uri filePath=data.getData();//uri
+            //사진 가지고 오기
+
+             filePath=data.getData();//uri type
             //imagePath=data.getData().toString();//파일 경로 저장했는데//string->database로
-            ImageData listItem = listItems.get(ItemPostion);
+            ImageData listItem=listItems.get(ItemPostion);
             listItem.imageUrl=filePath.toString();
+            adapter.notifyItemChanged(ItemPostion);
 
-            try {
-                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
 
-                adapter.notifyItemChanged(ItemPostion);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                //Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
+//
+//                adapter.notifyItemChanged(ItemPostion);
+//                //Log.d("다스리의 로그",""+ItemPostion);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         }
     }
@@ -204,4 +284,8 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
         //Log.d("다스리의 로그",""+position);
 
     }
+
+
+
+
 }

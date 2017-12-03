@@ -171,7 +171,7 @@ public class DataTestActivity extends AppCompatActivity {
                             //"review"는 첫번째 루트
                             //"users"는 두번째 루트트
 
-                          database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
+                          database.getReference().child("review").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
                             database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
                            // Log.d("다스리의 로그",m_imageData.description);
 

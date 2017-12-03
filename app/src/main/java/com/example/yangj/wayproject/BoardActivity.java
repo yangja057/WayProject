@@ -106,7 +106,7 @@ public class BoardActivity extends AppCompatActivity {
         자동적으로 새로 고침이 됨
          */
         
-        database.getReference().child("review: ").child("str1-str2").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("str1-str2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

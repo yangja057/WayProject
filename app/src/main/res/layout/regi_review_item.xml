@@ -24,7 +24,7 @@
                 android:singleLine="true"
                 android:background="@drawable/btn_backgroud"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/regi_UserImage"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"

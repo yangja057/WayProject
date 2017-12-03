@@ -105,8 +105,11 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         //사진등록이 성공했을 경우, 사진을 storage에 저장하기전에 데이터를 보존해둠
-                        Uri downloadUrl=taskSnapshot.getDownloadUrl();
-                        listItems.get(ItemPostion).imageUrl=downloadUrl.toString();//imageUri를 taskSnapshot.getDownloadUrl()의 string값으로 저장
+                        for(int i=0;i<listItems.size();i++){
+                            Uri downloadUrl=taskSnapshot.getDownloadUrl();
+                            listItems.get(i).imageUrl=downloadUrl.toString();//imageUri를 taskSnapshot.getDownloadUrl()의 string값으로 저장
+                        }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

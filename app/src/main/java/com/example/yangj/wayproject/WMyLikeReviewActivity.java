@@ -68,8 +68,10 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
         //
 
+        // Get a key for a new Post.
+       // .child("myReviewList").
 
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("likeReviewList").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users").child(auth.getCurrentUser().getUid()).orderByKey().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

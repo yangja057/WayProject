@@ -6,8 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -15,61 +13,38 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 즐겨찾기 액티비티인것임
- */
-public class WMyLikeReviewActivity extends AppCompatActivity {
+public class WMyReviewActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private UserData UserItems; //현재 어떤 사용자가 사용하고 있는지의 정보를 갖고옴.
     private FirebaseAuth auth;
-    public  List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
-    private WListViewAdapter listViewAdapter;
-
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
+    private UserData UserItems; //현재 어떤 사용자가 사용하고 있는지의 정보를 갖고옴.
+    public List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
+    private WListViewAdapter listViewAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wmy_like_review);
-        setTitle("My FavoriteList");
+        setContentView(R.layout.activity_wmy_review);
+        setTitle("My ReviewList");
+
 
         UserItems =new UserData();
-
-        database=FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
-        auth=FirebaseAuth.getInstance();
-
         listViewAdapter=new WListViewAdapter(R.layout.activity_wlist_item);
-
-        recyclerView=(RecyclerView)findViewById(R.id.LikerecyclerView) ;
+        recyclerView=(RecyclerView)findViewById(R.id.MyReviewView);
+        database= FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
+        auth= FirebaseAuth.getInstance();
 
         recyclerView.setAdapter(listViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-//        recyclerView.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
-//                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//        );
-
-
-
-        //
-
-
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("likeReviewList").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("myReviewList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -97,19 +72,5 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
-
-    //데이터를 읽어오는 코드
-        /*
-        - "review"를 읽어옴
-        - addValueEventListene : 글자가 하나씩 바뀔때 마다 데이터가 계속 넘어옴
-        - client에게 알려줌
-        즉 다른사람이 데이터를 수정했으면
-        자동적으로 새로 고침이 됨
-         */
-
-
-
 }

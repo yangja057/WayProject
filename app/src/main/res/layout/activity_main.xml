@@ -7,12 +7,6 @@
     android:orientation="vertical"
     tools:context="com.example.yangj.wayproject.MainActivity">
 
-    <Button
-        android:id="@+id/TestListView"
-        android:layout_width="112dp"
-        android:layout_height="40dp"
-        android:text="다스리의 작업실" />
-
         <Button
             android:id="@+id/BoardData"
             android:text="뿌려줘"
@@ -106,6 +100,17 @@
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="27dp" />
 
+        <Button
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+            android:text="즐겨찾기"
+            android:id="@+id/btnfavorite"/>
+
+        <Button
+            android:layout_width="112dp"
+            android:layout_height="40dp"
+            android:text="내가 쓴 리뷰"
+            android:id="@+id/btnWriteMyself"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -55,7 +55,7 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         holder.Place5View.setText(imageItem.getPlaceName());
 
         holder.UserIdView.setText(imageItem.getUserEmail());
-        holder.RecommendView.setText(imageItem.getDescription());
+        holder.RecommendView.setText("★ x "+String.valueOf(imageItem.getStar()));
 
     }
 

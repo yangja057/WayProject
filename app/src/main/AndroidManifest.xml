@@ -58,7 +58,8 @@
         <activity android:name=".WMyLikeReviewActivity" />
         <activity android:name=".WMainViewActivity" />
         <activity android:name=".FirebaseActivity" />
-        <activity android:name=".WRegiReviewRVActivity"></activity>
+        <activity android:name=".WRegiReviewRVActivity" />
+        <activity android:name=".WMyReviewActivity"></activity>
     </application>
 
 </manifest>

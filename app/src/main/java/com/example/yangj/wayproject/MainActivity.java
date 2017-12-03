@@ -21,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogOut;
     private Button btnGoList;
     private Button btnCheck;
-    private Button btnTestList;
 
     private Button btnBoardData;
     private Button btnGoMainSearch;
     private Button btnGoRegiReviewRV;
+    private Button btnFavoriteView;
+    private Button btnWriteMyself;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -57,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
         btnGoToLogin=(Button)findViewById(R.id.goToLogin);
         btnLogOut=(Button)findViewById(R.id.logOut);
         btnGoList=(Button)findViewById(R.id.goListView);
-        btnTestList=(Button)findViewById(R.id. TestListView) ;
         btnGoMainSearch=(Button)findViewById(R.id.goMainSearch);
         btnGoRegiReviewRV=(Button)findViewById(R.id.goRegiReviewRV);
-
+        btnFavoriteView=(Button)findViewById(R.id.btnfavorite);
+        btnWriteMyself=(Button)findViewById(R.id.btnWriteMyself);
 /*
 현재 로그인한 사용자
  */
@@ -157,6 +158,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), WRegiReviewRVActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnFavoriteView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(), WMyLikeReviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnWriteMyself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(), WMyReviewActivity.class);
                 startActivity(intent);
             }
         });

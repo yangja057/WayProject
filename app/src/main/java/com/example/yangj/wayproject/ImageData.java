@@ -1,5 +1,7 @@
 package com.example.yangj.wayproject;
 
+import android.net.Uri;
+
 /**
  * Created by 심다슬 on 2017-11-27.
  */
@@ -8,6 +10,7 @@ public class ImageData {
 
     //당연히 멤버변수 이름은 똑같아야됨
 
+   // public Uri myUrl;//이미지의 uri
     public String imageUrl;//이미지의 storage경로
     //public String title; "str1-str2" 로 필요하면 주석 해제해서 쓰세요
     public String description;//리뷰

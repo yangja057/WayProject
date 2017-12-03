@@ -96,8 +96,8 @@ public class DataTestActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);//data가 사진 파일의 객체인것임
         if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
-            filePath=data.getData();
-            imagePath=data.getData().toString();//파일 경로 저장했는데
+            filePath=data.getData();//uri
+            imagePath=data.getData().toString();//파일 경로 저장했는데//string->database로
             try {
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
                 imageView.setImageBitmap(bitmap);
@@ -135,15 +135,17 @@ public class DataTestActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Toast.makeText(DataTestActivity.this, "File Uploaded",Toast.LENGTH_LONG).show();
 
-                            Uri downloadUrl=taskSnapshot.getDownloadUrl();
-
                             /*
                             real time data base
                              */
                             ImageData m_imageData=new ImageData();
                             UserData m_userData=new UserData();
 
-                            m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
+                            Uri downloadUrl=taskSnapshot.getDownloadUrl();
+
+                           // m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
+                            m_imageData.imageUrl=downloadUrl.toString();
+                           // m_imageData.myUrl=Uri.parse(m_imageData.imageUrl);
                             //m_imageData.title=editImageTitle.getText().toString();
                             m_imageData.description=editUpLoadReview.getText().toString();
                             m_imageData.userEmail=auth.getCurrentUser().getEmail();//등록한 사용자의 이메일을 반환
@@ -171,7 +173,7 @@ public class DataTestActivity extends AppCompatActivity {
 
                           database.getReference().child("review: ").child("str1-str2").push().setValue(m_imageData);//데이터저장(쌓이는 형태)
                             database.getReference().child("users").child(m_userData.userUID).setValue(m_userData);
-                            Log.e("다스리의 로그",m_imageData.description);
+                           // Log.d("다스리의 로그",m_imageData.description);
 
                         }
                     })

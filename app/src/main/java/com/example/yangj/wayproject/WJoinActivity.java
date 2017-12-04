@@ -64,6 +64,7 @@ public class WJoinActivity extends AppCompatActivity implements GoogleApiClient.
 //                                    Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
                             Toast.makeText(WJoinActivity.this,"회원가입성공",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
 
                         // ...

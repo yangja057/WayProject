@@ -36,12 +36,14 @@ public class WMyReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wmy_review);
         setTitle("My ReviewList");
 
-
         UserItems =new UserData();
-        listViewAdapter=new WListViewAdapter(R.layout.activity_wlist_item);
-        recyclerView=(RecyclerView)findViewById(R.id.MyReviewView);
+
         database= FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
         auth= FirebaseAuth.getInstance();
+
+        listViewAdapter=new WListViewAdapter(R.layout.activity_wlist_item);
+
+        recyclerView=(RecyclerView)findViewById(R.id.MyReviewView);
 
         recyclerView.setAdapter(listViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -60,7 +62,7 @@ public class WMyReviewActivity extends AppCompatActivity {
 
         //myReviewList에는 무엇이 저장되어 있는지, 게시물의id가 저장되어 있으면 이를 가져와서 사실은 review에서 찾게 하는게 맞지 않을까.. ㅇㅅㅇ
         //여리고심.
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("myReviewList").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child("-L-Wf-7NqYzPgKJjhynU").child("list").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

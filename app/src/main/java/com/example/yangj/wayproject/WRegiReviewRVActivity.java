@@ -161,7 +161,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                 //String start_end;->이부분을 출발-도착 이렇게 append시켜서 child("str1-st2")이안에 넣어주십셔
                 //"review"는 첫번째 루트
                 //"users"는 두번째 루트트
-
+                finish();
 
                 break;
             default:

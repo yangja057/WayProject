@@ -140,10 +140,10 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                 m_userData.userUID=auth.getCurrentUser().getUid();
 
                 for(int i=0;i<listItems.size();i++){
-                    m_userData.myReviewList.add(listItems.get(i));
+                    m_userData.list.add(listItems.get(i));
                     //m_userData.myReviewList.add(listItems.get(i));
                 }
-                database.getReference().child("users").child(m_userData.userUID).push().setValue(m_userData);
+                database.getReference().child("users").child(m_userData.userUID).child("MyReviewList").push().setValue(m_userData);
 
                 /**
                  * 중요) child안에 emial string 넣으면 안됨<-보안상의 문제인듯

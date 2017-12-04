@@ -47,9 +47,10 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
 
         ImageData imageItem=WImageDataItemList.get(position);
 
-        //Uri myUri= Uri.parse(imageItem.loadUri);
-        Uri myUri= Uri.parse(" https://firebasestorage.googleapis.com/v0/b/wayproject-5d588.appspot.com/o/images%2Fimage%3A335?alt=media&token=5f9e52f9-77e3-4c9d-ad3b-1a25a9e78806");
-        Glide.with(holder.itemView.getContext()).load(myUri).into(((ViewHolder)holder).iconImageView);
+        if(imageItem.imageUrl!=null){
+            Uri myUri= Uri.parse(imageItem.loadUri);
+            Glide.with(holder.itemView.getContext()).load(myUri).into(((ViewHolder)holder).iconImageView);
+        }
 
         //holder.iconImageView.setImageURI(myUri);
         holder.Place1View.setText(imageItem.getPlaceName());

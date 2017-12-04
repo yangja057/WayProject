@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -25,11 +26,12 @@ public class FirstActivity extends AppCompatActivity {
     boolean touchbookmark=false;    //bookmark버튼을 클릭했는가 하지 않았는가.
 
     RecyclerView recyclerView;
-    private WRegiReviewRVAdapter adapter;
+    private WListViewAdapter adapter;
     private List<ImageData> listItems;
     private FirebaseDatabase database;//데이터 베이스 추가
     private FirebaseAuth auth;
     private StorageReference storageReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class FirstActivity extends AppCompatActivity {
         /*
         자영이가 넘긴 string을 받아서 str1-str2를 append해줌
          */
-        database.getReference().child("review").child("str-str2").child("-L-UvIntdUK8ssAv63Hg").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child("-L-W4QhQCVOGi4OI7NlR").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -64,12 +66,11 @@ public class FirstActivity extends AppCompatActivity {
                     getchildren() :가지 하나를 children이라고 함
                     child==현재 "review" 의 children하나를 읽어옴
                      */
-                    ImageData imageData=snapshot.getValue(ImageData.class);
-                    adapter.listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
-                    //listItems.add(imageData);
-                    //Log.i("다스리의 로그", "imageData:" + dataSnapshot.getChildren().toString());
+                    GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
+                    List<ImageData> taskDesList=dataSnapshot.getValue(genericTypeIndicator);
+
                 }
-                adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+               // adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

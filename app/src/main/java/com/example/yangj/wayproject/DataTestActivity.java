@@ -156,8 +156,8 @@ public class DataTestActivity extends AppCompatActivity {
 
                             //user정보 등록
                             m_userData.userEmail=auth.getCurrentUser().getEmail();
-                            m_userData.myReviewList.add(m_imageData);
-                           m_userData.likeReviewList.add(m_imageData);
+                          //  m_userData.myReviewList.add(m_imageData);
+                         //  m_userData.likeReviewList.add(m_imageData);
                            m_userData.userUID=auth.getCurrentUser().getUid();
 
                            //Toast.makeText(DataTestActivity.this, curUser,Toast.LENGTH_LONG).show();

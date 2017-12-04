@@ -11,13 +11,14 @@ import java.util.ArrayList;
 public class UserData {
     public  String userUID;
     public String userEmail;
-    public ArrayList<ImageData> likeReviewList;//내가 즐겨찾기 한 게시글 고유 id를 담음
-    public ArrayList<ImageData> myReviewList;//내가쓴 게시글 고유 id를 담음
+    public ArrayList<ImageData> list;// 내가 쓴 게시물 을 담음
+        // public ArrayList<ImageData> likeReviewList;//내가 즐겨찾기 한 게시글 고유 id를 담음
+   // public ArrayList<ImageData> myReviewList;//내가쓴 게시글 고유 id를 담음
 
 UserData(){
-    likeReviewList=new ArrayList<>();
-    myReviewList=new ArrayList<>();
-
+   // likeReviewList=new ArrayList<>();
+   // myReviewList=new ArrayList<>();
+    list=new ArrayList<>();
 }
 
 }

@@ -29,6 +29,7 @@ public class WLoginActivity extends AppCompatActivity {
     private EditText editLoginID;
     private EditText editLoginPW;
     private Button btnLogin;
+    private Button btngotoJoin;
 
     private  FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -39,11 +40,12 @@ public class WLoginActivity extends AppCompatActivity {
         //현재 사용자 등록및 확인
         textNowUser=(TextView)findViewById(R.id.nowUser);
         textNowEmail=(TextView)findViewById(R.id.nowEmail) ;
-
+        btngotoJoin=(Button)findViewById(R.id.gotojoin);
         mAuth = FirebaseAuth.getInstance();
         editLoginID=(EditText)findViewById(R.id.loginID);
         editLoginPW=(EditText)findViewById(R.id.loginPW);
         btnLogin=(Button)findViewById(R.id.login);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +54,13 @@ public class WLoginActivity extends AppCompatActivity {
             }
         });
 
+        btngotoJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), WJoinActivity.class);
+                startActivity(intent);
+            }
+        });
         mAuthListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -61,12 +70,15 @@ public class WLoginActivity extends AppCompatActivity {
                     Toast.makeText(WLoginActivity.this,"로그인이 되어있는 상태입니다",Toast.LENGTH_LONG).show();
                    // textNowUser.setText(mAuth.getCurrentUser().getDisplayName());
                     textNowEmail.setText(mAuth.getCurrentUser().getEmail());
+                    Intent intent=new Intent(getApplicationContext(), WListActivity.class);
+                    startActivity(intent);
+                    finish();
                   //  Intent intent=new Intent(WLoginActivity.this,MainActivity.class);
                   //  startActivity(intent);
                   //  finish();
                 }else{
                     //user is signed out
-                    Toast.makeText(WLoginActivity.this,"사용자가 없습니다. 로그인을 해주세요",Toast.LENGTH_LONG).show();
+                    Toast.makeText(WLoginActivity.this,"사용자가 없습니다. 회원가입을 해주세요",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -92,6 +104,9 @@ public class WLoginActivity extends AppCompatActivity {
 //                                    Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
                             Toast.makeText(WLoginActivity.this,"이메일 로그인 완료",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(getApplicationContext(), WListActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         // ...

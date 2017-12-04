@@ -79,7 +79,7 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
         //String str=database.getReference().child("users").child(auth.getCurrentUser().getUid()).push().getKey();
         //Log.d("다스리의 로그",str);
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).orderByChild("myReviewList").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").orderByChild("list").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

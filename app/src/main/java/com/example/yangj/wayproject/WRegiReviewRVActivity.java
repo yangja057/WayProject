@@ -129,8 +129,14 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
                 //Log.d("다스리의 로그",listItems.get(0).loadUri);
                 //database.getReference().child()
-                database.getReference().child("review").child(StartingPointId+"-"+EndingPointId).push().setValue(listItems);
+                String key=database.getReference().child("review").child(StartingPointId+"-"+EndingPointId).push().getKey();
 
+                for(int i=0;i<listItems.size()-1;i++){
+                    listItems.get(i).reviewKey=key;
+                }
+               // database.getReference().child("review").child(StartingPointId+"-"+EndingPointId).push().setValue(listItems);
+
+                database.getReference().child("review").child(StartingPointId+"-"+EndingPointId).child(key).setValue(listItems);
                 // m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
                 // m_imageData.myUrl=Uri.parse(m_imageData.imageUrl);
 
@@ -144,6 +150,9 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
                     //m_userData.myReviewList.add(listItems.get(i));
                 }
                 database.getReference().child("users").child(m_userData.userUID).child("MyReviewList").push().setValue(m_userData);
+
+                //이 아래것은 나중에 없어져야 됨(자영이가 좋아요 부분 구현하면)
+                database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").push().setValue(m_userData);
 
                 /**
                  * 중요) child안에 emial string 넣으면 안됨<-보안상의 문제인듯

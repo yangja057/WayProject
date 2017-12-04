@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +47,11 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
 
         ImageData imageItem=WImageDataItemList.get(position);
 
-        Uri filepath= Uri.parse(imageItem.getImageUrl());
+        //Uri myUri= Uri.parse(imageItem.loadUri);
+        Uri myUri= Uri.parse(" https://firebasestorage.googleapis.com/v0/b/wayproject-5d588.appspot.com/o/images%2Fimage%3A335?alt=media&token=5f9e52f9-77e3-4c9d-ad3b-1a25a9e78806");
+       // Glide.with(holder.iconImageView.getContext()).load(myUri).into(((ViewHolder)holder).iconImageView);
 
-        holder.iconImageView.setImageURI(filepath);
+        holder.iconImageView.setImageURI(myUri);
         holder.Place1View.setText(imageItem.getPlaceName());
         holder.Place2View.setText(imageItem.getPlaceName());
         holder.Place3View.setText(imageItem.getPlaceName());

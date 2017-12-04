@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FirstActivity extends AppCompatActivity {
@@ -47,11 +48,14 @@ public class FirstActivity extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
         auth=FirebaseAuth.getInstance();
-
+        listItems=new ArrayList<>();
         /*
         자영이가 넘긴 string을 받아서 str1-str2를 append해줌
+        child("-L-WkVk7aH9IJSYDVS0e") 이건 여리가 넘긴 게시물 고유 키값 imagedata.reviewkey
+        여리는 이 두개의 값을 모두 넘겨줘야 됨
+
          */
-        database.getReference().child("review").child("null-null").child("-L-WJ-0XpmWXS3cf76t9").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJITyWD9mkfDURMNW9v4owAEo").child("-L-WkVk7aH9IJSYDVS0e").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -66,8 +70,11 @@ public class FirstActivity extends AppCompatActivity {
                     getchildren() :가지 하나를 children이라고 함
                     child==현재 "review" 의 children하나를 읽어옴
                      */
-                    GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
-                   listItems=dataSnapshot.getValue(genericTypeIndicator);
+                    ImageData imageData=snapshot.getValue(ImageData.class);
+                    listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+
+                   // GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
+                   //listItems=dataSnapshot.getValue(genericTypeIndicator);
 
                 }
                adapter.notifyDataSetChanged();//새로 고침(갱신되니까)

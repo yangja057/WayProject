@@ -165,6 +165,7 @@ public class BoardActivity extends AppCompatActivity {
             ((CustomViewHolder)holder).textView2.setText(imageDTOs.get(position).description);
             Uri myUri= Uri.parse(imageDTOs.get(position).imageUrl);
             Glide.with(holder.itemView.getContext()).load(myUri).into(((CustomViewHolder)holder).imageView);
+
         }
 
         @Override

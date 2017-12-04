@@ -22,6 +22,7 @@ public class ImageData {
     public String one;//test용
     public String reviewKey;//item 고유 key
 
+
     public String getDescription() {
         return description;
     }

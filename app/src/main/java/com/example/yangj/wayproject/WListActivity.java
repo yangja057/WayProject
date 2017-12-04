@@ -66,6 +66,9 @@ public class WListActivity extends AppCompatActivity {
                     public void onItemClick(View view, int position) {
                         //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
                         Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getApplicationContext(), FirstActivity.class);
+                        ImageData img=adapter.WImageDataItemList.get(position);
+                        intent.putExtra("ID", img.reviewKey);
                     }
                 })
         );
@@ -92,7 +95,7 @@ public class WListActivity extends AppCompatActivity {
             }
         });
 
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("myReviewList").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child(startingPointId+"-"+endingPointId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

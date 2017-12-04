@@ -1,10 +1,25 @@
 package com.example.yangj.wayproject;
 
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,14 +42,91 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGoRegiReviewRV;
     private Button btnFavoriteView;
     private Button btnWriteMyself;
-
+    private DrawerLayout drawer;
     private  FirebaseAuth.AuthStateListener mAuthListener;
+    private FrameLayout frameLayout;
+
+    ListView listView=null;
+
+    ActionBarDrawerToggle drawerToggle; //액션바에 있는 아이콘 클릭
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item))
+            return true;
+        switch (item.getItemId()){
+            case R.id.SimpleMenu:
+                Toast.makeText(this, "으데보쟈", Toast.LENGTH_SHORT).show();
+                return true;
+                //break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final String[] items={"login", "join", "settings"};
+
+        ArrayAdapter adapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+
+        drawer=(DrawerLayout)findViewById(R.id.drawer);
+        frameLayout=(FrameLayout)findViewById(R.id.mainFrame);
+
+        listView=(ListView)findViewById(R.id.drawer_menulist);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), "제발 네비게이션ㅠ",Toast.LENGTH_SHORT).show();
+
+                switch (position){
+                    case 1:
+                        Intent intent=new Intent(getApplicationContext(), WListActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+                drawer.closeDrawer(Gravity.LEFT);
+            }
+        });
+
+        drawerToggle=new ActionBarDrawerToggle(this, drawer, R.string.open_drawer, R.string.close_drawer){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+        };
+        drawer.setDrawerListener(drawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*
         로그인버튼 : 로그인으로 이동
         회원가입 버튼 : 회원가입으로 이동
@@ -46,11 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
          */
 
-
         btnCheck=(Button)findViewById(R.id.check);
-
         btnBoardData=(Button)findViewById(R.id.BoardData) ;
-
         btnGoToJoin=(Button)findViewById(R.id.goToJoin);
         btnGoToApi=(Button)findViewById(R.id.goToFirebase);
         btnGoToMainView=(Button)findViewById(R.id.goToMainView);
@@ -181,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }//oncreat closed
-
 
 
 }

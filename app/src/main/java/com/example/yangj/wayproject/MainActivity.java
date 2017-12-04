@@ -106,13 +106,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        btnGoToMainView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(getBaseContext(),//클래스 등록);
-//                startActivity(intent);
-//            }
-//        });
+        //하나하나 잇기 시작합니다.
+        btnGoToMainView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),FirstActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnBoardData.setOnClickListener(new View.OnClickListener() {
             @Override

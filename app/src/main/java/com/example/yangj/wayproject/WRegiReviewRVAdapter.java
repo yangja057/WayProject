@@ -26,7 +26,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     static private final int PLACE_BUTTON = 0;
     static private final int USER_IMAGE = 1;
 
-    private List<ImageData> listItems;
+    public List<ImageData> listItems;
     private Context context;
 
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {
@@ -43,6 +43,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
         ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());

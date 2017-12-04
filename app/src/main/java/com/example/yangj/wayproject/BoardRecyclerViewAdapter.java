@@ -10,6 +10,8 @@ package com.example.yangj.wayproject;
         import android.widget.ImageView;
         import android.widget.TextView;
 
+        import com.bumptech.glide.Glide;
+
         import org.w3c.dom.Text;
 
         import java.util.ArrayList;
@@ -44,7 +46,9 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
 
         ImageData imageItem=WBoardList.get(position);
 
-        Uri myUri= Uri.parse(" https://firebasestorage.googleapis.com/v0/b/wayproject-5d588.appspot.com/o/images%2Fimage%3A335?alt=media&token=5f9e52f9-77e3-4c9d-ad3b-1a25a9e78806");
+       // Uri myUri= Uri.parse(" https://firebasestorage.googleapis.com/v0/b/wayproject-5d588.appspot.com/o/images%2Fimage%3A335?alt=media&token=5f9e52f9-77e3-4c9d-ad3b-1a25a9e78806");
+        Uri myUri= Uri.parse(WBoardList.get(position).loadUri);
+        Glide.with(holder.itemView.getContext()).load(myUri).into(holder.imageView);
 
         holder.imageView.setImageURI(myUri);
         holder.Place.setText(imageItem.getPlaceName());
@@ -64,9 +68,9 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView= (ImageView) itemView.findViewById(R.id.item_imageView);
-            Place=(Button) itemView.findViewById(R.id.item_textView);
-            Review=(TextView) itemView.findViewById(R.id.item_textView2);
+            imageView= (ImageView) itemView.findViewById(R.id.regi_UserImage);
+            Place=(Button) itemView.findViewById(R.id.regi_placeButton);
+            Review=(TextView) itemView.findViewById(R.id.regi_explainText);
 
         }
     }

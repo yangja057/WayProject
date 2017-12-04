@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center_vertical"
-                android:hint="장소추가"
+                android:hint="장소"
                 android:singleLine="true"
                 android:background="@drawable/btn_backgroud"/>
 

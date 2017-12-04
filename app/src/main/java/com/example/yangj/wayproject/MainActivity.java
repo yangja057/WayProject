@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         if(drawerToggle.onOptionsItemSelected(item))
             return true;
         switch (item.getItemId()){
-            case R.id.SimpleMenu:
-                Toast.makeText(this, "으데보쟈", Toast.LENGTH_SHORT).show();
-                return true;
-                //break;
+//            case R.id.SimpleMenu:
+//                Toast.makeText(this, "으데보쟈", Toast.LENGTH_SHORT).show();
+//                return true;
+//                //break;
             default:
                 break;
         }

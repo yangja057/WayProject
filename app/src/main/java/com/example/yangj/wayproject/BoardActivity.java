@@ -182,9 +182,9 @@ public class BoardActivity extends AppCompatActivity {
 
             public CustomViewHolder(View view) {
                 super(view);
-                imageView= (ImageView) view.findViewById(R.id.item_imageView);
-                textView=(TextView) view.findViewById(R.id.item_textView);
-                textView2=(TextView) view.findViewById(R.id.item_textView2);
+//                imageView= (ImageView) view.findViewById(R.id.item_imageView);
+//                textView=(TextView) view.findViewById(R.id.item_textView);
+//                textView2=(TextView) view.findViewById(R.id.item_textView2);
 
             }
         }

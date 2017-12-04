@@ -40,7 +40,7 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
 
         recyclerView=(RecyclerView)findViewById(R.id.FirstView);
-
+        adapter=new BoardRecyclerViewAdapter(R.layout.item_board);//adapter 생성
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -48,7 +48,7 @@ public class FirstActivity extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
         auth=FirebaseAuth.getInstance();
-        listItems=new ArrayList<>();
+        listItems=new ArrayList<ImageData>();
         /*
         자영이가 넘긴 string을 받아서 str1-str2를 append해줌
         child("-L-WkVk7aH9IJSYDVS0e") 이건 여리가 넘긴 게시물 고유 키값 imagedata.reviewkey
@@ -71,7 +71,8 @@ public class FirstActivity extends AppCompatActivity {
                     child==현재 "review" 의 children하나를 읽어옴
                      */
                     ImageData imageData=snapshot.getValue(ImageData.class);
-                    listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+                 Toast.makeText(FirstActivity.this,"출력?:"+imageData.loadUri.toString(),Toast.LENGTH_LONG).show();
+                    adapter.WBoardList.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
 
                    // GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
                    //listItems=dataSnapshot.getValue(genericTypeIndicator);

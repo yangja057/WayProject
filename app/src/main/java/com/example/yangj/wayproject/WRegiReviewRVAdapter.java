@@ -86,6 +86,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
             }
         });
 
+        //파이어베이스 저장소에 저장
         storageReference= FirebaseStorage.getInstance().getReference();
         if(listItem.imageUrl!=null){
             Uri temp=Uri.parse(listItem.imageUrl);

@@ -50,8 +50,9 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
         Uri myUri= Uri.parse(WBoardList.get(position).loadUri);
         Glide.with(holder.itemView.getContext()).load(myUri).into(holder.imageView);
 
-        holder.imageView.setImageURI(myUri);
-        holder.Place.setText(imageItem.getPlaceName());
+       // holder.imageView.setImageURI(myUri);
+       //holder.Place.setText(imageItem.getPlaceName());
+        holder.Place.setText(imageItem.getStar());//원래는 위에것이 맞는데 출력확인을 위해 잠시...
         holder.Review.setText(imageItem.getDescription());
 
     }

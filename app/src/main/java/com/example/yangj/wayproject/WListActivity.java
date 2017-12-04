@@ -110,6 +110,8 @@ public class WListActivity extends AppCompatActivity {
                         Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(), FirstActivity.class);
                         ImageData img=adapter.WImageDataItemList.get(position);
+                        //recyclerview에서 클릭을 한 position의 값을 알아낸 뒤 imageData에 position에 해당하는 값을 담아온다.
+                        //그리고 intent에 ID로 게시물의 고유키인 reviewKey를 전달한다.
                         intent.putExtra("ID", img.reviewKey);
                     }
                 })

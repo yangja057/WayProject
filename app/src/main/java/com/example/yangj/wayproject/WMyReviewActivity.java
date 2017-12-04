@@ -56,6 +56,8 @@ public class WMyReviewActivity extends AppCompatActivity {
                 })
         );
 
+        //myReviewList에는 무엇이 저장되어 있는지, 게시물의id가 저장되어 있으면 이를 가져와서 사실은 review에서 찾게 하는게 맞지 않을까.. ㅇㅅㅇ
+        //여리고심.
         database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("myReviewList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

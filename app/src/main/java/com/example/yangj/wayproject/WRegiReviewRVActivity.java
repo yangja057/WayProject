@@ -129,7 +129,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
                 //Log.d("다스리의 로그",listItems.get(0).loadUri);
                 //database.getReference().child()
-                database.getReference().child("review").child("str1-str2").push().setValue(listItems);
+                database.getReference().child("review").child(StartingPointId+"-"+EndingPointId).push().setValue(listItems);
 
                 // m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();
                 // m_imageData.myUrl=Uri.parse(m_imageData.imageUrl);

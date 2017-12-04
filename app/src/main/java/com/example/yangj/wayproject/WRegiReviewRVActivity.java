@@ -44,6 +44,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
     static private final int PLACE_BUTTON = 0;
     static private final int USER_IMAGE = 1;
 
+    private int storeIndex=0;
     private RecyclerView recyclerView;
     private WRegiReviewRVAdapter adapter;
 
@@ -100,25 +101,29 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
                 //파일 업로드가 성공했을 경우
                 //사진 storage에 저장
-                StorageReference riversRef = storageReference.child("images/"+ filePath.getLastPathSegment());
-                riversRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        //사진등록이 성공했을 경우, 사진을 storage에 저장하기전에 데이터를 보존해둠
-                        for(int i=0;i<listItems.size();i++){
-                            Uri downloadUrl=taskSnapshot.getDownloadUrl();
-                            listItems.get(i).imageUrl=downloadUrl.toString();//imageUri를 taskSnapshot.getDownloadUrl()의 string값으로 저장
+
+
+                for (storeIndex=0;storeIndex<listItems.size()-1;storeIndex++){
+                    final StorageReference riversRef = storageReference.child("images/"+ Uri.parse(listItems.get(storeIndex).imageUrl).getLastPathSegment());
+                    riversRef.putFile(Uri.parse(listItems.get(storeIndex).imageUrl)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //사진등록이 성공했을 경우, 사진을 storage에 저장하기전에 데이터를 보존해둠
+
+                                Uri downloadUrl=taskSnapshot.getDownloadUrl();
+                                listItems.get(storeIndex).loadUri=downloadUrl.toString();//imageUri를 taskSnapshot.getDownloadUrl()의 string값으로 저장
+                            Log.d("다스리의 로그",listItems.get(storeIndex).loadUri);
+                            adapter.notifyDataSetChanged();
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Toast.makeText(WRegiReviewRVActivity.this, exception.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Toast.makeText(WRegiReviewRVActivity.this, exception.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                });
-
-
+                //database.getReference().child()
                 database.getReference().child("review").child("str1-str2").push().setValue(listItems);
 
                 // m_imageData.imageUrl=filePath.toString(); //m_imageData.imageUrl=downloadUrl.toString();

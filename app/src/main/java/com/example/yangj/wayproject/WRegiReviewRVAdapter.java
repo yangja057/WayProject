@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.URI;
@@ -87,12 +88,15 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
         public ImageView imbUserImage;
         public EditText edtExplainText;
 
+        public TextView textView;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             edtPlaceButton = (EditText) itemView.findViewById(R.id.regi_placeButton);
             imbUserImage = (ImageView) itemView.findViewById(R.id.regi_UserImage);
             edtExplainText = (EditText) itemView.findViewById(R.id.regi_explainText);
+
         }
     }
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){

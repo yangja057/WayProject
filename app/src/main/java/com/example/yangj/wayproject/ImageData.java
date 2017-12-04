@@ -10,7 +10,8 @@ public class ImageData {
 
     //당연히 멤버변수 이름은 똑같아야됨
 
-   // public Uri myUrl;//이미지의 uri
+
+   public String loadUri;//이미지의 uri
     public String imageUrl;//이미지의 storage경로
     //public String title; "str1-str2" 로 필요하면 주석 해제해서 쓰세요
     public String description;//리뷰
@@ -19,7 +20,7 @@ public class ImageData {
     public String placeID;//장소의 고유 id
     public  String placeName;//장소의 이름
     public String one;//test용
-    public String reviewNum;//review들의 고유 넘버
+    //public String reviewKey;//item 고유 key
 
     public String getDescription() {
         return description;

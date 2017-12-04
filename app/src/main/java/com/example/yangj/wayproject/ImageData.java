@@ -19,7 +19,7 @@ public class ImageData {
     public int star;//별의 수
     public String placeID;//장소의 고유 id
     public  String placeName;//장소의 이름
-    public String one;//test용
+    //public String one;//test용
     //public String reviewKey;//item 고유 key
 
     public String getDescription() {

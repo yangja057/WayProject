@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +34,8 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
 
     public List<ImageData> listItems;
     private Context context;
+
+    StorageReference storageReference;
 
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {
         this.listItems = listItems;
@@ -41,7 +52,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        ImageData listItem = listItems.get(position);
+        final ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());
 
@@ -74,6 +85,24 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
                 onItemClickListener.onItemClick(position, USER_IMAGE);
             }
         });
+
+        storageReference= FirebaseStorage.getInstance().getReference();
+        if(listItem.imageUrl!=null){
+            Uri temp=Uri.parse(listItem.imageUrl);
+            StorageReference riversRef=storageReference.child("images/"+temp.getLastPathSegment());
+            riversRef.putFile(temp).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    listItem.loadUri=taskSnapshot.getDownloadUrl().toString();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //Toast.makeText(WRegiReviewRVAdapter.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
     }
 
     @Override

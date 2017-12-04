@@ -6,6 +6,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 public class FirstActivity extends AppCompatActivity {
+    boolean touchbookmark=false;    //bookmark버튼을 클릭했는가 하지 않았는가.
 
     RecyclerView recyclerView;
     private WRegiReviewRVAdapter adapter;
@@ -41,14 +46,17 @@ public class FirstActivity extends AppCompatActivity {
         storageReference= FirebaseStorage.getInstance().getReference();
         auth=FirebaseAuth.getInstance();
 
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("myReviewList").addValueEventListener(new ValueEventListener() {
+        /*
+        자영이가 넘긴 string을 받아서 str1-str2를 append해줌
+         */
+        database.getReference().child("review").child("str-str2").child("-L-UvIntdUK8ssAv63Hg").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Log.i("다스리의 로그", "onChildAdded:" + dataSnapshot.getKey());
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-                listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+               // listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
@@ -59,7 +67,7 @@ public class FirstActivity extends AppCompatActivity {
                     ImageData imageData=snapshot.getValue(ImageData.class);
                     adapter.listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
                     //listItems.add(imageData);
-                    Log.i("다스리의 로그", "imageData:" + dataSnapshot.getChildren().toString());
+                    //Log.i("다스리의 로그", "imageData:" + dataSnapshot.getChildren().toString());
                 }
                 adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
@@ -71,5 +79,35 @@ public class FirstActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.favorite_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.bookmark: //북마크(즐겨찾기)
+                Toast.makeText(this, "즐겨찾기", Toast.LENGTH_SHORT).show();
+                if(!touchbookmark){
+                    //bookmark버튼을 클릭했을때, icon을 까만 별로 바꾼다.★
+                    item.setIcon(R.drawable.ic_action_bookmark2);
+                    touchbookmark=true;
+                }
+                else
+                {
+                    //즐겨찾기 해제시 icon을 텅빈 별로 바꾼다.☆
+                    item.setIcon(R.drawable.ic_action_bookmark);
+                    touchbookmark=false;
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

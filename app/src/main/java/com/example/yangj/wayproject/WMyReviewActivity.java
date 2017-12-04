@@ -1,5 +1,6 @@
 package com.example.yangj.wayproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -52,6 +53,7 @@ public class WMyReviewActivity extends AppCompatActivity {
                     public void onItemClick(View view, int position) {
                         //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
                         Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+
                     }
                 })
         );

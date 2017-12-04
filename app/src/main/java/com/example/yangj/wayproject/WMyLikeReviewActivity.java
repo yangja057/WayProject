@@ -1,5 +1,6 @@
 package com.example.yangj.wayproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,15 +55,20 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-//        recyclerView.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
-//                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//        );
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
+                        Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+//                        Intent intent=new Intent(getApplicationContext(), FirstActivity.class);
+//                        startActivity(intent);
+                        //ImageData imageData=listViewAdapter.WImageDataItemList.get(position);
+                        //String uid=auth.getCurrentUser().getUid().toString();
+                        //Intent.putExtra("ReviewID", uid);
+                    }
+                })
+        );
 
 
 

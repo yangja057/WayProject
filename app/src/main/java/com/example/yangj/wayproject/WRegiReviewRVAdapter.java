@@ -2,21 +2,17 @@ package com.example.yangj.wayproject;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -27,7 +23,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     static private final int PLACE_BUTTON = 0;
     static private final int USER_IMAGE = 1;
 
-    private List<ImageData> listItems;
+    public List<ImageData> listItems;
     private Context context;
 
     public WRegiReviewRVAdapter(List<ImageData> listItems, Context context) {
@@ -44,10 +40,10 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
         ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());
-
 
         if(listItem.imageUrl!=null){
             Uri myuri=Uri.parse(listItem.imageUrl);
@@ -59,17 +55,19 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
             }
             holder.imbUserImage.setImageBitmap(bitmap);
             //holder.imbUserImage.setImageURI(myUri);
-
         }
 
-
+        listItem.setDescription(holder.edtExplainText.getText().toString());
         holder.edtExplainText.setText(listItem.getDescription());
+        //Log.d("짜요이의 로그","!" + holder.edtExplainText.getText().toString());
+
         holder.edtPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClickListener.onItemClick(position, PLACE_BUTTON);
             }
         });
+
         holder.imbUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

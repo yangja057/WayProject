@@ -3,11 +3,9 @@ package com.example.yangj.wayproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -214,7 +212,7 @@ public class WListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
-                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L-Wx1XO-D22I-HFCbYx").addValueEventListener(new ValueEventListener() {
+                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L-p0Y9N6R8f-FuNZHiK").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

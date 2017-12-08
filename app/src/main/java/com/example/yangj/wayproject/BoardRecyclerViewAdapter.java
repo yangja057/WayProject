@@ -23,13 +23,14 @@ package com.example.yangj.wayproject;
 
 public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecyclerViewAdapter.ViewHolder> {
 
-    public List<ImageData>WBoardList=new ArrayList<ImageData>();
+    public List<ImageData>WBoardList;
     private int itemLayout; //R.layout.imageData를 담음.
     private View view;
 
     //생성할 때 물려줄 xml을 물려줘야한다.
 
     public BoardRecyclerViewAdapter(int itemLayout){
+        WBoardList=new ArrayList<ImageData>();
         this.itemLayout=itemLayout;
     }
     @Override
@@ -46,9 +47,12 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
 
         ImageData imageItem=WBoardList.get(position);
 
+        if(imageItem.imageUrl!=null){
+            Uri myUri= Uri.parse(WBoardList.get(position).loadUri);
+            Glide.with(holder.itemView.getContext()).load(myUri).into(holder.imageView);
+        }
        // Uri myUri= Uri.parse(" https://firebasestorage.googleapis.com/v0/b/wayproject-5d588.appspot.com/o/images%2Fimage%3A335?alt=media&token=5f9e52f9-77e3-4c9d-ad3b-1a25a9e78806");
-        Uri myUri= Uri.parse(WBoardList.get(position).loadUri);
-        Glide.with(holder.itemView.getContext()).load(myUri).into(holder.imageView);
+
 
        // holder.imageView.setImageURI(myUri);
        //holder.Place.setText(imageItem.getPlaceName());

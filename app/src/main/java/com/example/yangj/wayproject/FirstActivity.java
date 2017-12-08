@@ -60,16 +60,19 @@ public class FirstActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Log.i("다스리의 로그", "onChildAdded:" + dataSnapshot.getKey());
+
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-                listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+               // listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
                     DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
                     getchildren() :가지 하나를 children이라고 함
                     child==현재 "review" 의 children하나를 읽어옴
                      */
-
-                    adapter.WBoardList.add(snapshot.getValue(ImageData.class));//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+                    ImageData imageData=snapshot.getValue(ImageData.class);
+                 Toast.makeText(FirstActivity.this,"출력?:"+imageData.loadUri.toString(),Toast.LENGTH_LONG).show();
+                    adapter.WBoardList.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
 
                    // GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
                    //listItems=dataSnapshot.getValue(genericTypeIndicator);

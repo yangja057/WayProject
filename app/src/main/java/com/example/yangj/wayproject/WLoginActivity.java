@@ -73,9 +73,6 @@ public class WLoginActivity extends AppCompatActivity {
                     Intent intent=new Intent(getApplicationContext(), WListActivity.class);
                     startActivity(intent);
                     finish();
-                  //  Intent intent=new Intent(WLoginActivity.this,MainActivity.class);
-                  //  startActivity(intent);
-                  //  finish();
                 }else{
                     //user is signed out
                     Toast.makeText(WLoginActivity.this,"사용자가 없습니다. 회원가입을 해주세요",Toast.LENGTH_LONG).show();

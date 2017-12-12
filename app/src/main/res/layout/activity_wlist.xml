@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context="com.example.yangj.wayproject.WListActivity">
 
     <android.support.v4.widget.DrawerLayout
@@ -32,25 +33,33 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/street"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="80dp"></ImageView>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
                     <EditText
                         android:id="@+id/list_btnStartingPoint"
-                        android:layout_width="200dp"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="80dp"
                         android:background="@drawable/btn_backgroud"
                         android:hint="출발지 검색" />
 
                     <EditText
                         android:id="@+id/list_btnEndingPoint"
-                        android:layout_width="200dp"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="30dp"
                         android:background="@drawable/btn_backgroud"
                         android:hint="도착지 검색" />
 
@@ -63,21 +72,13 @@
                     android:layout_height="80dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_backgroud"
                     android:text="검색" />
 
 
             </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/AddButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:background="#00ff0000"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,8 +94,19 @@
 
                 </android.support.v7.widget.RecyclerView>
 
-            </LinearLayout>
 
+            </LinearLayout>
+                <ImageButton
+                    android:id="@+id/AddButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginRight="30dp"
+                    app:srcCompat="@drawable/plus"
+
+                    android:background="#00ff0000"
+                    />
             </LinearLayout>
 
         </FrameLayout>

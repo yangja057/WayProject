@@ -7,9 +7,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/backpack"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
@@ -51,7 +50,7 @@
         </activity>
         <activity android:name=".WRegiReviewActivity" />
         <activity android:name=".WAddPlaceActivity" />
-        <activity android:name=".WListActivity" />
+        <activity android:name=".WListActivity"/>
         <activity android:name=".DataTestActivity" />
         <activity android:name=".WMainSearchActivity" />
         <activity android:name=".BoardActivity" />
@@ -60,7 +59,9 @@
         <activity android:name=".FirebaseActivity" />
         <activity android:name=".WRegiReviewRVActivity" />
         <activity android:name=".WMyReviewActivity" />
-        <activity android:name=".FirstActivity"></activity>
+        <activity android:name=".FirstActivity" />
+        <activity android:name=".ListViewIntro"
+        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
     </application>
 
 </manifest>

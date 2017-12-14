@@ -14,7 +14,10 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -122,20 +125,27 @@ public class FirstActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.ic_action_bookmark2);
                     touchbookmark=true;
 
-                    ReviewId = intent.getStringExtra("ID");//게시물 키값
+                    ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
+
+
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장
-                    database.getReference().child("review").child("ChIJp9W4ZNykfDURPKuai8EZ_gc-ChIJp9W4ZNykfDURPKuai8EZ_gc").child(ReviewId).addValueEventListener(new ValueEventListener() {
+                    database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            //adapter.m_userData.clear();
+
+                            m_userData.list.clear();
 
                             for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                                 ImageData imageData = snapshot.getValue(ImageData.class);
-                                imageData.plusStar();
+                                imageData.star++;
                                 m_userData.list.add(imageData);
                             }
-                             database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);
+
+                             database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);//다시등록
+                       database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData.list);//다시 등록
+                           // finish();
+
                         }
 
                         @Override

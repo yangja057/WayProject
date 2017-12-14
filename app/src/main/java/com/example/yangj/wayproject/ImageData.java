@@ -1,5 +1,8 @@
 package com.example.yangj.wayproject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by 심다슬 on 2017-11-27.
  */
@@ -19,7 +22,7 @@ public class ImageData {
     public  String placeName;//장소의 이름
     public String one;//test용
     public String reviewKey;//item 고유 key
-
+    public Map<String,Boolean>stars=new HashMap<>();
 
     public String getDescription() {
         return description;

@@ -64,7 +64,7 @@ public class FirstActivity extends AppCompatActivity {
 
          */
 
-        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child("-L0LcSA6K50aLjIvl6us").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child("-L0M2TUGIt3HEaWxWw_R").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -127,6 +127,39 @@ public class FirstActivity extends AppCompatActivity {
 
                     ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
 
+                    //추가
+
+//                    database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).runTransaction(new Transaction.Handler() {
+//                        @Override
+//                        public Transaction.Result doTransaction(MutableData mutableData) {
+//                            ImageData p = mutableData.getValue(ImageData.class);
+//                            if (p == null) {
+//                                return Transaction.success(mutableData);
+//                            }
+//
+//                            if (p.stars.containsKey(m_userData.userUID)) {
+//                                // Unstar the post and remove self from stars
+//                                p.star = p.star - 1;
+//                                p.stars.remove(m_userData.userUID);
+//                            } else {
+//                                // Star the post and add self to stars
+//                                p.star = p.star + 1;
+//                                p.stars.put(m_userData.userUID, true);
+//                            }
+//
+//                            // Set value and report transaction success
+//                            mutableData.setValue(p);
+//                            return Transaction.success(mutableData);
+//                        }
+//
+//                        @Override
+//                        public void onComplete(DatabaseError databaseError, boolean b,
+//                                               DataSnapshot dataSnapshot) {
+//                            // Transaction completed
+//                            Log.d("다슬로그", "postTransaction:onComplete:" + databaseError);
+//                        }
+//                    });
+
 
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장
@@ -134,19 +167,24 @@ public class FirstActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
+                            adapter.WBoardList.clear();
                             m_userData.list.clear();
 
                             for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                                 ImageData imageData = snapshot.getValue(ImageData.class);
                                 imageData.star++;
                                 m_userData.list.add(imageData);
+                                adapter.WBoardList.add(imageData);
+                                adapter.notifyDataSetChanged();
                             }
 
                              database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);//다시등록
-                       database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData.list);//다시 등록
-                           // finish();
+                      // database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData.list);//다시 등록
+                         adapter.notifyDataSetChanged();
+                          finish();
 
                         }
+                        //database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData.list);//다시 등록
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -154,10 +192,10 @@ public class FirstActivity extends AppCompatActivity {
                         }
                     });
 
-//                    Log.i("로그", m_userData.list.get(0).getPlaceName());
-                    //database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData);
+                    //Log.i("로그", m_userData.list.get(0).getPlaceName());
+                  database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(adapter.WBoardList);
 
-                }
+                }//if closed
                 else
                 {
                     //즐겨찾기 해제시 icon을 텅빈 별로 바꾼다.☆

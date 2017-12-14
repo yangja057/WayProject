@@ -59,6 +59,8 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
        // holder.Place.setText(imageItem.getStar());//원래는 위에것이 맞는데 출력확인을 위해 잠시...
         holder.Review.setText(imageItem.getDescription());
 
+
+
     }
     @Override
     public int getItemCount() {

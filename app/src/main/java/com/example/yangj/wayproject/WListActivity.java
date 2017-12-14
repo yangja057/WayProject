@@ -220,7 +220,7 @@ public class WListActivity extends AppCompatActivity {
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
 
 
-                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0LcSA6K50aLjIvl6us").child(0+"").addValueEventListener(new ValueEventListener() {
+                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0M2TUGIt3HEaWxWw_R").child(0+"").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

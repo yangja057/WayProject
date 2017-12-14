@@ -1,14 +1,10 @@
 package com.example.yangj.wayproject;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,11 +49,9 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         }
 
         //holder.iconImageView.setImageURI(myUri);
-        holder.Place1View.setText(imageItem.getPlaceName());
-        holder.Place2View.setText(imageItem.getPlaceName());
-        holder.Place3View.setText(imageItem.getPlaceName());
-        holder.Place4View.setText(imageItem.getPlaceName());
-        holder.Place5View.setText(imageItem.getPlaceName());
+
+        if(position < 5)
+            holder.textViewArr[position].setText(imageItem.getPlaceName());
 
         holder.UserIdView.setText(imageItem.getUserEmail());
         holder.RecommendView.setText("★ x "+String.valueOf(imageItem.getStar()));
@@ -73,11 +67,7 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
         //뷰 재활용을 위한 viewHolder
 
         ImageView iconImageView;
-        TextView Place1View;
-        TextView Place2View;
-        TextView Place3View;
-        TextView Place4View;
-        TextView Place5View;
+        TextView[] textViewArr = new TextView[5];
         TextView RecommendView;
         TextView UserIdView;
 
@@ -87,11 +77,11 @@ public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.View
 
             iconImageView=(ImageView)itemView.findViewById(R.id.imageView1);
 
-            Place1View=(TextView)itemView.findViewById(R.id.place1);
-            Place2View=(TextView)itemView.findViewById(R.id.place2);
-            Place3View=(TextView)itemView.findViewById(R.id.place3);
-            Place4View=(TextView)itemView.findViewById(R.id.place4);
-            Place5View=(TextView)itemView.findViewById(R.id.place5);
+            textViewArr[0] = (TextView)itemView.findViewById(R.id.place1);
+            textViewArr[1] = (TextView)itemView.findViewById(R.id.place2);
+            textViewArr[2] = (TextView)itemView.findViewById(R.id.place3);
+            textViewArr[3] = (TextView)itemView.findViewById(R.id.place4);
+            textViewArr[4] = (TextView)itemView.findViewById(R.id.place5);
 
             RecommendView=(TextView)itemView.findViewById(R.id.recommend);
             UserIdView=(TextView)itemView.findViewById(R.id.userID);

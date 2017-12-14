@@ -104,11 +104,11 @@ public class WListActivity extends AppCompatActivity {
                         //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
                         Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(), FirstActivity.class);
-                        ImageData img=adapter.WImageDataItemList.get(position);
+                      //  ImageData img=adapter.WImageDataItemList.get(position);
                         //recyclerview에서 클릭을 한 position의 값을 알아낸 뒤 imageData에 position에 해당하는 값을 담아온다.
                         //그리고 intent에 ID로 게시물의 고유키인 reviewKey를 전달한다.
-                        intent.putExtra("ID", img.reviewKey);
-                        Log.i("다스리의 로그12", "id" + img.reviewKey);
+                   //     intent.putExtra("ID", img.reviewKey);
+                      // Log.d("다스리의 로그12", "여기 안들어와?");
                         startActivity(intent);
                     }
                 })
@@ -138,6 +138,7 @@ public class WListActivity extends AppCompatActivity {
                         Toast.makeText(getBaseContext(),"로그아웃",Toast.LENGTH_LONG).show();
                         FirebaseAuth.getInstance().signOut();
                         finish();
+
                         break;
                     case 1:
                         //나의 리뷰 추가하기.
@@ -206,12 +207,13 @@ public class WListActivity extends AppCompatActivity {
 
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
 
+
                 database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0J0cYBZnkv69wNw8pB").child(0+"").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         //데이터가 날라온 것을 이미지 리스트에 담는다
-                        listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+                        adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
 //                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    /*
@@ -229,6 +231,9 @@ public class WListActivity extends AppCompatActivity {
                         ImageData imageData=dataSnapshot.getValue(ImageData.class);
                         adapter.WImageDataItemList.add(imageData);
                         adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+                        //notification만 호출하면 갱신이 안됨
+                        //다시 listview의 setadapter메소드에 해당 adapter를 넣어주면됨
+                        //recyclerView.setAdapter(adapter);
                     }
 
                     @Override

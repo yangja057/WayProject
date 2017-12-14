@@ -3,6 +3,7 @@ package com.example.yangj.wayproject;
         import android.media.Image;
         import android.net.Uri;
         import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -23,14 +24,13 @@ package com.example.yangj.wayproject;
 
 public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecyclerViewAdapter.ViewHolder> {
 
-    public List<ImageData>WBoardList;
+    public List<ImageData>WBoardList=new ArrayList<ImageData>();;
     private int itemLayout; //R.layout.imageData를 담음.
     private View view;
 
     //생성할 때 물려줄 xml을 물려줘야한다.
 
     public BoardRecyclerViewAdapter(int itemLayout){
-        WBoardList=new ArrayList<ImageData>();
         this.itemLayout=itemLayout;
     }
     @Override
@@ -41,10 +41,10 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(BoardRecyclerViewAdapter.ViewHolder holder, int position) {
         //listview의 getview를 대체
         //넘겨받은 데이터를 화면에 출력하는 역할이다.
-
+        Log.d("이것만하자","여기안와?");
         ImageData imageItem=WBoardList.get(position);
 
         if(imageItem.imageUrl!=null){
@@ -55,14 +55,14 @@ public class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecycler
 
 
        // holder.imageView.setImageURI(myUri);
-       //holder.Place.setText(imageItem.getPlaceName());
-        holder.Place.setText(imageItem.getStar());//원래는 위에것이 맞는데 출력확인을 위해 잠시...
+       holder.Place.setText(imageItem.getPlaceName());
+       // holder.Place.setText(imageItem.getStar());//원래는 위에것이 맞는데 출력확인을 위해 잠시...
         holder.Review.setText(imageItem.getDescription());
 
     }
     @Override
     public int getItemCount() {
-        return 0 ;
+        return WBoardList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

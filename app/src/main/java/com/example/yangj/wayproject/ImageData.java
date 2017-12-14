@@ -1,7 +1,5 @@
 package com.example.yangj.wayproject;
 
-import android.net.Uri;
-
 /**
  * Created by 심다슬 on 2017-11-27.
  */
@@ -43,8 +41,12 @@ public class ImageData {
         return star;
     }
 
-    public void setStar(int star) {
-        this.star = star;
+    public void plusStar() {
+        this.star++;
+    }
+
+    public void minusStar(){
+        this.star--;
     }
 
     public String getPlaceID() {

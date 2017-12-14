@@ -61,7 +61,7 @@ public class FirstActivity extends AppCompatActivity {
 
          */
 
-        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child("-L0J0cYBZnkv69wNw8pB").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJp9W4ZNykfDURPKuai8EZ_gc-ChIJp9W4ZNykfDURPKuai8EZ_gc").child("-L0KtnybTMzxTZbDTqnv").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -125,13 +125,14 @@ public class FirstActivity extends AppCompatActivity {
                     ReviewId = intent.getStringExtra("ID");
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장
-                    database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
+                    database.getReference().child("review").child("ChIJp9W4ZNykfDURPKuai8EZ_gc-ChIJp9W4ZNykfDURPKuai8EZ_gc").child(ReviewId).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             m_userData.list.clear();
 
                             for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                                 ImageData imageData = snapshot.getValue(ImageData.class);
+                                imageData.plusStar();
                                 m_userData.list.add(imageData);
                             }
                         }
@@ -143,6 +144,7 @@ public class FirstActivity extends AppCompatActivity {
                     });
 
 //                    Log.i("로그", m_userData.list.get(0).getPlaceName());
+                    //database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData);
                     database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);
                 }
                 else

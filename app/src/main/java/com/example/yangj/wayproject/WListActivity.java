@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -102,13 +101,13 @@ public class WListActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         //썸네일을 클릭하면 boardActivity로 넘어갈 게시물의 id를 넘겨줘야한다.
+                        ImageData img=adapter.WImageDataItemList.get(position);
                         Toast.makeText(view.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "reviewKey " + img.reviewKey, Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(), FirstActivity.class);
-                      //  ImageData img=adapter.WImageDataItemList.get(position);
                         //recyclerview에서 클릭을 한 position의 값을 알아낸 뒤 imageData에 position에 해당하는 값을 담아온다.
                         //그리고 intent에 ID로 게시물의 고유키인 reviewKey를 전달한다.
-                   //     intent.putExtra("ID", img.reviewKey);
-                      // Log.d("다스리의 로그12", "여기 안들어와?");
+                        intent.putExtra("ID", img.reviewKey);
                         startActivity(intent);
                     }
                 })

@@ -1,8 +1,8 @@
 package com.example.yangj.wayproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,11 +32,17 @@ public class FirstActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private StorageReference storageReference;
 
+    private String ReviewId;
+    private Intent intent;
+
+    UserData m_userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+
+        intent = getIntent();
 
         recyclerView=(RecyclerView)findViewById(R.id.FirstView);
         adapter=new BoardRecyclerViewAdapter(R.layout.item_board);//adapter 생성
@@ -93,7 +99,10 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
-
+        // 현재 유저 데이터 저장
+        m_userData = new UserData();
+        m_userData.userEmail = auth.getCurrentUser().getEmail();
+        m_userData.userUID = auth.getCurrentUser().getUid();
     }
 
     @Override
@@ -112,6 +121,29 @@ public class FirstActivity extends AppCompatActivity {
                     //bookmark버튼을 클릭했을때, icon을 까만 별로 바꾼다.★
                     item.setIcon(R.drawable.ic_action_bookmark2);
                     touchbookmark=true;
+
+                    ReviewId = intent.getStringExtra("ID");
+
+                    // 즐겨찾기 한 게시물의 아이템을 list에 저장
+                    database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            m_userData.list.clear();
+
+                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                ImageData imageData = snapshot.getValue(ImageData.class);
+                                m_userData.list.add(imageData);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
+                        }
+                    });
+
+//                    Log.i("로그", m_userData.list.get(0).getPlaceName());
+                    database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);
                 }
                 else
                 {

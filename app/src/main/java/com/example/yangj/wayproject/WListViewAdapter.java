@@ -20,6 +20,7 @@ import java.util.List;
 public class WListViewAdapter extends RecyclerView.Adapter<WListViewAdapter.ViewHolder> {
 
     public List<ImageData> WImageDataItemList=new ArrayList<ImageData>();
+    //public List<UserData>WUserDataItemList=new ArrayList<UserData>();
     private int itemLayout; //R.layout.listitem.xml을 담음.
     private View view;
 

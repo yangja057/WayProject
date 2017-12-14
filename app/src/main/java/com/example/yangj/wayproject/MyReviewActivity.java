@@ -1,5 +1,7 @@
 package com.example.yangj.wayproject;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WMyReviewActivity extends AppCompatActivity {
-
+public class MyReviewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FirebaseAuth auth;
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
@@ -31,16 +32,14 @@ public class WMyReviewActivity extends AppCompatActivity {
     public List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
     private WListViewAdapter listViewAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wmy_review);
-        setTitle("My ReviewList");
 
         UserItems =new UserData();
 
-      database= FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
+        database= FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
 
         auth= FirebaseAuth.getInstance();
 
@@ -68,13 +67,13 @@ public class WMyReviewActivity extends AppCompatActivity {
         ref=FirebaseDatabase.getInstance().getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyReviewList");
 
 //        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyReviewList").child("-L0KNIP6vpZbESkXYDTa")
-           // ref.orderByChild("list").
+        // ref.orderByChild("list").
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-               listViewAdapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+                listViewAdapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    /*
@@ -87,16 +86,9 @@ public class WMyReviewActivity extends AppCompatActivity {
 //                    listViewAdapter.WImageDataItemList.add(imageData);
 //                    Log.i("다스리의 로그", "imageData:" + imageData.getUserEmail());
 //                }
-                UserData userData=dataSnapshot.getValue(UserData.class);
-
-                //데이터 확인
-                Toast.makeText(WMyReviewActivity.this,"여기 들어옴"+dataSnapshot.getKey(),Toast.LENGTH_LONG).show();
-
-                for(int i=0;i<userData.list.size();i++){
-                    listViewAdapter.WImageDataItemList.add(userData.list.get(i));
-                }
-
-Toast.makeText(WMyReviewActivity.this,"여기 들어옴"+userData.list.size(),Toast.LENGTH_LONG).show();
+                ImageData imageData=dataSnapshot.getValue(ImageData.class);
+                listViewAdapter.WImageDataItemList.add(imageData);
+                Toast.makeText(MyReviewActivity.this,"여기 들어옴",Toast.LENGTH_LONG).show();
                 listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
             }
 
@@ -106,5 +98,8 @@ Toast.makeText(WMyReviewActivity.this,"여기 들어옴"+userData.list.size(),To
 
             }
         });
+
     }
+
+
 }

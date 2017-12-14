@@ -50,7 +50,7 @@
         </activity>
         <activity android:name=".WRegiReviewActivity" />
         <activity android:name=".WAddPlaceActivity" />
-        <activity android:name=".WListActivity"/>
+        <activity android:name=".WListActivity" />
         <activity android:name=".DataTestActivity" />
         <activity android:name=".WMainSearchActivity" />
         <activity android:name=".BoardActivity" />
@@ -60,8 +60,10 @@
         <activity android:name=".WRegiReviewRVActivity" />
         <activity android:name=".WMyReviewActivity" />
         <activity android:name=".FirstActivity" />
-        <activity android:name=".ListViewIntro"
-        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"></activity>
+        <activity
+            android:name=".ListViewIntro"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+        <activity android:name=".MyReviewActivity"></activity>
     </application>
 
 </manifest>

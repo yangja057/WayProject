@@ -122,13 +122,13 @@ public class FirstActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.ic_action_bookmark2);
                     touchbookmark=true;
 
-                    ReviewId = intent.getStringExtra("ID");
+                    ReviewId = intent.getStringExtra("ID");//게시물 키값
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장
                     database.getReference().child("review").child("ChIJp9W4ZNykfDURPKuai8EZ_gc-ChIJp9W4ZNykfDURPKuai8EZ_gc").child(ReviewId).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            m_userData.list.clear();
+                            adapter.m_userData.clear();
 
                             for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                                 ImageData imageData = snapshot.getValue(ImageData.class);
@@ -145,7 +145,7 @@ public class FirstActivity extends AppCompatActivity {
 
 //                    Log.i("로그", m_userData.list.get(0).getPlaceName());
                     //database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(m_userData);
-                    database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);
+                   // database.getReference().child("users").child(m_userData.userUID).child("MyLikeReviewList").child(ReviewId).setValue(m_userData);
                 }
                 else
                 {

@@ -52,7 +52,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
     private EditText StartingPointEdt;
     private EditText EndingPointEdt;
-    private Button addItemButton;
+    private ImageButton addItemButton;
 
     private String StartingPointName;
     private String StartingPointId;
@@ -181,7 +181,7 @@ public class WRegiReviewRVActivity extends AppCompatActivity implements WRegiRev
 
         StartingPointEdt = (EditText) findViewById(R.id.regi_btnStartingPoint);
         EndingPointEdt = (EditText) findViewById(R.id.regi_btnEndingPoint);
-        addItemButton = (Button) findViewById(R.id.regi_addItemButton);
+        addItemButton = (ImageButton) findViewById(R.id.regi_addItemButton);
 
         listItems = new ArrayList<>();
 

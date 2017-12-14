@@ -57,7 +57,6 @@ public class WListActivity extends AppCompatActivity {
     ListView listView=null; //네비게이션바에 들어가는 list를 담습니다.
     ActionBarDrawerToggle drawerToggle; //액션바에 있는 아이콘 클릭
     //
-    private ImageButton AddButton;   //이 버튼을 누르면 regireview화면으로 이동한다.
 
     static private final int STARTING_POINT = 0;
     static private final int ENDING_POINT = 1;
@@ -94,8 +93,6 @@ public class WListActivity extends AppCompatActivity {
         Endedit=(EditText)findViewById(R.id.list_btnEndingPoint);
         SearchButton=(Button)findViewById(R.id.list_btnsearch);
 
-        AddButton=(ImageButton)findViewById(R.id.AddButton);
-
         adapter=new WListViewAdapter(R.layout.activity_wlist_item);
         database=FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
         auth= FirebaseAuth.getInstance();
@@ -121,7 +118,7 @@ public class WListActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //여리의 내비게이션바 만들기
-        final String[] items={"로그아웃", "내가 쓴 리뷰보기","즐겨찾기","설정"}; //내비게이션바에 있을 메뉴들
+        final String[] items={"로그아웃", "리뷰추가", "내가 쓴 리뷰보기","즐겨찾기","설정"}; //내비게이션바에 있을 메뉴들
         ArrayAdapter naviadapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
         drawer=(DrawerLayout)findViewById(R.id.list_drawer);
@@ -141,25 +138,28 @@ public class WListActivity extends AppCompatActivity {
                         Toast.makeText(getBaseContext(),"로그아웃",Toast.LENGTH_LONG).show();
                         FirebaseAuth.getInstance().signOut();
                         finish();
-                        //Intent intent=new Intent(getApplicationContext(), WListActivity.class);
-                        //startActivity(intent);
                         break;
                     case 1:
-                        //내가 쓴 리뷰보기
+                        //나의 리뷰 추가하기.
+                        Intent intent3=new Intent(getApplicationContext(), WRegiReviewRVActivity.class);
+                        startActivity(intent3);
+                        break;
+                    case 2:
+                        //즐겨찾기
                         Toast.makeText(getApplicationContext(), "내가 쓴 리뷰보기",Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(), WMyReviewActivity.class);
                         startActivity(intent);
                         break;
-                    case 2:
-                        //즐겨찾기
+                    case 3:
+                        //내가 쓴 리뷰보기
                         Toast.makeText(getApplicationContext(), "즐겨찾기",Toast.LENGTH_SHORT).show();
                         Intent intent2=new Intent(getApplicationContext(), WMyLikeReviewActivity.class);
                         startActivity(intent2);
+
                         break;
-                    case 3:
+                    case 4:
                         //settings
                         Toast.makeText(getApplicationContext(), "settings",Toast.LENGTH_SHORT).show();
-                        break;
                     default:
                         break;
                 }
@@ -197,14 +197,6 @@ public class WListActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "이건 도착지를 선택하는 애지롱",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(), WAddPlaceActivity.class);
                 startActivityForResult(intent, ENDING_POINT);
-            }
-        });
-
-        AddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), WRegiReviewRVActivity.class);
-                startActivity(intent);
             }
         });
 

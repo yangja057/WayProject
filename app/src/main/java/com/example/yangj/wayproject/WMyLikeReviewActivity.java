@@ -40,7 +40,7 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wmy_like_review);
-        setTitle("My FavoriteList");
+
 
         UserItems =new UserData();
 

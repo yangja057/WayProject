@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class WRegiReviewRVAdapter extends RecyclerView.Adapter<WRegiReviewRVAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
+       // Log.d("다슬","여기는 들어오는데 저기는 안들어간다고?");
         final ImageData listItem = listItems.get(position);
 
         holder.edtPlaceButton.setText(listItem.getPlaceName());

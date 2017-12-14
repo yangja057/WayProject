@@ -204,13 +204,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnBoardData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getBaseContext(),BoardActivity.class);
-                startActivity(intent);
-            }
-        });
+//        btnBoardData.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(getBaseContext(),BoardActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         btnGoRegiReview.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -111,6 +111,8 @@ public class WListActivity extends AppCompatActivity {
                         //recyclerview에서 클릭을 한 position의 값을 알아낸 뒤 imageData에 position에 해당하는 값을 담아온다.
                         //그리고 intent에 ID로 게시물의 고유키인 reviewKey를 전달한다.
                         intent.putExtra("ID", img.reviewKey);
+                        Log.i("다스리의 로그12", "id" + img.reviewKey);
+                        startActivity(intent);
                     }
                 })
         );
@@ -157,7 +159,6 @@ public class WListActivity extends AppCompatActivity {
                     case 3:
                         //settings
                         Toast.makeText(getApplicationContext(), "settings",Toast.LENGTH_SHORT).show();
-
                         break;
                     default:
                         break;
@@ -212,7 +213,8 @@ public class WListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
-                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L-p0Y9N6R8f-FuNZHiK").addValueEventListener(new ValueEventListener() {
+
+                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0FhZhgTXly57hN3cM1").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

@@ -1,7 +1,7 @@
 package com.example.yangj.wayproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,7 +54,7 @@ public class FirstActivity extends AppCompatActivity {
         여리는 이 두개의 값을 모두 넘겨줘야 됨
 
          */
-        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJITyWD9mkfDURMNW9v4owAEo").child("-L-WkVk7aH9IJSYDVS0e").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJhTv7M9ykfDURbQkKXGOzDIk-ChIJhTv7M9ykfDURbQkKXGOzDIk").child("-L0FhZhgTXly57hN3cM1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

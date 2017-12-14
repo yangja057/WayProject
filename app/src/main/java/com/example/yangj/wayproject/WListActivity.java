@@ -114,6 +114,8 @@ public class WListActivity extends AppCompatActivity {
                         //recyclerview에서 클릭을 한 position의 값을 알아낸 뒤 imageData에 position에 해당하는 값을 담아온다.
                         //그리고 intent에 ID로 게시물의 고유키인 reviewKey를 전달한다.
                         intent.putExtra("ID", img.reviewKey);
+                       // intent.putExtra("startingPoint", startingPointId);
+                        //intent.putExtra("endingPoint", endingPointId);
                         startActivity(intent);
                     }
                 })
@@ -218,7 +220,7 @@ public class WListActivity extends AppCompatActivity {
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
 
 
-                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0KtnybTMzxTZbDTqnv").child(0+"").addValueEventListener(new ValueEventListener() {
+                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0LcSA6K50aLjIvl6us").child(0+"").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

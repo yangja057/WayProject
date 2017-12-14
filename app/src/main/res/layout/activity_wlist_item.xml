@@ -24,52 +24,47 @@
 
             <TextView
                 android:id="@+id/place1"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="New Text"
                 android:textColor="#666666"
                 android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/place2"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="New Text"
                 android:textColor="#666666"
                 android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/place3"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="New Text"
                 android:textColor="#666666"
                 android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/place4"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="New Text"
                 android:textColor="#666666"
                 android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/place5"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:text="New Text"
                 android:textColor="#666666"
                 android:textSize="16dp" />
 

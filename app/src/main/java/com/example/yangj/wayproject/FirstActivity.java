@@ -63,8 +63,9 @@ public class FirstActivity extends AppCompatActivity {
         여리는 이 두개의 값을 모두 넘겨줘야 됨
 
          */
+        ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
 
-        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child("-L0M2TUGIt3HEaWxWw_R").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -76,9 +77,12 @@ public class FirstActivity extends AppCompatActivity {
 
                     ImageData imageData=snapshot.getValue(ImageData.class);
                     //listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+                    //키값 받아오는 쿼리를 하기 위해 추가
+                    String uidKey=snapshot.getKey();
+
                   adapter.WBoardList.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
 
-                    Log.d("다슬로그","리뷰 조금 출력?"+imageData.description);
+                    Log.d("다슬로그","리뷰 조금 출력?"+uidKey);
                    // GenericTypeIndicator<List<ImageData>> genericTypeIndicator =new GenericTypeIndicator<List<ImageData>>(){};
                    //listItems=dataSnapshot.getValue(genericTypeIndicator);adapter.
 
@@ -125,7 +129,7 @@ public class FirstActivity extends AppCompatActivity {
                     item.setIcon(R.drawable.ic_action_bookmark2);
                     touchbookmark=true;
 
-                    ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
+                   // ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
 
                     //추가
 

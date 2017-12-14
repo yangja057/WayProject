@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="4">
+               >
 
                 <android.support.v7.widget.RecyclerView
 
@@ -95,10 +95,23 @@
 
                 </android.support.v7.widget.RecyclerView>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="240dp"
+                    android:src="@drawable/back"
+                    android:id="@+id/back"
+                    android:gravity="bottom"
+                    android:background="#00ff0000"
+
+                    />
 
             </LinearLayout>
 
+
+
             </LinearLayout>
+
 
         </FrameLayout>
 

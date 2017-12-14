@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -47,6 +47,7 @@ public class WListActivity extends AppCompatActivity {
     private WListViewAdapter adapter;
     private FirebaseAuth auth;
     public List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
+    private ImageView imageback;
 
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
@@ -92,6 +93,8 @@ public class WListActivity extends AppCompatActivity {
         Startedit=(EditText)findViewById(R.id.list_btnStartingPoint);
         Endedit=(EditText)findViewById(R.id.list_btnEndingPoint);
         SearchButton=(Button)findViewById(R.id.list_btnsearch);
+        imageback=(ImageView)findViewById(R.id.back);   //검색 버튼 밑에 뜨는 이미지
+        imageback.setImageAlpha(80);    //이미지 투명도 수정(투명하게)
 
         adapter=new WListViewAdapter(R.layout.activity_wlist_item);
         database=FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
@@ -203,6 +206,11 @@ public class WListActivity extends AppCompatActivity {
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //요리
+                //검색버튼을 누르면 이미지가 아예 보이지 않게 한다.
+                //GONE는 이미지뷰를 아예 숨기게 하는 것으로 이를 사용하면 공간조차 없어진다.
+                imageback.setVisibility(View.GONE);
 
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
 

@@ -36,6 +36,8 @@ public class FirstActivity extends AppCompatActivity {
     private StorageReference storageReference;
 
     private String ReviewId;
+    private String sp;//starting point
+    private String ep;//ending point
     private Intent intent;
 
     UserData m_userData;
@@ -64,8 +66,11 @@ public class FirstActivity extends AppCompatActivity {
 
          */
         ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
+        sp=intent.getStringExtra("s");
+       ep=intent.getStringExtra("e");
+        Toast.makeText(FirstActivity.this,"확인"+sp+", "+ep,Toast.LENGTH_LONG).show();
 
-        database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
+        database.getReference().child("review").child(sp+"-"+ep).child(ReviewId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -167,7 +172,7 @@ public class FirstActivity extends AppCompatActivity {
 
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장
-                    database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).addValueEventListener(new ValueEventListener() {
+                    database.getReference().child("review").child(sp+"-"+ep).child(ReviewId).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -197,7 +202,7 @@ public class FirstActivity extends AppCompatActivity {
                     });
 
                     //Log.i("로그", m_userData.list.get(0).getPlaceName());
-                  database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(adapter.WBoardList);
+                  //database.getReference().child("review").child("ChIJhTv7M9ykfDURcOPgVAYJGYE-ChIJOdw9FOCYfDUR4-e79v57J_Q").child(ReviewId).setValue(adapter.WBoardList);
 
                 }//if closed
                 else

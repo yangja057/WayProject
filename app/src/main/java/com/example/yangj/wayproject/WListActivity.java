@@ -158,7 +158,7 @@ public class WListActivity extends AppCompatActivity {
                     case 2:
                         //즐겨찾기
                         Toast.makeText(getApplicationContext(), "내가 쓴 리뷰보기",Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(getApplicationContext(), WMyReviewActivity.class);
+                        Intent intent=new Intent(getApplicationContext(), MyReviewActivity.class);
 
                         //추가
                         //인텐트로 값 넘겨주기

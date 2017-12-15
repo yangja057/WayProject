@@ -32,13 +32,14 @@ public class MyReviewActivity extends AppCompatActivity {
     public List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
     private WListViewAdapter listViewAdapter;
 
+    private ArrayList<String> m_keyData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wmy_review);
 
         UserItems =new UserData();
-
+        m_keyData=new ArrayList<>();
         database= FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
 
         auth= FirebaseAuth.getInstance();
@@ -75,21 +76,39 @@ public class MyReviewActivity extends AppCompatActivity {
                 //데이터가 날라온 것을 이미지 리스트에 담는다
                 listViewAdapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
-//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    /*
-//                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
-//                    getchildren() :가지 하나를 children이라고 함
-//                    child==현재 "review" 의 children하나를 읽어옴
-//                     */
-//                    ImageData imageData=snapshot.getValue(ImageData.class);
-//                    //listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
-//                    listViewAdapter.WImageDataItemList.add(imageData);
-//                    Log.i("다스리의 로그", "imageData:" + imageData.getUserEmail());
-//                }
-                ImageData imageData=dataSnapshot.getValue(ImageData.class);
-                listViewAdapter.WImageDataItemList.add(imageData);
-                Toast.makeText(MyReviewActivity.this,"여기 들어옴",Toast.LENGTH_LONG).show();
-                listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    m_keyData.clear();
+                    String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
+                    m_keyData.add(uidKey);
+
+                    //키값 받아서 다시 서치
+                    ref.child(uidKey).child("list").child(0+"").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //원래는 이 밑이 데이터를 추가하는 코드임
+                            // adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
+
+                            ImageData imageData=dataSnapshot.getValue(ImageData.class);
+                            listViewAdapter.WImageDataItemList.add(imageData);
+                           // Log.d("데이터 확인",listViewAdapter.WImageDataItemList.get(0).description);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    Log.i("다스리의 로그", "uidKey:" + uidKey);
+                }
+                listViewAdapter.notifyDataSetChanged();
+//
+//                ImageData imageData=dataSnapshot.getValue(ImageData.class);
+//                listViewAdapter.WImageDataItemList.add(imageData);
+//                Toast.makeText(MyReviewActivity.this,"여기 들어옴",Toast.LENGTH_LONG).show();
+
             }
 
             @Override

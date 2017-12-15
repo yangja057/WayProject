@@ -159,6 +159,12 @@ public class WListActivity extends AppCompatActivity {
                         //즐겨찾기
                         Toast.makeText(getApplicationContext(), "내가 쓴 리뷰보기",Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(getApplicationContext(), WMyReviewActivity.class);
+
+                        //추가
+                        //인텐트로 값 넘겨주기
+                        intent.putExtra("sp", startingPointId);
+                        intent.putExtra("ep", endingPointId);
+
                         startActivity(intent);
                         break;
                     case 3:

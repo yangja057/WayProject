@@ -30,13 +30,14 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public  List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
     private WListViewAdapter listViewAdapter;
-
+private  String sp;
+private String ep;
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
 
     //key를 받기 위해 만들어 놓은 array list
    private ArrayList<String> m_keyData=new ArrayList<>();
-
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +46,9 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
 
         UserItems =new UserData();
+        intent = getIntent();
+        sp=intent.getStringExtra("s");
+        ep=intent.getStringExtra("e");
 
         database=FirebaseDatabase.getInstance();//다른곳에서 사용하기 위해서 singletone pattern으로  등록
         auth=FirebaseAuth.getInstance();
@@ -85,19 +89,34 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
         database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList")./*child("-L-Wf-7NqYzPgKJjhynU").child("list").*/addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                listViewAdapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
                 //데이터가 날라온 것을 이미지 리스트에 담는다
                // listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    /*
-                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
-                    getchildren() :가지 하나를 children이라고 함
-                    child==현재 "review" 의 children하나를 읽어옴
-                     */
 
+                    m_keyData.clear();
                     String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
                     m_keyData.add(uidKey);
+
+                    //키값 받아서 다시 서치
+                    database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child(uidKey).child("list").child(0+"").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //원래는 이 밑이 데이터를 추가하는 코드임
+                            // adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
+
+                            ImageData imageData=dataSnapshot.getValue(ImageData.class);
+                            listViewAdapter.WImageDataItemList.add(imageData);
+                            // Log.i("다스리의 로그", "uidKey:" + uidKey);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
                     //원래는 이 밑이 데이터를 추가하는 코드임
                     //ImageData imageData=snapshot.getValue(ImageData.class);
@@ -116,42 +135,42 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
             }
         });
 
-        for(int i=0;i<m_keyData.size();i++){
-
-            database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child(m_keyData.get(i)).child("list").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    //데이터가 날라온 것을 이미지 리스트에 담는다
-                    listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
-
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    /*
-                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
-                    getchildren() :가지 하나를 children이라고 함
-                    child==현재 "review" 의 children하나를 읽어옴
-                     */
-
-                       // String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
-                        //m_keyData.add(uidKey);
-
-                        //원래는 이 밑이 데이터를 추가하는 코드임
-                        ImageData imageData=snapshot.getValue(ImageData.class);
-
-                        listViewAdapter.WImageDataItemList.add(imageData);
-                       // Log.i("다스리의 로그", "uidKey:" + uidKey);
-                    }
-
-                    listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
-
-                }
-            });
-        }
+//        for(int i=0;i<m_keyData.size();i++){
+//
+//            database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child(m_keyData.get(i)).child("list").addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                    //데이터가 날라온 것을 이미지 리스트에 담는다
+//                    listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+//
+//                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    /*
+//                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
+//                    getchildren() :가지 하나를 children이라고 함
+//                    child==현재 "review" 의 children하나를 읽어옴
+//                     */
+//
+//                       // String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
+//                        //m_keyData.add(uidKey);
+//
+//                        //원래는 이 밑이 데이터를 추가하는 코드임
+//                        ImageData imageData=snapshot.getValue(ImageData.class);
+//
+//                        listViewAdapter.WImageDataItemList.add(imageData);
+//                       // Log.i("다스리의 로그", "uidKey:" + uidKey);
+//                    }
+//
+//                    listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                    Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
+//
+//                }
+//            });
+//        }
 
     }
 

@@ -68,7 +68,7 @@ public class FirstActivity extends AppCompatActivity {
         ReviewId = intent.getStringExtra("ID");//클릭한 게시물 키값 받아오기
         sp=intent.getStringExtra("s");
        ep=intent.getStringExtra("e");
-        Toast.makeText(FirstActivity.this,"확인"+sp+", "+ep,Toast.LENGTH_LONG).show();
+       // Toast.makeText(FirstActivity.this,"확인"+sp+", "+ep,Toast.LENGTH_LONG).show();
 
         database.getReference().child("review").child(sp+"-"+ep).child(ReviewId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -168,7 +168,6 @@ public class FirstActivity extends AppCompatActivity {
 //                            Log.d("다슬로그", "postTransaction:onComplete:" + databaseError);
 //                        }
 //                    });
-
 
 
                     // 즐겨찾기 한 게시물의 아이템을 list에 저장

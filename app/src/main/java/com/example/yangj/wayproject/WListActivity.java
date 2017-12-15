@@ -51,6 +51,7 @@ public class WListActivity extends AppCompatActivity {
     public List<ImageData> listItems=new ArrayList<ImageData>(); //데이터 리스트 구조체
     private ImageView imageback;
 
+    private  ArrayList<String> dataKeyList=new ArrayList<>();
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
 
@@ -222,32 +223,83 @@ public class WListActivity extends AppCompatActivity {
                 //검색버튼을 누르면 recycler에 게시물들이 썸네일처럼 뿌려져야함.
 
 
-                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0M2TUGIt3HEaWxWw_R").child(0+"").addValueEventListener(new ValueEventListener() {
+//                database.getReference().child("review").child(startingPointId+"-"+endingPointId).child("-L0M2TUGIt3HEaWxWw_R").child(0+"").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        //데이터가 날라온 것을 이미지 리스트에 담는다
+//                        adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+//
+////                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+////                    /*
+////                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
+////                    getchildren() :가지 하나를 children이라고 함
+////                    child==현재 "review" 의 children하나를 읽어옴
+////                     */
+////
+////                            ImageData imageData=snapshot.getValue(ImageData.class);
+////                            //listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
+////                            //adapter.WImageDataItemList.add(imageData);
+////                            Log.i("다스리의 로그", "imageData:" + imageData.getUserEmail());
+////                        }
+//
+//                        ImageData imageData=dataSnapshot.getValue(ImageData.class);
+//                        adapter.WImageDataItemList.add(imageData);
+//                        adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+//                        //notification만 호출하면 갱신이 안됨
+//                        //다시 listview의 setadapter메소드에 해당 adapter를 넣어주면됨
+//                        //recyclerView.setAdapter(adapter);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
+//
+//                    }
+//                });
+
+                //여기서 부터 추가를 해봅니다
+                database.getReference().child("review").child(startingPointId+"-"+endingPointId)./*child("-L0M2TUGIt3HEaWxWw_R").child(0+"").*/addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         //데이터가 날라온 것을 이미지 리스트에 담는다
-                        adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+                         adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
-//                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    /*
-//                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
-//                    getchildren() :가지 하나를 children이라고 함
-//                    child==현재 "review" 의 children하나를 읽어옴
-//                     */
-//
-//                            ImageData imageData=snapshot.getValue(ImageData.class);
-//                            //listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
-//                            //adapter.WImageDataItemList.add(imageData);
-//                            Log.i("다스리의 로그", "imageData:" + imageData.getUserEmail());
-//                        }
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
-                        ImageData imageData=dataSnapshot.getValue(ImageData.class);
-                        adapter.WImageDataItemList.add(imageData);
+                            dataKeyList.clear();
+                            String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
+                            dataKeyList.add(uidKey);
+
+                            //키값 받아서 다시 서치
+                            database.getReference().child("review").child(startingPointId+"-"+endingPointId).child(uidKey).child(0+"").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    //원래는 이 밑이 데이터를 추가하는 코드임
+                                   // adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
+
+                                        ImageData imageData=dataSnapshot.getValue(ImageData.class);
+                                        adapter.WImageDataItemList.add(imageData);
+                                        // Log.i("다스리의 로그", "uidKey:" + uidKey);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            //원래는 이 밑이 데이터를 추가하는 코드임
+                            //ImageData imageData=snapshot.getValue(ImageData.class);
+
+                            //listViewAdapter.WImageDataItemList.add(imageData);
+                           // Log.i("다스리의 로그", "uidKey:" + dataKeyList.get(0));
+                        }
                         adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
-                        //notification만 호출하면 갱신이 안됨
-                        //다시 listview의 setadapter메소드에 해당 adapter를 넣어주면됨
-                        //recyclerView.setAdapter(adapter);
+
+
                     }
 
                     @Override
@@ -256,10 +308,51 @@ public class WListActivity extends AppCompatActivity {
 
                     }
                 });
-            }
+                //closed here!
+
+
+                //one more start
+//                for(int i=0;i<dataKeyList.size();i++){
+//
+//                    database.getReference().child("review").child(startingPointId+"-"+endingPointId).child(dataKeyList.get(i)).child(0+"").addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+////데이터가 날라온 것을 이미지 리스트에 담는다
+//                            adapter.WImageDataItemList.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+//
+//                            for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//
+//                                ImageData imageData=snapshot.getValue(ImageData.class);
+//
+//                                adapter.WImageDataItemList.add(imageData);
+//
+//                            }
+//
+//                            adapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//                            Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
+//                        }
+//                    });
+//
+//                }
+
+
+
+
+
+
+            }//onclick 함수 closed
+
+
+
+
         });
 
-    }
+
+    }//oncreate closed
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

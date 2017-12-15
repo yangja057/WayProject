@@ -34,6 +34,8 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
     //파이어 베이스 데이터베이스 추가->문서를 읽어오기 위해 꼭 필요한 객체
     private FirebaseDatabase database;
 
+    //key를 받기 위해 만들어 놓은 array list
+   private ArrayList<String> m_keyData=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +82,12 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
         //String str=database.getReference().child("users").child(auth.getCurrentUser().getUid()).push().getKey();
         //Log.d("다스리의 로그",str);
 
-        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child("-L-Wf-7NqYzPgKJjhynU").child("list").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList")./*child("-L-Wf-7NqYzPgKJjhynU").child("list").*/addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //데이터가 날라온 것을 이미지 리스트에 담는다
-                listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+               // listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     /*
@@ -93,10 +95,15 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
                     getchildren() :가지 하나를 children이라고 함
                     child==현재 "review" 의 children하나를 읽어옴
                      */
-                    ImageData imageData=snapshot.getValue(ImageData.class);
-                    //listItems.add(imageData);//데이터의 개수만큼 for loop을 돌면서 list에 객체를 넣음
-                    listViewAdapter.WImageDataItemList.add(imageData);
-                    Log.i("다스리의 로그", "imageData:" + imageData.getUserEmail());
+
+                    String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
+                    m_keyData.add(uidKey);
+
+                    //원래는 이 밑이 데이터를 추가하는 코드임
+                    //ImageData imageData=snapshot.getValue(ImageData.class);
+
+                    //listViewAdapter.WImageDataItemList.add(imageData);
+                    Log.i("다스리의 로그", "uidKey:" + uidKey);
                 }
 
                 listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
@@ -108,6 +115,43 @@ public class WMyLikeReviewActivity extends AppCompatActivity {
 
             }
         });
+
+        for(int i=0;i<m_keyData.size();i++){
+
+            database.getReference().child("users").child(auth.getCurrentUser().getUid()).child("MyLikeReviewList").child(m_keyData.get(i)).child("list").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    //데이터가 날라온 것을 이미지 리스트에 담는다
+                    listItems.clear();//수정될때마다 데이터가 날라옴/ 안해주면 데이터가 쌓여
+
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    /*
+                    DataSnapshot snapshot : dataSnapshot.getChildren() //처음부터 끝까지 데이터를 읽는다는 뜻임
+                    getchildren() :가지 하나를 children이라고 함
+                    child==현재 "review" 의 children하나를 읽어옴
+                     */
+
+                       // String uidKey=snapshot.getKey();//child에 있는 키값을 모두 받음
+                        //m_keyData.add(uidKey);
+
+                        //원래는 이 밑이 데이터를 추가하는 코드임
+                        ImageData imageData=snapshot.getValue(ImageData.class);
+
+                        listViewAdapter.WImageDataItemList.add(imageData);
+                       // Log.i("다스리의 로그", "uidKey:" + uidKey);
+                    }
+
+                    listViewAdapter.notifyDataSetChanged();//새로 고침(갱신되니까)
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.i("다스리의 로그","여기들어왔다는건...잘못됐다는뜻임");
+
+                }
+            });
+        }
 
     }
 
